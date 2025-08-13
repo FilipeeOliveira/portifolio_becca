@@ -5,10 +5,10 @@ export function Footer() {
         <p className="text-xs sm:text-sm text-gray-500">
           © 2025{' '}
           <a
-            href="https://www.linkedin.com/in/filipeoliveira"
+            href="https://www.linkedin.com/in/filipe-leite-oliveira/"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-blue-600 hover:underline transition-colors"
+            className=" text-coral-600 hover:underline transition-colors"
             title="Ver perfil no LinkedIn"
           >
             Filipe Oliveira

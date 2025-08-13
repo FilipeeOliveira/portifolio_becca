@@ -6,24 +6,24 @@ export function CvSection() {
   return (
     <section id="curriculo" className="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-coral-50 to-white">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-8 sm:mb-12">
+          <p className="text-coral-500 font-medium text-sm sm:text-base mb-2 uppercase">Conheça</p>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800">
+            Minha Trajetória
+          </h2>
+        </div>
         <div className="bg-white rounded-2xl sm:rounded-3xl shadow-xl overflow-hidden">
           <div className="grid grid-cols-1 lg:grid-cols-2 items-center">
             {/* CV Preview */}
-            <div className="relative h-60 sm:h-80 lg:h-96 p-6 sm:p-8 flex items-center justify-center bg-gray-50">
-              <div className="bg-white rounded-lg shadow-lg border border-gray-200 w-36 sm:w-48 h-48 sm:h-64 flex flex-col items-center justify-center p-3 sm:p-4">
-                <div className="w-full h-24 sm:h-32 bg-coral-100 rounded mb-3 sm:mb-4 flex items-center justify-center">
-                  <div className="text-coral-500 text-center">
-                    <div className="w-8 sm:w-12 h-8 sm:h-12 bg-coral-200 rounded-full mx-auto mb-1 sm:mb-2"></div>
-                    <div className="text-xs font-medium">Rebecca Ariel</div>
-                    <div className="text-xs text-gray-500">Terapeuta Ocupacional</div>
-                  </div>
-                </div>
-                <div className="space-y-1 w-full">
-                  <div className="h-1.5 sm:h-2 bg-gray-200 rounded w-full"></div>
-                  <div className="h-1.5 sm:h-2 bg-gray-200 rounded w-3/4"></div>
-                  <div className="h-1.5 sm:h-2 bg-gray-200 rounded w-5/6"></div>
-                  <div className="h-1.5 sm:h-2 bg-gray-200 rounded w-2/3"></div>
-                </div>
+            <div className="relative h-60 sm:h-80 lg:h-96 p-6 sm:p-8 flex items-center justify-center bg-gray-55">
+              <div className="relative bg-white rounded-lg shadow-lg w-full max-w-64 h-full overflow-hidden">
+                <iframe 
+                  src="/docs/CV-RebeccaAriel.pdf#toolbar=0&navpanes=0&scrollbar=0&zoom=65" 
+                  className="w-full h-full border-0 blur-sm opacity-60"
+                  style={{ transform: 'scale(1.3) translateX(2%) translateY(-2%)', filter: 'blur(1.5px)' }}
+                  title="CV Preview"
+                />
+                <div className="absolute inset-0 bg-white/40"></div>
               </div>
             </div>
 
@@ -42,8 +42,7 @@ export function CvSection() {
                   <Button
                     className="bg-coral-500 hover:bg-coral-600 text-white px-4 sm:px-6 py-2 rounded-full font-medium transition-colors duration-200 flex items-center justify-center gap-2 text-sm"
                     onClick={() => {
-                      // Placeholder for PDF download functionality
-                      console.log("Download CV")
+                      window.open('/docs/CV-RebeccaAriel.pdf', '_blank')
                     }}
                   >
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -28,7 +28,7 @@ export function Navigation({ items, activeSection }: NavigationProps) {
               <button
                 key={item.id}
                 onClick={() => handleNavigate(item.id)}
-                className={`text-sm font-medium transition-colors relative ${
+                className={`text-sm font-medium transition-colors relative cursor-pointer ${
                   activeSection === item.id ? "text-coral-500" : "text-gray-600 hover:text-coral-500"
                 }`}
               >
@@ -59,7 +59,7 @@ export function Navigation({ items, activeSection }: NavigationProps) {
                 <button
                   key={item.id}
                   onClick={() => handleNavigate(item.id)}
-                  className={`text-left text-sm font-medium transition-colors ${
+                  className={`text-left text-sm font-medium transition-colors cursor-pointer ${
                     activeSection === item.id ? "text-coral-500" : "text-gray-600 hover:text-coral-500"
                   }`}
                 >
