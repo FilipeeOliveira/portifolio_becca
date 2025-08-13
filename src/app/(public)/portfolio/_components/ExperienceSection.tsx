@@ -1,25 +1,17 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { Card, CardContent } from "@/shared/components/ui/card"
 import { GraduationCap, Briefcase, ChevronLeft, ChevronRight } from "lucide-react"
 import type { Experience } from "@/shared/types/experience.types"
 
 const experiences: Experience[] = [
   {
-    title: "Estagiária",
-    company: "Tribunal de Justiça do Amazonas - CEJUS",
-    department: "Famílias",
-    period: "2019 - 2021",
-    description:
-      "Experiência em mediação familiar e suporte jurídico em questões relacionadas ao direito de família.",
-  },
-  {
-    title: "Recepcionista",
-    company: "Hapvida",
-    department: "Medicina Preventiva",
-    period: "11/2022 - 05/2023",
-    description: "Atendimento ao público e gestão de agendamentos em ambiente de medicina preventiva.",
+    title: "Assistente Terapêutico",
+    company: "Samel",
+    department: "Terapias Integradas",
+    period: "02/2024 - Atualmente",
+    description: "Aplicando conhecimento e experiência prática nos métodos ABA e Denver, desenvolvendo e aplicando estratégias terapêuticas personalizadas para atender às necessidades individuais de cada paciente.",
   },
   {
     title: "Assistente de Acolhimento",
@@ -29,34 +21,64 @@ const experiences: Experience[] = [
     description: "Responsável pelo acolhimento e orientação de pacientes em serviços de medicina preventiva.",
   },
   {
-    title: "Assistente Terapêutico",
-    company: "Samel",
-    department: "Terapias Integradas",
-    period: "02/2024 - Atualmente",
-    description: "Aplicando conhecimento e experiência prática nos métodos ABA e Denver, desenvolvendo e aplicando estratégias terapêuticas personalizadas para atender às necessidades individuais de cada paciente.",
+    title: "Recepcionista",
+    company: "Hapvida",
+    department: "Medicina Preventiva",
+    period: "11/2022 - 05/2023",
+    description: "Atendimento ao público e gestão de agendamentos em ambiente de medicina preventiva.",
+  },
+  {
+    title: "Estagiária",
+    company: "Tribunal de Justiça do Amazonas - CEJUS",
+    department: "Famílias",
+    period: "2019 - 2021",
+    description:
+      "Experiência em mediação familiar e suporte jurídico em questões relacionadas ao direito de família.",
   },
 ]
 
 export function ExperienceSection() {
   const [currentSlide, setCurrentSlide] = useState(0)
+  const [isVisible, setIsVisible] = useState(false)
+  const [isManualControl, setIsManualControl] = useState(false)
+  const sectionRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % experiences.length)
-    }, 4000)
-    return () => clearInterval(timer)
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting)
+      },
+      { threshold: 0.5 }
+    )
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current)
+    }
+
+    return () => observer.disconnect()
   }, [])
 
+  useEffect(() => {
+    if (!isVisible || isManualControl) return
+
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % experiences.length)
+    }, 3000)
+    return () => clearInterval(timer)
+  }, [isVisible, isManualControl])
+
   const nextSlide = () => {
+    setIsManualControl(true)
     setCurrentSlide((prev) => (prev + 1) % experiences.length)
   }
 
   const prevSlide = () => {
+    setIsManualControl(true)
     setCurrentSlide((prev) => (prev - 1 + experiences.length) % experiences.length)
   }
 
   return (
-    <section id="experiencia" className="px-4 sm:px-6 py-10 sm:py-12">
+    <section ref={sectionRef} id="experiencia" className="px-4 sm:px-6 py-10 sm:py-12">
       <div className="mx-auto max-w-6xl">
         <div className="text-center mb-6 sm:mb-8">
           <p className="text-coral-500 text-xs sm:text-sm font-medium tracking-wider uppercase mb-2">
@@ -142,7 +164,10 @@ export function ExperienceSection() {
                 {experiences.map((_, index) => (
                   <button
                     key={index}
-                    onClick={() => setCurrentSlide(index)}
+                    onClick={() => {
+                      setIsManualControl(true)
+                      setCurrentSlide(index)
+                    }}
                     className={`w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full transition-colors ${
                       index === currentSlide ? "bg-coral-500" : "bg-coral-200"
                     }`}
