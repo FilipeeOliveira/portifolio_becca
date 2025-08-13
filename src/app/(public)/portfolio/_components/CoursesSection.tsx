@@ -16,8 +16,9 @@ export function CoursesSection() {
               Treinamentos
             </h2>
             <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
-              Minha jornada de aprendizado contínuo inclui especializações em mediação, terapia ABA, desenvolvimento
-              infantil e comunicação alternativa, sempre buscando oferecer o melhor cuidado aos meus pacientes.
+              Minha jornada de aprendizagem até o presente momento tem sido marcada pelo estudo e prática em mediação, 
+              terapia nos métodos ABA e Denver, desenvolvimento infantil e comunicação alternativa, 
+              sempre guiada pelo compromisso de oferecer um cuidado individualizado e de qualidade.
             </p>
           </div>
 

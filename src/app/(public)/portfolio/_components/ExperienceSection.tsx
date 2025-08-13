@@ -33,7 +33,7 @@ const experiences: Experience[] = [
     company: "Samel",
     department: "Terapias Integradas",
     period: "02/2024 - Atualmente",
-    description: "Especializada em ABA e modelo Denver, desenvolvendo estratégias personalizadas para cada paciente.",
+    description: "Aplicando conhecimento e experiência prática nos métodos ABA e Denver, desenvolvendo e aplicando estratégias terapêuticas personalizadas para atender às necessidades individuais de cada paciente.",
   },
 ]
 

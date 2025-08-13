@@ -34,8 +34,8 @@ export function HeroSection() {
             </p>
 
             <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
-              Hoje, trabalho como assistente terapêutico especializada em ABA, oferecendo suporte individualizado
-              para promover o desenvolvimento e autonomia dos meus pacientes.
+              Atualmente, trabalho como Assistente Terapêutica nos métodos ABA e Denver, 
+              oferecendo suporte individualizado para estimular o desenvolvimento e a autonomia dos pacientes.
             </p>
           </div>
         </div>
