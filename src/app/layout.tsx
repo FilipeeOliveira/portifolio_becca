@@ -16,9 +16,18 @@ const openSans = Open_Sans({
 })
 
 export const metadata: Metadata = {
-  title: "Rebecca Ariel - Terapeuta Ocupacional",
-  description: "Portfólio profissional de Rebecca Ariel, Terapeuta Ocupacional especializada em ABA",
-  generator: "v0.dev",
+  title: "Rebecca Ariel - Estudante de Terapia Ocupacional",
+  description: "Portfólio profissional de Rebecca Ariel, Estudante de Terapia Ocupacional.",
+  openGraph: {
+    images: [
+      {
+        url: "/img/meta-image-perfil.png", 
+        width: 1200,
+        height: 630,
+        alt: "Rebecca Ariel - Estudante de Terapia Ocupacional",
+      },
+    ],
+  },
 }
 
 export default function RootLayout({
