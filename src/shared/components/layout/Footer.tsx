@@ -8,7 +8,7 @@ export function Footer() {
             href="https://www.linkedin.com/in/filipe-leite-oliveira/"
             target="_blank"
             rel="noopener noreferrer"
-            className=" text-coral-600 hover:underline transition-colors"
+            className="text-coral-600 underline hover:text-coral-700 transition-colors inline-flex items-center gap-1"
             title="Ver perfil no LinkedIn"
           >
             Filipe Oliveira

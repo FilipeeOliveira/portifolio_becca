@@ -24,7 +24,6 @@ export default function PublicLayout({
       <Navigation 
         items={navigationItems}
         activeSection={activeSection}
-        onNavigate={() => {}}
       />
       
       <main className="pt-16 sm:pt-20">

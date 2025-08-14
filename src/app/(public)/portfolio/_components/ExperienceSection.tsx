@@ -104,7 +104,7 @@ export function ExperienceSection() {
                 </div>
                 <div>
                   <h4 className="font-bold text-gray-800 text-sm sm:text-base">Serviço Social</h4>
-                  <p className="text-coral-500 text-xs sm:text-sm">UFAM • Graduada em 2023</p>
+                  <p className="text-coral-500 text-xs sm:text-sm">UFAM - Universidade Federal do Amazonas • Graduada em 2023</p>
                 </div>
               </div>
             </CardContent>
