@@ -33,7 +33,7 @@ export function HeroSection() {
               acessível e de qualidade.
             </p>
 
-            <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
+            <p className="text-gray-600 leading-relaxed text-base sm:text-lg">
               Atualmente, trabalho como Assistente Terapêutica nos métodos ABA e Denver, 
               oferecendo suporte individualizado para estimular o desenvolvimento e a autonomia dos pacientes.
             </p>

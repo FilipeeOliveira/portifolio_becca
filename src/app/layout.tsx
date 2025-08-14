@@ -16,6 +16,7 @@ const openSans = Open_Sans({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_URL || 'http://localhost:3000'),
   title: "Rebecca Ariel - Estudante de Terapia Ocupacional",
   description: "Portfólio profissional de Rebecca Ariel, Estudante de Terapia Ocupacional.",
   openGraph: {
