@@ -18,7 +18,7 @@ export function HeroSection() {
           <div className="space-y-4 sm:space-y-6 order-1 lg:order-2">
             <div className="space-y-2">
               <p className="text-coral-500 text-xs sm:text-sm font-medium tracking-wider uppercase">
-                Olá deixe-me me apresentar
+                Olá deixe-me apresentar
               </p>
               <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-800 leading-tight">
                 Me chamo Rebecca Ariel<br />
