@@ -464,14 +464,10 @@ export function CvSection() {
                 <CardContent className="p-8">
                   <div className="relative">
                     <div className="relative bg-white rounded-xl shadow-lg overflow-hidden transform rotate-1 hover:rotate-0 transition-transform duration-500">
-                      <div className="h-80 bg-gradient-to-br from-coral-100 to-coral-200 flex items-center justify-center">
-                        <div className="text-center">
-                          <div className="w-16 h-16 bg-coral-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <BookOpen className="w-8 h-8 text-white" />
-                          </div>
-                          <h3 className="text-lg font-bold text-foreground mb-2">CV Completo</h3>
-                          <p className="text-sm text-muted-foreground">Visualize meu currículo detalhado</p>
-                        </div>
+                      <div 
+                        className="h-80 flex items-center justify-center bg-cover bg-top" 
+                        style={{ backgroundImage: "url('/docs/Currículo_imagem_tumblr.png')" }}
+                      >
                       </div>
                     </div>
                     <div className="absolute -top-2 -right-2 w-6 h-6 bg-coral-500 rounded-full flex items-center justify-center">
