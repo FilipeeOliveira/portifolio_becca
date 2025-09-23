@@ -20,7 +20,6 @@ export function Navigation({ items, activeSection }: NavigationProps) {
         <div className="flex justify-between items-center">
           <div className="font-bold text-lg sm:text-xl text-coral-500 flex items-center gap-1">
             Rebecca Ariel
-            <span className="text-coral-400">★</span>
           </div>
           
           <div className="hidden md:flex gap-6 lg:gap-8">
