@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react"
 import { Card, CardContent } from "@/shared/components/ui/card"
+import { Badge } from "@/shared/components/ui/badge"
 import { GraduationCap, Briefcase, ChevronLeft, ChevronRight } from "lucide-react"
 import type { Experience } from "@/shared/types/experience.types"
 
@@ -84,7 +85,7 @@ export function ExperienceSection() {
           <p className="text-coral-500 text-xs sm:text-sm font-medium tracking-wider uppercase mb-2">
             Minha Trajetória
           </p>
-          <h2 className="text-2xl sm:text-3xl font-bold text-gray-800">Formação & Experiência</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold text-foreground">Formação & Experiência</h2>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
@@ -95,15 +96,15 @@ export function ExperienceSection() {
                 <div className="w-10 sm:w-12 h-10 sm:h-12 bg-coral-100 rounded-full flex items-center justify-center">
                   <GraduationCap className="w-5 sm:w-6 h-5 sm:h-6 text-coral-500" />
                 </div>
-                <h3 className="text-lg sm:text-xl font-bold text-gray-800">Formação</h3>
+                <h3 className="text-lg sm:text-xl font-bold text-foreground">Formação</h3>
               </div>
               <div className="space-y-3 sm:space-y-4">
                 <div>
-                  <h4 className="font-bold text-gray-800 text-sm sm:text-base">Terapia Ocupacional</h4>
+                  <h4 className="font-bold text-foreground text-sm sm:text-base">Terapia Ocupacional</h4>
                   <p className="text-coral-500 text-xs sm:text-sm">Universidade FAMETRO • 6° período</p>
                 </div>
                 <div>
-                  <h4 className="font-bold text-gray-800 text-sm sm:text-base">Serviço Social</h4>
+                  <h4 className="font-bold text-foreground text-sm sm:text-base">Serviço Social</h4>
                   <p className="text-coral-500 text-xs sm:text-sm">UFAM - Universidade Federal do Amazonas • Graduada em 2023</p>
                 </div>
               </div>
@@ -117,7 +118,7 @@ export function ExperienceSection() {
                   <div className="w-10 sm:w-12 h-10 sm:h-12 bg-coral-100 rounded-full flex items-center justify-center">
                     <Briefcase className="w-5 sm:w-6 h-5 sm:h-6 text-coral-500" />
                   </div>
-                  <h3 className="text-lg sm:text-xl font-bold text-gray-800">Experiência Profissional</h3>
+                  <h3 className="text-lg sm:text-xl font-bold text-foreground">Experiência Profissional</h3>
                 </div>
 
                 {/* Navigation buttons */}
@@ -147,12 +148,12 @@ export function ExperienceSection() {
                     <div key={index} className="w-full flex-shrink-0">
                       <div className="space-y-2 sm:space-y-3">
                         <div>
-                          <h4 className="font-bold text-gray-800 text-base sm:text-lg">{exp.title}</h4>
+                          <h4 className="font-bold text-foreground text-base sm:text-lg">{exp.title}</h4>
                           <p className="text-coral-500 font-medium text-xs sm:text-sm">{exp.company}</p>
                           <p className="text-coral-400 text-xs">{exp.department}</p>
                         </div>
-                        <p className="text-coral-600 text-xs sm:text-sm font-medium">{exp.period}</p>
-                        <p className="text-gray-600 text-xs sm:text-sm leading-relaxed">{exp.description}</p>
+                        <Badge variant="secondary" className="bg-coral-100 text-coral-600 hover:bg-coral-200 text-xs">{exp.period}</Badge>
+                        <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed">{exp.description}</p>
                       </div>
                     </div>
                   ))}
