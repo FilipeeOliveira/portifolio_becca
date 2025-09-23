@@ -59,7 +59,7 @@ const timelineData = [
     location: 'Manaus, AM',
     description: 'Aplicando conhecimento nos métodos ABA e Denver, desenvolvendo estratégias terapêuticas personalizadas.',
     type: 'work',
-    highlights: ['ABA', 'Denver', 'Terapia Personalizada']
+    highlights: ['Método ABA', 'Método Denver', 'Estratégias Terapêuticas Personalizadas']
   },
   {
     id: '2023-2',
@@ -67,29 +67,29 @@ const timelineData = [
     title: 'Assistente de Acolhimento',
     company: 'Hapvida - Medicina Preventiva',
     location: 'Manaus, AM',
-    description: 'Responsável pelo acolhimento e orientação de pacientes.',
+    description: 'Atuei no acolhimento de familiares, realizando agendamentos iniciais e orientando sobre o fluxo das terapias. Prestei suporte administrativo e jurídico à equipe, contribuindo para a organização e eficiência dos processos.',
     type: 'work',
-    highlights: ['Acolhimento', 'Orientação']
+    highlights: ['Acolhimento de familiares', 'Orientações Iniciais', 'Suporte administrativo e jurídico']
   },
   {
     id: '2023-1',
-    period: '2023',
-    title: 'Graduada em Serviço Social',
-    company: 'UFAM - Universidade Federal do Amazonas',
-    location: 'Manaus, AM',
-    description: 'Conclusão da graduação com foco em políticas sociais.',
-    type: 'education',
-    highlights: ['Graduação', 'Políticas Sociais']
-  },
-  {
-    id: '2022',
     period: '11/2022 - 05/2023',
     title: 'Recepcionista',
     company: 'Hapvida - Medicina Preventiva',
     location: 'Manaus, AM',
-    description: 'Atendimento ao público e gestão de agendamentos.',
+    description: 'Atendimento ao público, acolhimento de familiares, orientação sobre fluxos de terapias e gestão de agendamentos.',
     type: 'work',
-    highlights: ['Atendimento', 'Gestão']
+    highlights: ['Atendimento ao público', 'Gestão de agendamentos', 'Orientação sobre fluxos de terapias']
+  },
+  {
+    id: '2022',
+    period: '02/2019 - 12/2021',
+    title: 'Estagiária',
+    company: 'TRIBUNAL DE JUSTIÇA DO AMAZONAS',
+    location: 'Manaus, AM',
+    description: 'Atuação em mediação familiar, acompanhamento de processos e prestação de suporte jurídico em questões relacionadas ao Direito de Família, contribuindo para a resolução de conflitos e o andamento processual.',
+    type: 'work',
+    highlights: ['Mediação familiar', 'Acompanhamento processual', 'Suporte jurídico em Direito de Família']
   }
 ]
 
