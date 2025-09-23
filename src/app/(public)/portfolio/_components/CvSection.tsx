@@ -222,7 +222,12 @@ export function CvSection() {
                     <Button
                       className="bg-coral-500 hover:bg-coral-600 text-white px-4 sm:px-6 py-2 rounded-full font-medium transition-colors duration-200 flex items-center justify-center gap-2 text-sm"
                       onClick={() => {
-                        window.open('/docs/CV-RebeccaAriel.pdf', '_blank')
+                        const link = document.createElement('a')
+                        link.href = '/docs/CV-RebeccaAriel.pdf'
+                        link.download = 'CV-RebeccaAriel.pdf'
+                        document.body.appendChild(link)
+                        link.click()
+                        document.body.removeChild(link)
                       }}
                     >
                       <Download className="w-4 h-4" />
