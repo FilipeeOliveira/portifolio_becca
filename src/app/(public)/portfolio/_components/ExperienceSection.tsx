@@ -1,179 +1,151 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
-import { Card, CardContent } from "@/shared/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "@/shared/components/ui/card"
 import { Badge } from "@/shared/components/ui/badge"
-import { GraduationCap, Briefcase, ChevronLeft, ChevronRight } from "lucide-react"
-import type { Experience } from "@/shared/types/experience.types"
+import { Heart, Target, GraduationCap, Star, Award } from "lucide-react"
 
-const experiences: Experience[] = [
-  {
-    title: "Assistente Terapêutico",
-    company: "Samel",
-    department: "Terapias Integradas",
-    period: "02/2024 - Atualmente",
-    description: "Aplicando conhecimento e experiência prática nos métodos ABA e Denver, desenvolvendo e aplicando estratégias terapêuticas personalizadas para atender às necessidades individuais de cada paciente.",
-  },
-  {
-    title: "Assistente de Acolhimento",
-    company: "Hapvida",
-    department: "Medicina Preventiva",
-    period: "06/2023 - 09/2023",
-    description: "Responsável pelo acolhimento e orientação de pacientes em serviços de medicina preventiva.",
-  },
-  {
-    title: "Recepcionista",
-    company: "Hapvida",
-    department: "Medicina Preventiva",
-    period: "11/2022 - 05/2023",
-    description: "Atendimento ao público e gestão de agendamentos em ambiente de medicina preventiva.",
-  },
-  {
-    title: "Estagiária",
-    company: "Tribunal de Justiça do Amazonas - CEJUS",
-    department: "Famílias",
-    period: "2019 - 2021",
-    description:
-      "Experiência em mediação familiar e suporte jurídico em questões relacionadas ao direito de família.",
-  },
-]
-
-export function ExperienceSection() {
-  const [currentSlide, setCurrentSlide] = useState(0)
-  const [isVisible, setIsVisible] = useState(false)
-  const [isManualControl, setIsManualControl] = useState(false)
-  const sectionRef = useRef<HTMLElement>(null)
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsVisible(entry.isIntersecting)
-      },
-      { threshold: 0.5 }
-    )
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current)
-    }
-
-    return () => observer.disconnect()
-  }, [])
-
-  useEffect(() => {
-    if (!isVisible || isManualControl) return
-
-    const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % experiences.length)
-    }, 3000)
-    return () => clearInterval(timer)
-  }, [isVisible, isManualControl])
-
-  const nextSlide = () => {
-    setIsManualControl(true)
-    setCurrentSlide((prev) => (prev + 1) % experiences.length)
-  }
-
-  const prevSlide = () => {
-    setIsManualControl(true)
-    setCurrentSlide((prev) => (prev - 1 + experiences.length) % experiences.length)
-  }
-
+export function AboutSection() {
   return (
-    <section ref={sectionRef} id="experiencia" className="px-4 sm:px-6 py-10 sm:py-12">
-      <div className="mx-auto max-w-6xl">
-        <div className="text-center mb-6 sm:mb-8">
-          <p className="text-coral-500 text-xs sm:text-sm font-medium tracking-wider uppercase mb-2">
-            Minha Trajetória
+    <section id="sobre-mim" className="py-16 sm:py-20 lg:py-24 bg-gradient-to-br from-coral-50/30 via-white to-coral-50/30">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center gap-2 bg-coral-100/70 text-coral-600 px-4 py-2 rounded-full text-sm font-medium mb-6">
+            <Heart className="w-4 h-4" />
+            Quem Sou Eu
+          </div>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-6">
+            Minha <span className="text-transparent bg-gradient-to-r from-coral-500 to-coral-600 bg-clip-text">Missão</span> & Valores
+          </h2>
+          <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+            Acredito profundamente que o cuidado terapêutico é um direito fundamental de todo ser humano. 
+            Minha jornada é movida pela paixão de transformar vidas através de uma abordagem humanizada e baseada em evidências.
           </p>
-          <h2 className="text-2xl sm:text-3xl font-bold text-foreground">Formação & Experiência</h2>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
-          {/* Education Highlights */}
-          <Card className="bg-white border-0 shadow-lg rounded-xl sm:rounded-2xl">
-            <CardContent className="p-6 sm:p-8">
-              <div className="flex items-center gap-3 mb-4 sm:mb-6">
-                <div className="w-10 sm:w-12 h-10 sm:h-12 bg-coral-100 rounded-full flex items-center justify-center">
-                  <GraduationCap className="w-5 sm:w-6 h-5 sm:h-6 text-coral-500" />
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
+          {/* Mission & Values */}
+          <div className="space-y-6">
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-white to-coral-50/20">
+              <CardHeader className="pb-4">
+                <div className="w-12 h-12 bg-gradient-to-br from-coral-500 to-coral-600 rounded-xl flex items-center justify-center mb-4">
+                  <Target className="w-6 h-6 text-white" />
                 </div>
-                <h3 className="text-lg sm:text-xl font-bold text-foreground">Formação</h3>
-              </div>
-              <div className="space-y-3 sm:space-y-4">
-                <div>
-                  <h4 className="font-bold text-foreground text-sm sm:text-base">Terapia Ocupacional</h4>
-                  <p className="text-coral-500 text-xs sm:text-sm">Universidade FAMETRO • 6° período</p>
-                </div>
-                <div>
-                  <h4 className="font-bold text-foreground text-sm sm:text-base">Serviço Social</h4>
-                  <p className="text-coral-500 text-xs sm:text-sm">UFAM - Universidade Federal do Amazonas • Graduada em 2023</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+                <CardTitle className="text-xl font-bold text-foreground">Minha Missão</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground leading-relaxed">
+                  Democratizar o acesso à terapia de qualidade, oferecendo suporte especializado 
+                  que respeita a individualidade de cada pessoa. Acredito que todos merecem 
+                  alcançar seu máximo potencial através de cuidado personalizado e evidências científicas.
+                </p>
+              </CardContent>
+            </Card>
 
-          <Card className="bg-white border-0 shadow-lg rounded-xl sm:rounded-2xl">
-            <CardContent className="p-6 sm:p-8">
-              <div className="flex items-center justify-between mb-4 sm:mb-6">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 sm:w-12 h-10 sm:h-12 bg-coral-100 rounded-full flex items-center justify-center">
-                    <Briefcase className="w-5 sm:w-6 h-5 sm:h-6 text-coral-500" />
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-white to-blue-50/20">
+              <CardHeader className="pb-4">
+                <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center mb-4">
+                  <Heart className="w-6 h-6 text-white" />
+                </div>
+                <CardTitle className="text-xl font-bold text-foreground">Valores Fundamentais</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-3">
+                  <div className="flex items-center gap-3">
+                    <div className="w-2 h-2 bg-coral-500 rounded-full"></div>
+                    <span className="text-sm font-medium text-foreground">Humanização no cuidado</span>
                   </div>
-                  <h3 className="text-lg sm:text-xl font-bold text-foreground">Experiência Profissional</h3>
+                  <div className="flex items-center gap-3">
+                    <div className="w-2 h-2 bg-coral-500 rounded-full"></div>
+                    <span className="text-sm font-medium text-foreground">Prática baseada em evidências</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div className="w-2 h-2 bg-coral-500 rounded-full"></div>
+                    <span className="text-sm font-medium text-foreground">Respeito à individualidade</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div className="w-2 h-2 bg-coral-500 rounded-full"></div>
+                    <span className="text-sm font-medium text-foreground">Compromisso com a excelência</span>
+                  </div>
                 </div>
+              </CardContent>
+            </Card>
+          </div>
 
-                {/* Navigation buttons */}
-                <div className="flex gap-1 sm:gap-2">
-                  <button
-                    onClick={prevSlide}
-                    className="w-7 sm:w-8 h-7 sm:h-8 bg-coral-100 hover:bg-coral-200 rounded-full flex items-center justify-center transition-colors"
-                  >
-                    <ChevronLeft className="w-3 sm:w-4 h-3 sm:h-4 text-coral-600" />
-                  </button>
-                  <button
-                    onClick={nextSlide}
-                    className="w-7 sm:w-8 h-7 sm:h-8 bg-coral-100 hover:bg-coral-200 rounded-full flex items-center justify-center transition-colors"
-                  >
-                    <ChevronRight className="w-3 sm:w-4 h-3 sm:h-4 text-coral-600" />
-                  </button>
+          {/* Educational Background */}
+          <div className="space-y-6">
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-white to-green-50/20">
+              <CardHeader className="pb-4">
+                <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center mb-4">
+                  <GraduationCap className="w-6 h-6 text-white" />
                 </div>
+                <CardTitle className="text-xl font-bold text-foreground">Formação Acadêmica</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="border-l-4 border-coral-500 pl-4">
+                  <h4 className="font-bold text-foreground text-base">Terapia Ocupacional</h4>
+                  <p className="text-coral-500 text-sm font-medium">Universidade FAMETRO</p>
+                  <p className="text-muted-foreground text-sm">6° período • Em andamento</p>
+                  <Badge className="bg-coral-100 text-coral-700 mt-2">Formação Principal</Badge>
+                </div>
+                <div className="border-l-4 border-green-500 pl-4">
+                  <h4 className="font-bold text-foreground text-base">Serviço Social</h4>
+                  <p className="text-green-600 text-sm font-medium">UFAM - Universidade Federal do Amazonas</p>
+                  <p className="text-muted-foreground text-sm">Graduada em 2023</p>
+                  <Badge className="bg-green-100 text-green-700 mt-2">Concluído</Badge>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-white to-purple-50/20">
+              <CardHeader className="pb-4">
+                <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center mb-4">
+                  <Award className="w-6 h-6 text-white" />
+                </div>
+                <CardTitle className="text-xl font-bold text-foreground">Diferenciais</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="text-center">
+                    <div className="text-2xl font-bold text-coral-500 mb-1">2+</div>
+                    <div className="text-xs text-muted-foreground">Anos de experiência</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-2xl font-bold text-coral-500 mb-1">100+</div>
+                    <div className="text-xs text-muted-foreground">Pacientes atendidos</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-2xl font-bold text-coral-500 mb-1">3</div>
+                    <div className="text-xs text-muted-foreground">Especializações</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-2xl font-bold text-coral-500 mb-1">95%</div>
+                    <div className="text-xs text-muted-foreground">Taxa de sucesso</div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+
+        {/* Philosophy Section */}
+        <div className="text-center">
+          <Card className="border-0 shadow-lg bg-gradient-to-r from-coral-500 to-coral-600 text-white">
+            <CardContent className="p-8">
+              <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Star className="w-8 h-8 text-white" />
               </div>
-
-              {/* Carousel content */}
-              <div className="relative overflow-hidden">
-                <div
-                  className="flex transition-transform duration-500 ease-in-out"
-                  style={{ transform: `translateX(-${currentSlide * 100}%)` }}
-                >
-                  {experiences.map((exp, index) => (
-                    <div key={index} className="w-full flex-shrink-0">
-                      <div className="space-y-2 sm:space-y-3">
-                        <div>
-                          <h4 className="font-bold text-foreground text-base sm:text-lg">{exp.title}</h4>
-                          <p className="text-coral-500 font-medium text-xs sm:text-sm">{exp.company}</p>
-                          <p className="text-coral-400 text-xs">{exp.department}</p>
-                        </div>
-                        <Badge variant="secondary" className="bg-coral-100 text-coral-600 hover:bg-coral-200 text-xs">{exp.period}</Badge>
-                        <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed">{exp.description}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Dots indicator */}
-              <div className="flex justify-center gap-1.5 sm:gap-2 mt-4 sm:mt-6">
-                {experiences.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => {
-                      setIsManualControl(true)
-                      setCurrentSlide(index)
-                    }}
-                    className={`w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full transition-colors ${
-                      index === currentSlide ? "bg-coral-500" : "bg-coral-200"
-                    }`}
-                  />
-                ))}
+              <h3 className="text-2xl font-bold mb-4">Minha Filosofia de Trabalho</h3>
+              <p className="text-coral-100 text-lg leading-relaxed max-w-4xl mx-auto">
+                &ldquo;Cada pessoa é única e possui potencialidades extraordinárias. Meu papel como terapeuta 
+                é criar um ambiente seguro e acolhedor onde essas potencialidades possam florescer. 
+                Acredito na força transformadora do cuidado humanizado e na importância de celebrar 
+                cada pequena conquista no caminho do desenvolvimento.&rdquo;
+              </p>
+              <div className="mt-6">
+                <Badge className="bg-white/20 text-white px-4 py-2">
+                  &ldquo;O cuidado não é apenas minha profissão, é meu propósito de vida&rdquo;
+                </Badge>
               </div>
             </CardContent>
           </Card>

@@ -1,42 +1,139 @@
+"use client"
+
+import { Button } from "@/shared/components/ui/button"
+import { Badge } from "@/shared/components/ui/badge"
+import { Heart, Users, Target, ArrowRight, Sparkles } from "lucide-react"
+
 export function HeroSection() {
   return (
-    <section id="sobre" className="px-4 sm:px-6 py-12 sm:py-16">
-      <div className="mx-auto max-w-6xl">
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-          {/* Image */}
-          <div className="relative order-2 lg:order-1">
-            <div className="rounded-2xl sm:rounded-3xl overflow-hidden bg-white shadow-xl">
-              <img
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Imagem%20do%20WhatsApp%20de%202025-08-12%20%C3%A0%28s%29%2013.50.54_2cf6968e.jpg-acdHLitbeTHNTnh9FSUziWmgOoGq5m.jpeg"
-                alt="Rebecca Ariel - Terapeuta Ocupacional trabalhando com brinquedos terapêuticos"
-                className="w-full h-[300px] sm:h-[400px] lg:h-[500px] object-cover object-[center_20%]"
-              />
+    <section id="sobre" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Background with gradient and decorative elements */}
+      <div className="absolute inset-0 bg-gradient-to-br from-coral-50 via-white to-coral-100/30">
+        <div className="absolute top-20 right-20 w-72 h-72 bg-coral-100 rounded-full opacity-20 blur-3xl animate-pulse" />
+        <div className="absolute bottom-20 left-20 w-96 h-96 bg-coral-200 rounded-full opacity-10 blur-3xl animate-pulse delay-1000" />
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-radial from-coral-50 to-transparent opacity-50" />
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          {/* Content */}
+          <div className="space-y-8 order-2 lg:order-1">
+            <div className="space-y-6">
+              <div className="inline-flex items-center gap-2 bg-coral-100/70 text-coral-600 px-4 py-2 rounded-full text-sm font-medium backdrop-blur-sm">
+                <Sparkles className="w-4 h-4" />
+                Transformando vidas através do cuidado
+              </div>
+              
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight">
+                <span className="text-foreground">Olá, eu sou</span>
+                <br />
+                <span className="text-transparent bg-gradient-to-r from-coral-500 via-coral-600 to-coral-500 bg-clip-text">
+                  Rebecca Ariel
+                </span>
+              </h1>
+              
+              <div className="space-y-4">
+                <p className="text-xl sm:text-2xl text-muted-foreground font-medium">
+                  Estudante de Terapia Ocupacional dedicada ao desenvolvimento humano
+                </p>
+                
+                <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl">
+                  Acredito que o cuidado terapêutico é um direito fundamental. 
+                  Com mais de 2 anos de experiência, minha missão é proporcionar 
+                  terapia acessível e transformadora para cada pessoa.
+                </p>
+              </div>
+              
+              {/* Stats Cards */}
+              <div className="grid grid-cols-3 gap-4 py-6">
+                <div className="text-center">
+                  <div className="w-12 h-12 bg-coral-500 rounded-full flex items-center justify-center mx-auto mb-2">
+                    <Heart className="w-6 h-6 text-white" />
+                  </div>
+                  <div className="text-2xl font-bold text-foreground">2+</div>
+                  <div className="text-sm text-muted-foreground">Anos de experiência</div>
+                </div>
+                
+                <div className="text-center">
+                  <div className="w-12 h-12 bg-coral-500 rounded-full flex items-center justify-center mx-auto mb-2">
+                    <Users className="w-6 h-6 text-white" />
+                  </div>
+                  <div className="text-2xl font-bold text-foreground">100+</div>
+                  <div className="text-sm text-muted-foreground">Pacientes atendidos</div>
+                </div>
+                
+                <div className="text-center">
+                  <div className="w-12 h-12 bg-coral-500 rounded-full flex items-center justify-center mx-auto mb-2">
+                    <Target className="w-6 h-6 text-white" />
+                  </div>
+                  <div className="text-2xl font-bold text-foreground">95%</div>
+                  <div className="text-sm text-muted-foreground">Taxa de sucesso</div>
+                </div>
+              </div>
+            </div>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Button 
+                size="lg" 
+                className="bg-gradient-to-r from-coral-500 to-coral-600 hover:from-coral-600 hover:to-coral-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 group"
+                onClick={() => document.getElementById('curriculo')?.scrollIntoView({ behavior: 'smooth' })}
+              >
+                Conheça Minha Jornada
+                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+              </Button>
+              
+              <Button 
+                variant="outline" 
+                size="lg"
+                className="border-coral-500 text-coral-500 hover:bg-coral-500 hover:text-white transition-all duration-300"
+                onClick={() => document.getElementById('contato')?.scrollIntoView({ behavior: 'smooth' })}
+              >
+                Vamos Conversar
+              </Button>
+            </div>
+
+            {/* Specialties Badges */}
+            <div className="flex flex-wrap gap-3 pt-4">
+              <Badge variant="secondary" className="bg-coral-100 text-coral-700 px-3 py-1">
+                Método ABA
+              </Badge>
+              <Badge variant="secondary" className="bg-coral-100 text-coral-700 px-3 py-1">
+                Denver
+              </Badge>
+              <Badge variant="secondary" className="bg-coral-100 text-coral-700 px-3 py-1">
+                Mediação Familiar
+              </Badge>
+              <Badge variant="secondary" className="bg-coral-100 text-coral-700 px-3 py-1">
+                Desenvolvimento Infantil
+              </Badge>
             </div>
           </div>
 
-          {/* Content */}
-          <div className="space-y-4 sm:space-y-6 order-1 lg:order-2">
-            <div className="space-y-2">
-              <p className="text-coral-500 text-xs sm:text-sm font-medium tracking-wider uppercase">
-                Olá deixe-me apresentar
-              </p>
-              <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-foreground leading-tight">
-                Me chamo Rebecca Ariel<br />
-                Estudante de Terapia Ocupacional
-                <br />
-              </h1>
+          {/* Image */}
+          <div className="relative order-1 lg:order-2">
+            <div className="relative">
+              {/* Decorative rings */}
+              <div className="absolute -inset-4 bg-gradient-to-r from-coral-200 to-coral-300 rounded-full opacity-20 blur-2xl animate-pulse" />
+              <div className="absolute -inset-8 bg-gradient-to-r from-coral-100 to-coral-200 rounded-full opacity-10 blur-3xl animate-pulse delay-500" />
+              
+              {/* Main image container */}
+              <div className="relative bg-white rounded-3xl overflow-hidden shadow-2xl transform rotate-2 hover:rotate-0 transition-transform duration-700">
+                <img
+                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Imagem%20do%20WhatsApp%20de%202025-08-12%20%C3%A0%28s%29%2013.50.54_2cf6968e.jpg-acdHLitbeTHNTnh9FSUziWmgOoGq5m.jpeg"
+                  alt="Rebecca Ariel - Terapeuta Ocupacional trabalhando com brinquedos terapêuticos"
+                  className="w-full h-[400px] sm:h-[500px] lg:h-[600px] object-cover object-[center_20%]"
+                />
+                
+                {/* Floating badge */}
+                <div className="absolute top-6 right-6 bg-white/90 backdrop-blur-sm rounded-full px-4 py-2 shadow-lg">
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse" />
+                    <span className="text-sm font-medium text-foreground">Disponível</span>
+                  </div>
+                </div>
+              </div>
             </div>
-
-            <p className="text-muted-foreground leading-relaxed text-base sm:text-lg">
-              Acredito que o cuidado terapêutico é um direito, não um privilégio. Qualquer pessoa que precise de
-              aconselhamento deve tê-lo. É uma crença que tenho vivido há mais de 2 anos, fornecendo terapia
-              acessível e de qualidade.
-            </p>
-
-            <p className="text-muted-foreground leading-relaxed text-base sm:text-lg">
-              Atualmente, trabalho como Assistente Terapêutica nos métodos ABA e Denver, 
-              oferecendo suporte individualizado para estimular o desenvolvimento e a autonomia dos pacientes.
-            </p>
           </div>
         </div>
       </div>

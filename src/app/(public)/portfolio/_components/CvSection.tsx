@@ -2,6 +2,10 @@
 
 import { useState, useCallback, useEffect } from 'react'
 import { Button } from "@/shared/components/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "@/shared/components/ui/card"
+import { Badge } from "@/shared/components/ui/badge"
+import { Progress } from "@/shared/components/ui/progress"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/shared/components/ui/tabs"
 import { 
   Dialog, 
   DialogContent, 
@@ -10,7 +14,22 @@ import {
   DialogTitle, 
   DialogDescription 
 } from "@/shared/components/ui/dialog"
-import { Eye, Download, ChevronLeft, ChevronRight, Loader2 } from 'lucide-react'
+import { 
+  Eye, 
+  Download, 
+  ChevronLeft, 
+  ChevronRight, 
+  Loader2,
+  Calendar,
+  MapPin,
+  Award,
+  BookOpen,
+  Target,
+  TrendingUp,
+  Star,
+  Clock,
+  CheckCircle
+} from 'lucide-react'
 import dynamic from 'next/dynamic'
 
 // Import react-pdf components dynamically to avoid SSR issues
@@ -29,6 +48,204 @@ const Page = dynamic(
   () => import('react-pdf').then(mod => mod.Page),
   { ssr: false }
 )
+
+// Timeline data
+const timelineData = [
+  {
+    id: '2024',
+    period: '02/2024 - Atualmente',
+    title: 'Assistente Terapêutico',
+    company: 'Samel - Terapias Integradas',
+    location: 'Manaus, AM',
+    description: 'Aplicando conhecimento nos métodos ABA e Denver, desenvolvendo estratégias terapêuticas personalizadas.',
+    type: 'work',
+    highlights: ['ABA', 'Denver', 'Terapia Personalizada']
+  },
+  {
+    id: '2023-2',
+    period: '06/2023 - 09/2023',
+    title: 'Assistente de Acolhimento',
+    company: 'Hapvida - Medicina Preventiva',
+    location: 'Manaus, AM',
+    description: 'Responsável pelo acolhimento e orientação de pacientes.',
+    type: 'work',
+    highlights: ['Acolhimento', 'Orientação']
+  },
+  {
+    id: '2023-1',
+    period: '2023',
+    title: 'Graduada em Serviço Social',
+    company: 'UFAM - Universidade Federal do Amazonas',
+    location: 'Manaus, AM',
+    description: 'Conclusão da graduação com foco em políticas sociais.',
+    type: 'education',
+    highlights: ['Graduação', 'Políticas Sociais']
+  },
+  {
+    id: '2022',
+    period: '11/2022 - 05/2023',
+    title: 'Recepcionista',
+    company: 'Hapvida - Medicina Preventiva',
+    location: 'Manaus, AM',
+    description: 'Atendimento ao público e gestão de agendamentos.',
+    type: 'work',
+    highlights: ['Atendimento', 'Gestão']
+  }
+]
+
+// Skills data
+const skillsData = {
+  'Terapia Ocupacional': [
+    { name: 'Método ABA', level: 90, category: 'specialty' },
+    { name: 'Método Denver', level: 85, category: 'specialty' },
+    { name: 'Avaliação Funcional', level: 80, category: 'specialty' },
+    { name: 'Intervenção Terapêutica', level: 88, category: 'specialty' }
+  ],
+  'Habilidades Interpessoais': [
+    { name: 'Comunicação', level: 95, category: 'soft' },
+    { name: 'Empatia', level: 98, category: 'soft' },
+    { name: 'Trabalho em Equipe', level: 92, category: 'soft' },
+    { name: 'Resolução de Problemas', level: 87, category: 'soft' }
+  ],
+  'Conhecimentos Técnicos': [
+    { name: 'Políticas de Saúde', level: 85, category: 'technical' },
+    { name: 'Documentação Clínica', level: 82, category: 'technical' },
+    { name: 'Ética Profissional', level: 95, category: 'technical' },
+    { name: 'Legislação Social', level: 80, category: 'technical' }
+  ]
+}
+
+// Achievements data
+const achievementsData = [
+  {
+    icon: Award,
+    title: 'Especialização em ABA',
+    description: 'Certificação em Applied Behavior Analysis',
+    year: '2024'
+  },
+  {
+    icon: Star,
+    title: 'Graduação com Distinção',
+    description: 'Serviço Social - UFAM',
+    year: '2023'
+  },
+  {
+    icon: Target,
+    title: 'Estágio CEJUS',
+    description: 'Experiência em mediação familiar',
+    year: '2021'
+  }
+]
+
+// Timeline Item Component
+const TimelineItem = ({ item, index }: { item: typeof timelineData[0], index: number }) => {
+  const [isVisible, setIsVisible] = useState(false)
+  
+  useEffect(() => {
+    const timer = setTimeout(() => setIsVisible(true), index * 200)
+    return () => clearTimeout(timer)
+  }, [index])
+
+  const Icon = item.type === 'work' ? Target : BookOpen
+  
+  return (
+    <div className={`relative pl-8 pb-8 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+      {/* Timeline line */}
+      <div className="absolute left-4 top-0 bottom-0 w-px bg-gradient-to-b from-coral-200 to-coral-400" />
+      
+      {/* Timeline dot */}
+      <div className="absolute left-2 top-2 w-4 h-4 bg-coral-500 rounded-full border-4 border-white shadow-lg z-10">
+        <div className="absolute inset-0 bg-coral-500 rounded-full animate-ping opacity-20" />
+      </div>
+      
+      <Card className="ml-4 border-0 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-white/80 backdrop-blur-sm">
+        <CardContent className="p-6">
+          <div className="flex items-start gap-3">
+            <div className="w-10 h-10 bg-coral-100 rounded-full flex items-center justify-center flex-shrink-0">
+              <Icon className="w-5 h-5 text-coral-600" />
+            </div>
+            
+            <div className="flex-1">
+              <div className="flex items-center gap-2 mb-2">
+                <Badge variant="secondary" className="bg-coral-100 text-coral-700 text-xs">
+                  {item.period}
+                </Badge>
+                <div className="flex items-center text-muted-foreground text-xs">
+                  <MapPin className="w-3 h-3 mr-1" />
+                  {item.location}
+                </div>
+              </div>
+              
+              <h4 className="text-lg font-semibold text-foreground mb-1">{item.title}</h4>
+              <p className="text-coral-600 font-medium text-sm mb-2">{item.company}</p>
+              <p className="text-muted-foreground text-sm leading-relaxed mb-3">{item.description}</p>
+              
+              <div className="flex flex-wrap gap-1">
+                {item.highlights.map((highlight) => (
+                  <Badge key={highlight} variant="outline" className="text-xs border-coral-200 text-coral-600">
+                    {highlight}
+                  </Badge>
+                ))}
+              </div>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+  )
+}
+
+// Skill Bar Component
+const SkillBar = ({ skill, index }: { skill: { name: string, level: number, category: string }, index: number }) => {
+  const [animatedLevel, setAnimatedLevel] = useState(0)
+  
+  useEffect(() => {
+    const timer = setTimeout(() => setAnimatedLevel(skill.level), index * 100)
+    return () => clearTimeout(timer)
+  }, [skill.level, index])
+  
+  
+  return (
+    <div className="space-y-2">
+      <div className="flex justify-between items-center">
+        <span className="text-sm font-medium text-foreground">{skill.name}</span>
+        <span className="text-xs text-muted-foreground">{skill.level}%</span>
+      </div>
+      <Progress value={animatedLevel} className="h-2 bg-gray-100" />
+    </div>
+  )
+}
+
+// Achievement Card Component
+const AchievementCard = ({ achievement, index }: { achievement: typeof achievementsData[0], index: number }) => {
+  const [isVisible, setIsVisible] = useState(false)
+  
+  useEffect(() => {
+    const timer = setTimeout(() => setIsVisible(true), index * 150)
+    return () => clearTimeout(timer)
+  }, [index])
+  
+  const Icon = achievement.icon
+  
+  return (
+    <Card className={`border-0 shadow-md hover:shadow-xl transition-all duration-500 hover:-translate-y-2 bg-gradient-to-br from-white to-coral-50/30 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
+      <CardContent className="p-6">
+        <div className="flex items-center gap-4">
+          <div className="w-12 h-12 bg-gradient-to-br from-coral-500 to-coral-600 rounded-full flex items-center justify-center">
+            <Icon className="w-6 h-6 text-white" />
+          </div>
+          <div className="flex-1">
+            <h4 className="font-semibold text-foreground mb-1">{achievement.title}</h4>
+            <p className="text-muted-foreground text-sm mb-1">{achievement.description}</p>
+            <Badge className="bg-coral-100 text-coral-700 text-xs">
+              {achievement.year}
+            </Badge>
+          </div>
+        </div>
+      </CardContent>
+    </Card>
+  )
+}
 
 const PDFViewer = ({ file, isPreview = false }: { file: string, isPreview?: boolean }) => {
   const [numPages, setNumPages] = useState<number | null>(null);
@@ -177,117 +394,232 @@ const PDFViewer = ({ file, isPreview = false }: { file: string, isPreview?: bool
 
 export function CvSection() {
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [downloadLoading, setDownloadLoading] = useState(false)
+
+  const handleDownload = async () => {
+    setDownloadLoading(true)
+    try {
+      const link = document.createElement('a')
+      link.href = '/docs/CV-RebeccaAriel.pdf'
+      link.download = 'CV-RebeccaAriel.pdf'
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
+    } finally {
+      setTimeout(() => setDownloadLoading(false), 1000)
+    }
+  }
 
   return (
-    <section id="curriculo" className="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-coral-50 to-white">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-8 sm:mb-12">
-          <p className="text-coral-500 font-medium text-sm sm:text-base mb-2 uppercase">Conheça</p>
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground">
-            Minha Trajetória
-          </h2>
-        </div>
-        <div className="bg-white rounded-2xl sm:rounded-3xl shadow-xl overflow-hidden">
-          <div className="grid grid-cols-1 lg:grid-cols-2 items-center">
-            {/* CV Preview */}
-            <div className="relative h-60 sm:h-80 lg:h-96 p-6 sm:p-8 flex items-center justify-center bg-gray-55">
-              <div className="relative bg-white rounded-lg shadow-lg w-full max-w-64 h-full overflow-hidden">
-                <div className="w-full h-full border-0 blur-sm opacity-60">
-                   <PDFViewer file="/docs/CV-RebeccaAriel.pdf" isPreview={true} />
-                </div>
-                <div className="absolute inset-0 bg-white/40"></div>
-              </div>
-            </div>
+    <section id="curriculo" className="py-16 sm:py-20 lg:py-24 bg-gradient-to-br from-coral-50 via-white to-coral-50/20 relative overflow-hidden">
+      {/* Background decorative elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-20 right-10 w-32 h-32 bg-coral-100 rounded-full opacity-30 blur-3xl" />
+        <div className="absolute bottom-20 left-10 w-24 h-24 bg-coral-200 rounded-full opacity-20 blur-2xl" />
+      </div>
 
-            {/* CV Download Content */}
-            <div className="p-6 sm:p-8 lg:p-12 relative">
-              <div className="space-y-4 sm:space-y-6">
-                <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground leading-tight">
-                  Confira meu currículo completo
-                  <br />e conheça minha trajetória profissional.
-                </h3>
-
-                <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-                  <div className="flex flex-col sm:flex-row gap-3">
-                    <DialogTrigger asChild>
-                      <Button
-                        variant="outline"
-                        className="border-coral-500 text-coral-500 hover:bg-coral-50 hover:text-coral-600 px-4 sm:px-6 py-2 rounded-full font-medium transition-colors duration-200 flex items-center justify-center gap-2 text-sm"
-                      >
-                        <Eye className="w-4 h-4" />
-                        Visualizar
-                      </Button>
-                    </DialogTrigger>
-                    
-                    <Button
-                      className="bg-coral-500 hover:bg-coral-600 text-white px-4 sm:px-6 py-2 rounded-full font-medium transition-colors duration-200 flex items-center justify-center gap-2 text-sm"
-                      onClick={() => {
-                        const link = document.createElement('a')
-                        link.href = '/docs/CV-RebeccaAriel.pdf'
-                        link.download = 'CV-RebeccaAriel.pdf'
-                        document.body.appendChild(link)
-                        link.click()
-                        document.body.removeChild(link)
-                      }}
-                    >
-                      <Download className="w-4 h-4" />
-                      Baixar Currículo
-                    </Button>
-                  </div>
-
-                  <DialogContent 
-                    className="!w-[95vw] !max-w-[95vw] !h-[95vh] !max-h-[95vh] p-0 overflow-hidden rounded-lg border-0 !grid-rows-1"
-                    showCloseButton={false}
-                  >
-                    <DialogHeader className="sr-only">
-                      <DialogTitle>Currículo de Rebecca Ariel</DialogTitle>
-                      <DialogDescription>
-                        Visualizador de PDF para o currículo completo de Rebecca Ariel.
-                      </DialogDescription>
-                    </DialogHeader>
-                    
-                    {/* Custom Close Button with higher z-index */}
-                    <button
-                      onClick={() => setIsModalOpen(false)}
-                      className="absolute top-4 right-4 z-50 p-2 bg-white/90 hover:bg-white rounded-full shadow-lg transition-all duration-200 hover:scale-110"
-                      aria-label="Fechar"
-                    >
-                      <svg
-                        className="w-4 h-4 text-muted-foreground"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M6 18L18 6M6 6l12 12"
-                        />
-                      </svg>
-                    </button>
-                    
-                    <div className="w-full h-full flex flex-col">
-                      <PDFViewer file="/docs/CV-RebeccaAriel.pdf" />
-                    </div>
-                  </DialogContent>
-                </Dialog>
-              </div>
-
-              {/* Decorative dots */}
-              <div className="hidden sm:block absolute bottom-6 lg:bottom-8 right-6 lg:right-8 opacity-30">
-                <div className="grid grid-cols-3 gap-1.5 sm:gap-2">
-                  <div className="w-1.5 sm:w-2 h-1.5 sm:h-2 bg-coral-300 rounded-full"></div>
-                  <div className="w-2 sm:w-3 h-2 sm:h-3 bg-coral-400 rounded-full"></div>
-                  <div className="w-1.5 sm:w-2 h-1.5 sm:h-2 bg-coral-200 rounded-full"></div>
-                  <div className="w-1.5 sm:w-2 h-1.5 sm:h-2 bg-coral-400 rounded-full"></div>
-                  <div className="w-2 sm:w-3 h-2 sm:h-3 bg-coral-300 rounded-full"></div>
-                  <div className="w-1.5 sm:w-2 h-1.5 sm:h-2 bg-coral-200 rounded-full"></div>
-                </div>
-              </div>
-            </div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+        {/* Header */}
+        <div className="text-center mb-12 sm:mb-16">
+          <div className="inline-flex items-center gap-2 bg-coral-100/50 text-coral-600 px-4 py-2 rounded-full text-sm font-medium mb-4">
+            <Calendar className="w-4 h-4" />
+            Minha Jornada Profissional
           </div>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
+            Conheça Minha 
+            <span className="text-transparent bg-gradient-to-r from-coral-500 to-coral-600 bg-clip-text"> Trajetória</span>
+          </h2>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Uma jornada dedicada ao cuidado e desenvolvimento humano, combinando conhecimento técnico 
+            com paixão pela transformação de vidas.
+          </p>
         </div>
+
+        {/* Main Content Tabs */}
+        <Tabs defaultValue="overview" className="w-full">
+          <TabsList className="grid w-full grid-cols-4 mb-8 bg-white/50 backdrop-blur-sm">
+            <TabsTrigger value="overview" className="flex items-center gap-2">
+              <Eye className="w-4 h-4" />
+              <span className="hidden sm:inline">Visão Geral</span>
+            </TabsTrigger>
+            <TabsTrigger value="timeline" className="flex items-center gap-2">
+              <Clock className="w-4 h-4" />
+              <span className="hidden sm:inline">Timeline</span>
+            </TabsTrigger>
+            <TabsTrigger value="skills" className="flex items-center gap-2">
+              <TrendingUp className="w-4 h-4" />
+              <span className="hidden sm:inline">Habilidades</span>
+            </TabsTrigger>
+            <TabsTrigger value="achievements" className="flex items-center gap-2">
+              <Award className="w-4 h-4" />
+              <span className="hidden sm:inline">Conquistas</span>
+            </TabsTrigger>
+          </TabsList>
+
+          {/* Overview Tab */}
+          <TabsContent value="overview" className="space-y-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+              {/* CV Preview Card */}
+              <Card className="border-0 shadow-2xl overflow-hidden bg-gradient-to-br from-white to-coral-50/30">
+                <CardContent className="p-8">
+                  <div className="relative">
+                    <div className="relative bg-white rounded-xl shadow-lg overflow-hidden transform rotate-1 hover:rotate-0 transition-transform duration-500">
+                      <div className="h-80 bg-gradient-to-br from-coral-100 to-coral-200 flex items-center justify-center">
+                        <div className="text-center">
+                          <div className="w-16 h-16 bg-coral-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <BookOpen className="w-8 h-8 text-white" />
+                          </div>
+                          <h3 className="text-lg font-bold text-foreground mb-2">CV Completo</h3>
+                          <p className="text-sm text-muted-foreground">Visualize meu currículo detalhado</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="absolute -top-2 -right-2 w-6 h-6 bg-coral-500 rounded-full flex items-center justify-center">
+                      <CheckCircle className="w-4 h-4 text-white" />
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Action Card */}
+              <Card className="border-0 shadow-xl bg-gradient-to-br from-white via-coral-50/10 to-white">
+                <CardContent className="p-8">
+                  <div className="space-y-6">
+                    <div className="space-y-4">
+                      <h3 className="text-2xl sm:text-3xl font-bold text-foreground leading-tight">
+                        Explore Minha Jornada
+                        <span className="block text-lg font-normal text-muted-foreground mt-2">
+                          Descubra minha experiência profissional e formação acadêmica
+                        </span>
+                      </h3>
+                      
+                      <div className="flex flex-wrap gap-2 mb-6">
+                        <Badge className="bg-coral-500 text-white">Terapia Ocupacional</Badge>
+                        <Badge variant="secondary">Método ABA</Badge>
+                        <Badge variant="secondary">Denver</Badge>
+                        <Badge variant="outline">Serviço Social</Badge>
+                      </div>
+                    </div>
+
+                    <div className="flex flex-col sm:flex-row gap-4">
+                      <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+                        <DialogTrigger asChild>
+                          <Button 
+                            variant="outline" 
+                            size="lg"
+                            className="border-coral-500 text-coral-500 hover:bg-coral-500 hover:text-white transition-all duration-300 flex items-center justify-center gap-2 group"
+                          >
+                            <Eye className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                            Visualizar PDF
+                          </Button>
+                        </DialogTrigger>
+                        
+                        <Button 
+                          size="lg"
+                          onClick={handleDownload}
+                          disabled={downloadLoading}
+                          className="bg-gradient-to-r from-coral-500 to-coral-600 hover:from-coral-600 hover:to-coral-700 text-white transition-all duration-300 flex items-center justify-center gap-2 group shadow-lg hover:shadow-xl"
+                        >
+                          {downloadLoading ? (
+                            <Loader2 className="w-5 h-5 animate-spin" />
+                          ) : (
+                            <Download className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                          )}
+                          {downloadLoading ? 'Baixando...' : 'Baixar Currículo'}
+                        </Button>
+
+                        {/* Enhanced Modal */}
+                        <DialogContent 
+                          className="!w-[98vw] !max-w-[98vw] !h-[98vh] !max-h-[98vh] p-0 overflow-hidden rounded-xl border-0"
+                          showCloseButton={false}
+                        >
+                          <DialogHeader className="sr-only">
+                            <DialogTitle>Currículo de Rebecca Ariel</DialogTitle>
+                            <DialogDescription>
+                              Visualizador completo do currículo profissional
+                            </DialogDescription>
+                          </DialogHeader>
+                          
+                          <button
+                            onClick={() => setIsModalOpen(false)}
+                            className="absolute top-6 right-6 z-50 p-3 bg-white/90 hover:bg-white rounded-full shadow-lg transition-all duration-200 hover:scale-110 group"
+                            aria-label="Fechar"
+                          >
+                            <svg className="w-5 h-5 text-muted-foreground group-hover:text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                          </button>
+                          
+                          <div className="w-full h-full">
+                            <PDFViewer file="/docs/CV-RebeccaAriel.pdf" />
+                          </div>
+                        </DialogContent>
+                      </Dialog>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </TabsContent>
+
+          {/* Timeline Tab */}
+          <TabsContent value="timeline" className="space-y-6">
+            <div className="max-w-4xl mx-auto">
+              <div className="text-center mb-8">
+                <h3 className="text-2xl font-bold text-foreground mb-2">Linha do Tempo Profissional</h3>
+                <p className="text-muted-foreground">Minha jornada de crescimento e desenvolvimento</p>
+              </div>
+              
+              <div className="relative">
+                {timelineData.map((item, index) => (
+                  <TimelineItem key={item.id} item={item} index={index} />
+                ))}
+              </div>
+            </div>
+          </TabsContent>
+
+          {/* Skills Tab */}
+          <TabsContent value="skills" className="space-y-8">
+            <div className="text-center mb-8">
+              <h3 className="text-2xl font-bold text-foreground mb-2">Minhas Competências</h3>
+              <p className="text-muted-foreground">Habilidades desenvolvidas ao longo da minha carreira</p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {Object.entries(skillsData).map(([category, skills]) => (
+                <Card key={category} className="border-0 shadow-lg hover:shadow-xl transition-all duration-300">
+                  <CardHeader>
+                    <CardTitle className="text-lg text-foreground flex items-center gap-2">
+                      <div className="w-8 h-8 bg-coral-100 rounded-full flex items-center justify-center">
+                        <TrendingUp className="w-4 h-4 text-coral-600" />
+                      </div>
+                      {category}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    {skills.map((skill, index) => (
+                      <SkillBar key={skill.name} skill={skill} index={index} />
+                    ))}
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </TabsContent>
+
+          {/* Achievements Tab */}
+          <TabsContent value="achievements" className="space-y-8">
+            <div className="text-center mb-8">
+              <h3 className="text-2xl font-bold text-foreground mb-2">Principais Conquistas</h3>
+              <p className="text-muted-foreground">Marcos importantes da minha trajetória profissional</p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {achievementsData.map((achievement, index) => (
+                <AchievementCard key={achievement.title} achievement={achievement} index={index} />
+              ))}
+            </div>
+          </TabsContent>
+        </Tabs>
       </div>
     </section>
   )

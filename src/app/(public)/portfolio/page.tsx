@@ -1,6 +1,6 @@
 import { HeroSection } from "./_components/HeroSection"
 import { CoursesSection } from "./_components/CoursesSection"
-import { ExperienceSection } from "./_components/ExperienceSection"
+import { AboutSection } from "./_components/ExperienceSection"
 import { CvSection } from "./_components/CvSection"
 import { ContactSection } from "./_components/ContactSection"
 
@@ -29,7 +29,7 @@ export default function PortfolioPage() {
 
       <HeroSection />
       <CoursesSection />
-      <ExperienceSection />
+      <AboutSection />
       <CvSection />
       <ContactSection />
     </>
