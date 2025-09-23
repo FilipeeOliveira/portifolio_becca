@@ -1,36 +1,121 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🌟 Portfólio Rebecca Ariel
 
-## Getting Started
+Portfólio profissional moderno e responsivo desenvolvido para Rebecca Ariel, estudante de Terapia Ocupacional e graduada em Serviço Social.
 
-First, run the development server:
+## ✨ Características
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Design Moderno**: Interface limpa e elegante com sistema de cores coral personalizado
+- **Totalmente Responsivo**: Otimizado para desktop, tablet e mobile
+- **Performance Otimizada**: Built com Next.js 15 e Turbopack
+- **PDF Viewer**: Visualizador de currículo integrado com navegação por páginas
+- **Scroll Spy**: Navegação dinâmica que destaca a seção ativa
+- **Componentes Reutilizáveis**: Arquitetura modular com shadcn/ui
+
+## 🚀 Tecnologias
+
+- **Framework**: [Next.js 15.2.4](https://nextjs.org) com App Router
+- **Linguagem**: TypeScript
+- **Styling**: Tailwind CSS 4.1.11 com design system customizado
+- **Componentes UI**: [shadcn/ui](https://ui.shadcn.com) + Radix UI
+- **Ícones**: [Lucide React](https://lucide.dev)
+- **PDF**: [react-pdf](https://github.com/wojtekmaj/react-pdf) para visualização
+- **Fontes**: Work Sans & Open Sans do Google Fonts
+
+## 📁 Estrutura do Projeto
+
+```
+src/
+├── app/                    # App Router do Next.js
+│   ├── (public)/          # Rotas públicas
+│   │   └── portfolio/     # Página principal do portfólio
+│   └── globals.css        # Estilos globais + sistema de design
+├── shared/                # Recursos compartilhados
+│   ├── components/        # Componentes reutilizáveis
+│   │   ├── ui/           # Componentes shadcn/ui
+│   │   └── layout/       # Componentes de layout
+│   ├── hooks/            # Custom hooks (useActiveSection)
+│   ├── types/            # Definições TypeScript
+│   └── utils/            # Utilitários (scroll, etc.)
+└── lib/                  # Configurações e libs
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🎨 Seções do Portfólio
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Hero**: Apresentação pessoal com foto e biografia
+- **Cursos**: Formações e treinamentos especializados
+- **Experiência**: Histórico profissional com carousel automático
+- **Currículo**: Visualizador PDF integrado com download direto
+- **Contato**: Informações de contato e redes sociais
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🛠️ Desenvolvimento
 
-## Learn More
+### Pré-requisitos
 
-To learn more about Next.js, take a look at the following resources:
+- Node.js 18+ 
+- npm, yarn, pnpm ou bun
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Instalação
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+# Clonar o repositório
+git clone <repo-url>
+cd portifolio_becca
 
-## Deploy on Vercel
+# Instalar dependências
+npm install
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# Executar em desenvolvimento
+npm run dev
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Scripts Disponíveis
+
+```bash
+# Desenvolvimento com Turbopack
+npm run dev
+
+# Build de produção
+npm run build
+
+# Executar build
+npm start
+
+# Linting
+npm run lint
+```
+
+### Adicionando Componentes shadcn/ui
+
+```bash
+npx shadcn@latest add [component-name]
+```
+
+## 🎯 Funcionalidades Especiais
+
+- **PDF Viewer Avançado**: Modal full-screen com navegação entre páginas
+- **Download Direto**: Botão que baixa o currículo automaticamente
+- **Scroll Spy**: Indicação visual da seção ativa na navegação
+- **Carousel Automático**: Rotação automática das experiências profissionais
+- **Design System**: Sistema de cores coral consistente em todo projeto
+
+## 📱 Responsividade
+
+- **Mobile First**: Design otimizado para dispositivos móveis
+- **Breakpoints**: sm (640px), md (768px), lg (1024px), xl (1280px)
+- **Menu Mobile**: Navegação adaptativa para telas pequenas
+
+## 🚀 Deploy
+
+O projeto está otimizado para deploy na [Vercel Platform](https://vercel.com):
+
+```bash
+# Build de produção
+npm run build
+
+# Deploy automático via Vercel CLI
+vercel --prod
+```
+
+## 📄 Licença
+
+Este projeto foi desenvolvido especificamente para Rebecca Ariel. Todos os direitos reservados.
