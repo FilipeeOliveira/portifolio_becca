@@ -104,7 +104,7 @@ const PDFViewer = ({ file, isPreview = false }: { file: string, isPreview?: bool
           error={
             <div className="flex flex-col items-center justify-center w-full h-full text-red-500">
               <p className="text-lg font-medium">Erro ao carregar o PDF</p>
-              <p className="text-sm text-gray-600 mt-1">Verifique sua conexão e tente novamente</p>
+              <p className="text-sm text-muted-foreground mt-1">Verifique sua conexão e tente novamente</p>
             </div>
           }
           className="max-w-full max-h-full"
@@ -134,14 +134,14 @@ const PDFViewer = ({ file, isPreview = false }: { file: string, isPreview?: bool
           </Button>
           
           <div className="flex items-center gap-4 flex-1 justify-center">
-            <p className="text-sm font-medium text-gray-700 whitespace-nowrap">
+            <p className="text-sm font-medium text-foreground whitespace-nowrap">
               Página {pageNumber} de {numPages}
             </p>
             
             {/* Page Jump Input for multiple pages */}
             {numPages > 1 && (
               <div className="flex items-center gap-2">
-                <span className="text-xs text-gray-500 whitespace-nowrap">Ir para:</span>
+                <span className="text-xs text-muted-foreground whitespace-nowrap">Ir para:</span>
                 <input
                   type="number"
                   min={1}
@@ -183,7 +183,7 @@ export function CvSection() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-8 sm:mb-12">
           <p className="text-coral-500 font-medium text-sm sm:text-base mb-2 uppercase">Conheça</p>
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground">
             Minha Trajetória
           </h2>
         </div>
@@ -202,7 +202,7 @@ export function CvSection() {
             {/* CV Download Content */}
             <div className="p-6 sm:p-8 lg:p-12 relative">
               <div className="space-y-4 sm:space-y-6">
-                <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-800 leading-tight">
+                <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground leading-tight">
                   Confira meu currículo completo
                   <br />e conheça minha trajetória profissional.
                 </h3>
@@ -248,7 +248,7 @@ export function CvSection() {
                       aria-label="Fechar"
                     >
                       <svg
-                        className="w-4 h-4 text-gray-600"
+                        className="w-4 h-4 text-muted-foreground"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"

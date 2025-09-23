@@ -20,20 +20,20 @@ export function HeroSection() {
               <p className="text-coral-500 text-xs sm:text-sm font-medium tracking-wider uppercase">
                 Olá deixe-me apresentar
               </p>
-              <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-800 leading-tight">
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-foreground leading-tight">
                 Me chamo Rebecca Ariel<br />
                 Estudante de Terapia Ocupacional
                 <br />
               </h1>
             </div>
 
-            <p className="text-gray-600 leading-relaxed text-base sm:text-lg">
+            <p className="text-muted-foreground leading-relaxed text-base sm:text-lg">
               Acredito que o cuidado terapêutico é um direito, não um privilégio. Qualquer pessoa que precise de
               aconselhamento deve tê-lo. É uma crença que tenho vivido há mais de 2 anos, fornecendo terapia
               acessível e de qualidade.
             </p>
 
-            <p className="text-gray-600 leading-relaxed text-base sm:text-lg">
+            <p className="text-muted-foreground leading-relaxed text-base sm:text-lg">
               Atualmente, trabalho como Assistente Terapêutica nos métodos ABA e Denver, 
               oferecendo suporte individualizado para estimular o desenvolvimento e a autonomia dos pacientes.
             </p>
