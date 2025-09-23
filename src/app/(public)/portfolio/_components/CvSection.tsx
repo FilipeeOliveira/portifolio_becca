@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import { Button } from "@/shared/components/ui/button"
 import { 
   Dialog, 
@@ -11,17 +11,37 @@ import {
   DialogDescription 
 } from "@/shared/components/ui/dialog"
 import { Eye, Download, ChevronLeft, ChevronRight, Loader2 } from 'lucide-react'
-import { Document, Page, pdfjs } from 'react-pdf'
+import dynamic from 'next/dynamic'
 
-import 'react-pdf/dist/Page/AnnotationLayer.css';
-import 'react-pdf/dist/Page/TextLayer.css';
+// Import react-pdf components dynamically to avoid SSR issues
+const Document = dynamic(
+  () => import('react-pdf').then(mod => mod.Document),
+  { 
+    ssr: false,
+    loading: () => <div className="flex items-center justify-center w-full h-full">
+      <Loader2 className="h-8 w-8 animate-spin text-coral-500" />
+      <span className="ml-2 text-coral-600">Carregando...</span>
+    </div>
+  }
+)
 
-// Configure o worker do PDF.js
-pdfjs.GlobalWorkerOptions.workerSrc = `/pdf.worker.min.mjs`;
+const Page = dynamic(
+  () => import('react-pdf').then(mod => mod.Page),
+  { ssr: false }
+)
 
-const PDFViewer = ({ file }: { file: string }) => {
+const PDFViewer = ({ file, isPreview = false }: { file: string, isPreview?: boolean }) => {
   const [numPages, setNumPages] = useState<number | null>(null);
   const [pageNumber, setPageNumber] = useState(1);
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+    // Configure PDF worker only on client
+    import('react-pdf').then(({ pdfjs }) => {
+      pdfjs.GlobalWorkerOptions.workerSrc = `/pdf.worker.min.mjs`;
+    });
+  }, []);
 
   const onDocumentLoadSuccess = useCallback(({ numPages }: { numPages: number }) => {
     setNumPages(numPages);
@@ -30,36 +50,122 @@ const PDFViewer = ({ file }: { file: string }) => {
   const goToPrevPage = () => setPageNumber(prev => Math.max(prev - 1, 1));
   const goToNextPage = () => setPageNumber(prev => Math.min(prev + 1, numPages || 1));
 
+  if (!isClient) {
+    return (
+      <div className="w-full h-full flex items-center justify-center bg-gray-100">
+        <Loader2 className="h-8 w-8 animate-spin text-coral-500" />
+        <span className="ml-2 text-coral-600">Carregando PDF...</span>
+      </div>
+    );
+  }
+
+  if (isPreview) {
+    return (
+      <div className="w-full h-full flex flex-col items-center bg-gray-100">
+        <div className="flex-grow w-full overflow-y-auto flex justify-center">
+          <Document
+            file={file}
+            onLoadSuccess={onDocumentLoadSuccess}
+            loading={
+              <div className="flex items-center justify-center w-full h-full">
+                <Loader2 className="h-8 w-8 animate-spin text-coral-500" />
+              </div>
+            }
+            error={
+              <div className="flex items-center justify-center w-full h-full text-red-500">
+                Falha ao carregar o PDF.
+              </div>
+            }
+          >
+            <Page 
+              pageNumber={pageNumber} 
+              renderTextLayer={false} 
+              width={256} 
+            />
+          </Document>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="w-full h-full flex flex-col items-center bg-gray-100">
-      <div className="flex-grow w-full overflow-y-auto flex justify-center">
+    <div className="w-full h-full flex flex-col bg-gray-50">
+      {/* PDF Container */}
+      <div className="flex-1 min-h-0 overflow-auto flex items-center justify-center p-4">
         <Document
           file={file}
           onLoadSuccess={onDocumentLoadSuccess}
           loading={
             <div className="flex items-center justify-center w-full h-full">
               <Loader2 className="h-8 w-8 animate-spin text-coral-500" />
+              <span className="ml-2 text-coral-600">Carregando PDF...</span>
             </div>
           }
           error={
-            <div className="flex items-center justify-center w-full h-full text-red-500">
-              Falha ao carregar o PDF.
+            <div className="flex flex-col items-center justify-center w-full h-full text-red-500">
+              <p className="text-lg font-medium">Erro ao carregar o PDF</p>
+              <p className="text-sm text-gray-600 mt-1">Verifique sua conexão e tente novamente</p>
             </div>
           }
+          className="max-w-full max-h-full"
         >
-          <Page pageNumber={pageNumber} width={800} />
+          <Page 
+            pageNumber={pageNumber} 
+            renderTextLayer={true}
+            renderAnnotationLayer={true}
+            width={isClient ? Math.min(window.innerWidth - 150, 900) : 800}
+            className="shadow-lg mx-auto"
+          />
         </Document>
       </div>
+      
+      {/* Navigation Controls - Fixed at bottom */}
       {numPages && (
-        <div className="flex items-center justify-center gap-4 p-4 bg-white border-t w-full">
-          <Button onClick={goToPrevPage} disabled={pageNumber <= 1} variant="outline" size="sm">
+        <div className="flex-shrink-0 flex items-center justify-between gap-4 px-6 py-3 bg-white border-t shadow-sm z-10">
+          <Button 
+            onClick={goToPrevPage} 
+            disabled={pageNumber <= 1} 
+            variant="outline" 
+            size="sm"
+            className="flex items-center gap-2 min-w-[100px]"
+          >
             <ChevronLeft className="h-4 w-4" />
             Anterior
           </Button>
-          <p className="text-sm font-medium text-gray-700">
-            Página {pageNumber} de {numPages}
-          </p>
-          <Button onClick={goToNextPage} disabled={pageNumber >= numPages} variant="outline" size="sm">
+          
+          <div className="flex items-center gap-4 flex-1 justify-center">
+            <p className="text-sm font-medium text-gray-700 whitespace-nowrap">
+              Página {pageNumber} de {numPages}
+            </p>
+            
+            {/* Page Jump Input for multiple pages */}
+            {numPages > 1 && (
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-gray-500 whitespace-nowrap">Ir para:</span>
+                <input
+                  type="number"
+                  min={1}
+                  max={numPages}
+                  value={pageNumber}
+                  onChange={(e) => {
+                    const page = parseInt(e.target.value);
+                    if (page >= 1 && page <= numPages) {
+                      setPageNumber(page);
+                    }
+                  }}
+                  className="w-16 px-2 py-1 text-xs border rounded focus:outline-none focus:ring-2 focus:ring-coral-500"
+                />
+              </div>
+            )}
+          </div>
+          
+          <Button 
+            onClick={goToNextPage} 
+            disabled={pageNumber >= numPages} 
+            variant="outline" 
+            size="sm"
+            className="flex items-center gap-2 min-w-[100px]"
+          >
             Próximo
             <ChevronRight className="h-4 w-4" />
           </Button>
@@ -87,7 +193,7 @@ export function CvSection() {
             <div className="relative h-60 sm:h-80 lg:h-96 p-6 sm:p-8 flex items-center justify-center bg-gray-55">
               <div className="relative bg-white rounded-lg shadow-lg w-full max-w-64 h-full overflow-hidden">
                 <div className="w-full h-full border-0 blur-sm opacity-60">
-                   <PDFViewer file="/docs/CV-RebeccaAriel.pdf" />
+                   <PDFViewer file="/docs/CV-RebeccaAriel.pdf" isPreview={true} />
                 </div>
                 <div className="absolute inset-0 bg-white/40"></div>
               </div>
@@ -124,14 +230,41 @@ export function CvSection() {
                     </Button>
                   </div>
 
-                  <DialogContent className="max-w-5xl w-full h-[90vh] p-0 overflow-hidden">
+                  <DialogContent 
+                    className="!w-[95vw] !max-w-[95vw] !h-[95vh] !max-h-[95vh] p-0 overflow-hidden rounded-lg border-0 !grid-rows-1"
+                    showCloseButton={false}
+                  >
                     <DialogHeader className="sr-only">
                       <DialogTitle>Currículo de Rebecca Ariel</DialogTitle>
                       <DialogDescription>
                         Visualizador de PDF para o currículo completo de Rebecca Ariel.
                       </DialogDescription>
                     </DialogHeader>
-                    <PDFViewer file="/docs/CV-RebeccaAriel.pdf" />
+                    
+                    {/* Custom Close Button with higher z-index */}
+                    <button
+                      onClick={() => setIsModalOpen(false)}
+                      className="absolute top-4 right-4 z-50 p-2 bg-white/90 hover:bg-white rounded-full shadow-lg transition-all duration-200 hover:scale-110"
+                      aria-label="Fechar"
+                    >
+                      <svg
+                        className="w-4 h-4 text-gray-600"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M6 18L18 6M6 6l12 12"
+                        />
+                      </svg>
+                    </button>
+                    
+                    <div className="w-full h-full flex flex-col">
+                      <PDFViewer file="/docs/CV-RebeccaAriel.pdf" />
+                    </div>
                   </DialogContent>
                 </Dialog>
               </div>
