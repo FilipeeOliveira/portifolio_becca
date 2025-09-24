@@ -25,7 +25,7 @@ export function HeroSection() {
               </div>
               
               <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight">
-                <span className="text-foreground">Olá, eu sou</span>
+                <span className="text-foreground">Olá, me chamo</span>
                 <br />
                 <span className="text-transparent bg-gradient-to-r from-coral-500 via-coral-600 to-coral-500 bg-clip-text">
                   Rebecca Ariel
@@ -34,7 +34,7 @@ export function HeroSection() {
               
               <div className="space-y-4">
                 <p className="text-xl sm:text-2xl text-muted-foreground font-medium">
-                  Estudante de Terapia Ocupacional dedicada ao desenvolvimento humano
+                  Estudante de Terapia Ocupacional dedicada ao desenvolvimento humano.
                 </p>
                 
                 <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl">

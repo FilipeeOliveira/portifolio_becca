@@ -7,7 +7,7 @@ import { useActiveSection } from "@/shared/hooks/useActiveSection"
 const navigationItems = [
   { id: "sobre", label: "Sobre" },
   { id: "especialidades", label: "Especialidades" },
-  { id: "sobre-mim", label: "Missão & Valores" },
+  { id: "sobre-mim", label: "Missão e Valores" },
   { id: "curriculo", label: "Currículo" },
   { id: "contato", label: "Contato" },
 ]
