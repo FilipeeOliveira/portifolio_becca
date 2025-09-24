@@ -31,16 +31,13 @@ import {
   CheckCircle
 } from 'lucide-react'
 import dynamic from 'next/dynamic'
+import { Loading } from './Loading'
 
 // Import react-pdf components dynamically to avoid SSR issues
 const Document = dynamic(
   () => import('react-pdf').then(mod => mod.Document),
   { 
-    ssr: false,
-    loading: () => <div className="flex items-center justify-center w-full h-full">
-      <Loader2 className="h-8 w-8 animate-spin text-coral-500" />
-      <span className="ml-2 text-coral-600">Carregando...</span>
-    </div>
+    ssr: false
   }
 )
 
@@ -269,9 +266,8 @@ const PDFViewer = ({ file, isPreview = false }: { file: string, isPreview?: bool
 
   if (!isClient) {
     return (
-      <div className="w-full h-full flex items-center justify-center bg-gray-100">
-        <Loader2 className="h-8 w-8 animate-spin text-coral-500" />
-        <span className="ml-2 text-coral-600">Carregando PDF...</span>
+      <div className="w-full h-full bg-gray-100">
+        <Loading message="Carregando PDF..." />
       </div>
     );
   }
@@ -283,11 +279,7 @@ const PDFViewer = ({ file, isPreview = false }: { file: string, isPreview?: bool
           <Document
             file={file}
             onLoadSuccess={onDocumentLoadSuccess}
-            loading={
-              <div className="flex items-center justify-center w-full h-full">
-                <Loader2 className="h-8 w-8 animate-spin text-coral-500" />
-              </div>
-            }
+            loading={<Loading />}
             error={
               <div className="flex items-center justify-center w-full h-full text-red-500">
                 Falha ao carregar o PDF.
@@ -312,12 +304,7 @@ const PDFViewer = ({ file, isPreview = false }: { file: string, isPreview?: bool
         <Document
           file={file}
           onLoadSuccess={onDocumentLoadSuccess}
-          loading={
-            <div className="flex items-center justify-center w-full h-full">
-              <Loader2 className="h-8 w-8 animate-spin text-coral-500" />
-              <span className="ml-2 text-coral-600">Carregando PDF...</span>
-            </div>
-          }
+          loading={<Loading message="Carregando PDF..." />}
           error={
             <div className="flex flex-col items-center justify-center w-full h-full text-red-500">
               <p className="text-lg font-medium">Erro ao carregar o PDF</p>
