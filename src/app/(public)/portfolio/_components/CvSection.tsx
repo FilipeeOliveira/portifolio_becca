@@ -493,7 +493,7 @@ export function CvSection() {
                         <Badge className="bg-coral-500 text-white">Terapia Ocupacional</Badge>
                         <Badge variant="secondary">Método ABA</Badge>
                         <Badge variant="secondary">Denver</Badge>
-                        <Badge variant="outline">Serviço Social</Badge>
+                        <Badge variant="secondary">Serviço Social</Badge>
                       </div>
                     </div>
 
