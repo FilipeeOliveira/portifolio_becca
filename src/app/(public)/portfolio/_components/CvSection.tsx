@@ -560,7 +560,7 @@ export function CvSection() {
 
           {/* Timeline Tab */}
           <TabsContent value="timeline" className="space-y-6">
-            <div className="max-w-4xl mx-auto">
+            <div className="max-w-4xl mx-auto ">
               <div className="text-center mb-8">
                 <h3 className="text-2xl font-bold text-foreground mb-2">Linha do Tempo Profissional</h3>
                 <p className="text-muted-foreground">Minha jornada de crescimento e desenvolvimento</p>

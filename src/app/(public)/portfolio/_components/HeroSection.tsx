@@ -124,15 +124,7 @@ export function HeroSection() {
                   alt="Rebecca Ariel - Terapeuta Ocupacional trabalhando com brinquedos terapêuticos"
                   className="w-full h-[400px] sm:h-[500px] lg:h-[600px] object-cover object-[center_20%]"
                 />
-                
-                {/* Floating badge */}
-                <div className="absolute top-6 right-6 bg-white/90 backdrop-blur-sm rounded-full px-4 py-2 shadow-lg">
-                  <div className="flex items-center gap-2">
-                    <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse" />
-                    <span className="text-sm font-medium text-foreground">Disponível</span>
-                  </div>
                 </div>
-              </div>
             </div>
           </div>
         </div>
