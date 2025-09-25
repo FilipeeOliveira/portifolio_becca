@@ -299,53 +299,55 @@ const PDFViewer = ({ file, isPreview = false }: { file: string, isPreview?: bool
 
   return (
     <div className="w-full h-full flex flex-col bg-gray-50">
-      {/* PDF Container */}
-      <div className="flex-1 min-h-0 overflow-auto flex items-center justify-center p-4">
-        <Document
-          file={file}
-          onLoadSuccess={onDocumentLoadSuccess}
-          loading={<Loading message="Carregando PDF..." />}
-          error={
-            <div className="flex flex-col items-center justify-center w-full h-full text-red-500">
-              <p className="text-lg font-medium">Erro ao carregar o PDF</p>
-              <p className="text-sm text-muted-foreground mt-1">Verifique sua conexão e tente novamente</p>
-            </div>
-          }
-          className="max-w-full max-h-full"
-        >
-          <Page 
-            pageNumber={pageNumber} 
-            renderTextLayer={true}
-            renderAnnotationLayer={true}
-            width={isClient ? Math.min(window.innerWidth - 150, 900) : 800}
-            className="shadow-lg mx-auto"
-          />
-        </Document>
+      {/* PDF Container with scroll */}
+      <div className="flex-1 min-h-0 overflow-y-auto overflow-x-auto bg-gray-100 p-2 sm:p-4">
+        <div className="min-h-full flex items-center justify-center">
+          <Document
+            file={file}
+            onLoadSuccess={onDocumentLoadSuccess}
+            loading={<Loading message="Carregando PDF..." />}
+            error={
+              <div className="flex flex-col items-center justify-center w-full h-full text-red-500 p-8">
+                <p className="text-lg font-medium">Erro ao carregar o PDF</p>
+                <p className="text-sm text-muted-foreground mt-1">Verifique sua conexão e tente novamente</p>
+              </div>
+            }
+            className="flex flex-col items-center"
+          >
+            <Page 
+              pageNumber={pageNumber} 
+              renderTextLayer={true}
+              renderAnnotationLayer={true}
+              width={isClient ? Math.min(window.innerWidth * 0.9, 800) : 600}
+              className="shadow-lg border border-gray-200 bg-white"
+            />
+          </Document>
+        </div>
       </div>
       
       {/* Navigation Controls - Fixed at bottom */}
       {numPages && (
-        <div className="flex-shrink-0 flex items-center justify-between gap-4 px-6 py-3 bg-white border-t shadow-sm z-10">
+        <div className="flex-shrink-0 flex items-center justify-between gap-4 px-4 py-3 bg-white border-t shadow-sm z-20">
           <Button 
             onClick={goToPrevPage} 
             disabled={pageNumber <= 1} 
             variant="outline" 
             size="sm"
-            className="flex items-center gap-2 min-w-[100px]"
+            className="flex items-center gap-2 min-w-[80px] sm:min-w-[100px]"
           >
             <ChevronLeft className="h-4 w-4" />
-            Anterior
+            <span className="hidden sm:inline">Anterior</span>
           </Button>
           
-          <div className="flex items-center gap-4 flex-1 justify-center">
-            <p className="text-sm font-medium text-foreground whitespace-nowrap">
-              Página {pageNumber} de {numPages}
+          <div className="flex items-center gap-2 sm:gap-4 flex-1 justify-center">
+            <p className="text-xs sm:text-sm font-medium text-foreground whitespace-nowrap">
+              {pageNumber}/{numPages}
             </p>
             
             {/* Page Jump Input for multiple pages */}
             {numPages > 1 && (
-              <div className="flex items-center gap-2">
-                <span className="text-xs text-muted-foreground whitespace-nowrap">Ir para:</span>
+              <div className="flex items-center gap-1 sm:gap-2">
+                <span className="text-xs text-muted-foreground whitespace-nowrap hidden sm:inline">Ir para:</span>
                 <input
                   type="number"
                   min={1}
@@ -357,7 +359,7 @@ const PDFViewer = ({ file, isPreview = false }: { file: string, isPreview?: bool
                       setPageNumber(page);
                     }
                   }}
-                  className="w-16 px-2 py-1 text-xs border rounded focus:outline-none focus:ring-2 focus:ring-coral-500"
+                  className="w-12 sm:w-16 px-1 sm:px-2 py-1 text-xs border rounded focus:outline-none focus:ring-2 focus:ring-coral-500"
                 />
               </div>
             )}
@@ -368,9 +370,9 @@ const PDFViewer = ({ file, isPreview = false }: { file: string, isPreview?: bool
             disabled={pageNumber >= numPages} 
             variant="outline" 
             size="sm"
-            className="flex items-center gap-2 min-w-[100px]"
+            className="flex items-center gap-2 min-w-[80px] sm:min-w-[100px]"
           >
-            Próximo
+            <span className="hidden sm:inline">Próximo</span>
             <ChevronRight className="h-4 w-4" />
           </Button>
         </div>
@@ -513,7 +515,7 @@ export function CvSection() {
 
                         {/* Enhanced Modal */}
                         <DialogContent 
-                          className="!w-[98vw] !max-w-[98vw] !h-[98vh] !max-h-[98vh] p-0 overflow-hidden rounded-xl border-0"
+                          className="!w-[95vw] !max-w-[95vw] !h-[95vh] !max-h-[95vh] p-0 overflow-hidden rounded-xl border-0 flex flex-col"
                           showCloseButton={false}
                         >
                           <DialogHeader className="sr-only">
@@ -525,15 +527,15 @@ export function CvSection() {
                           
                           <button
                             onClick={() => setIsModalOpen(false)}
-                            className="absolute top-6 right-6 z-50 p-3 bg-white/90 hover:bg-white rounded-full shadow-lg transition-all duration-200 hover:scale-110 group"
+                            className="absolute top-4 right-4 z-50 p-2 bg-white/90 hover:bg-white rounded-full shadow-lg transition-all duration-200 hover:scale-110 group"
                             aria-label="Fechar"
                           >
-                            <svg className="w-5 h-5 text-muted-foreground group-hover:text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg className="w-4 h-4 text-muted-foreground group-hover:text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                             </svg>
                           </button>
                           
-                          <div className="w-full h-full">
+                          <div className="w-full h-full flex flex-col min-h-0">
                             <PDFViewer file="/docs/CV-RebeccaAriel.pdf" />
                           </div>
                         </DialogContent>
