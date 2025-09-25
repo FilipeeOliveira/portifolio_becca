@@ -33,108 +33,172 @@ export function CoursesSection() {
         {/* Main Courses Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
           {/* Mediadores e Conciliadores Judiciais */}
-          <Card className="group border-0 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 bg-gradient-to-br from-white to-coral-50/20">
-            <CardHeader className="text-center pb-4">
-              <div className="w-16 h-16 bg-gradient-to-br from-coral-500 to-coral-600 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
-                <Scale className="w-8 h-8 text-white" />
+          <Card className="group relative border border-coral-100/50 shadow-lg hover:shadow-2xl hover:shadow-coral-500/10 transition-all duration-500 hover:-translate-y-3 bg-white/70 backdrop-blur-sm overflow-hidden">
+            {/* Background glow effect on hover */}
+            <div className="absolute inset-0 bg-gradient-to-br from-coral-500/5 to-coral-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            
+            <CardHeader className="text-center pb-4 relative z-10">
+              <div className="w-20 h-20 flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 relative">
+                <div className="absolute inset-0 bg-coral-500/10 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <Scale className="w-10 h-10 text-coral-500 relative z-10 group-hover:text-coral-600 transition-colors duration-300" />
               </div>
-              <CardTitle className="text-lg font-bold text-foreground">Mediadores e Conciliadores Judiciais</CardTitle>
-              <Badge className="bg-coral-100 text-coral-700 mx-auto">NUPEMEC - TJAM</Badge>
+              <CardTitle className="text-xl font-bold text-foreground mb-3 group-hover:text-coral-600 transition-colors duration-300">
+                Mediadores e Conciliadores Judiciais
+              </CardTitle>
             </CardHeader>
-            <CardContent className="text-center">
-              <p className="text-muted-foreground mb-4 leading-relaxed">
+            <CardContent className="text-center relative z-10">
+              <p className="text-muted-foreground mb-6 leading-relaxed">
                 Formação completa em mediação e conciliação judicial para resolução 
                 de conflitos familiares e civis.
               </p>
-              <div className="flex flex-wrap justify-center gap-2 mb-3">
-                <Badge variant="outline" className="text-xs">100h (40h Teóricas + 60h Práticas)</Badge>
+              <div className="flex flex-wrap justify-center gap-2 mb-4">
+                <Badge variant="outline" className="text-xs border-coral-200 text-coral-600 hover:bg-coral-50 transition-colors duration-300">
+                  100h
+                </Badge>
               </div>
-              <Badge variant="secondary" className="bg-green-100 text-green-700">Finalizado em 17/12/2021</Badge>
+              
+              <div className="flex flex-wrap justify-center gap-3">
+                <Badge className="bg-coral-100 text-coral-700 hover:bg-coral-200 transition-colors duration-300">
+                  NUPEMEC - TJAM
+                </Badge>
+                <Badge className="bg-coral-100 text-coral-700 hover:bg-coral-200 transition-colors duration-300">
+                  Finalizado 12/2021
+                </Badge>
+              </div>
+
             </CardContent>
           </Card>
 
           {/* Assistente Terapêutico Denver */}
-          <Card className="group border-0 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 bg-gradient-to-br from-white to-blue-50/20">
-            <CardHeader className="text-center pb-4">
-              <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
-                <Baby className="w-8 h-8 text-white" />
+          <Card className="group relative border border-coral-100/50 shadow-lg hover:shadow-2xl hover:shadow-coral-500/10 transition-all duration-500 hover:-translate-y-3 bg-white/70 backdrop-blur-sm overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-coral-500/5 to-coral-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            
+            <CardHeader className="text-center pb-4 relative z-10">
+              <div className="w-20 h-20 flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 relative">
+                <div className="absolute inset-0 bg-coral-500/10 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <Baby className="w-10 h-10 text-coral-500 relative z-10 group-hover:text-coral-600 transition-colors duration-300" />
               </div>
-              <CardTitle className="text-lg font-bold text-foreground">Assistente Terapêutico em Modelo Naturalista/Denver</CardTitle>
-              <Badge className="bg-blue-100 text-blue-700 mx-auto">CLÍNICA PAIS & FILHOS</Badge>
+              <CardTitle className="text-xl font-bold text-foreground mb-3 group-hover:text-coral-600 transition-colors duration-300">
+                Assistente Terapêutico em Modelo Naturalista/Denver
+              </CardTitle>
             </CardHeader>
-            <CardContent className="text-center">
-              <p className="text-muted-foreground mb-4 leading-relaxed">
+            <CardContent className="text-center relative z-10">
+              <p className="text-muted-foreground mb-6 leading-relaxed">
                 Especialização em intervenção precoce para crianças com autismo 
                 usando o modelo naturalista Denver.
               </p>
-              <div className="flex flex-wrap justify-center gap-2 mb-3">
-                <Badge variant="outline" className="text-xs">40h</Badge>
+              <div className="flex flex-wrap justify-center gap-2 mb-4">
+                <Badge variant="outline" className="text-xs border-coral-200 text-coral-600 hover:bg-coral-50 transition-colors duration-300">40h</Badge>
               </div>
-              <Badge variant="secondary" className="bg-green-100 text-green-700">Finalizado em 21/07/2024</Badge>
+              
+              <div className="flex flex-wrap justify-center gap-3">
+                <Badge className="bg-coral-100 text-coral-700 hover:bg-coral-200 transition-colors duration-300">
+                  CLÍNICA PAIS & FILHOS
+                </Badge>
+                <Badge className="bg-coral-100 text-coral-700 hover:bg-coral-200 transition-colors duration-300">
+                  Finalizado 21/07/2024
+                </Badge>
+              </div>
             </CardContent>
           </Card>
 
           {/* Assistente Terapêutico ABA */}
-          <Card className="group border-0 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 bg-gradient-to-br from-white to-green-50/20">
-            <CardHeader className="text-center pb-4">
-              <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
-                <Brain className="w-8 h-8 text-white" />
+          <Card className="group relative border border-coral-100/50 shadow-lg hover:shadow-2xl hover:shadow-coral-500/10 transition-all duration-500 hover:-translate-y-3 bg-white/70 backdrop-blur-sm overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-coral-500/5 to-coral-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            
+            <CardHeader className="text-center pb-4 relative z-10">
+              <div className="w-20 h-20 flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 relative">
+                <div className="absolute inset-0 bg-coral-500/10 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <Brain className="w-10 h-10 text-coral-500 relative z-10 group-hover:text-coral-600 transition-colors duration-300" />
               </div>
-              <CardTitle className="text-lg font-bold text-foreground">Assistente Terapêutico em ABA</CardTitle>
-              <Badge className="bg-green-100 text-green-700 mx-auto">CLÍNICA PAIS & FILHOS</Badge>
+              <CardTitle className="text-xl font-bold text-foreground mb-3 group-hover:text-coral-600 transition-colors duration-300">
+                Assistente Terapêutico em ABA
+              </CardTitle>
             </CardHeader>
-            <CardContent className="text-center">
-              <p className="text-muted-foreground mb-4 leading-relaxed">
+            <CardContent className="text-center relative z-10">
+              <p className="text-muted-foreground mb-6 leading-relaxed">
                 Applied Behavior Analysis com foco em desenvolvimento de habilidades 
                 comportamentais e sociais.
               </p>
-              <div className="flex flex-wrap justify-center gap-2 mb-3">
-                <Badge variant="outline" className="text-xs">40h</Badge>
+              <div className="flex flex-wrap justify-center gap-2 mb-4">
+                <Badge variant="outline" className="text-xs border-coral-200 text-coral-600 hover:bg-coral-50 transition-colors duration-300">40h</Badge>
               </div>
-              <Badge variant="secondary" className="bg-green-100 text-green-700">Finalizado em 17/03/2024</Badge>
+              
+              <div className="flex flex-wrap justify-center gap-3">
+                <Badge className="bg-coral-100 text-coral-700 hover:bg-coral-200 transition-colors duration-300">
+                  CLÍNICA PAIS & FILHOS
+                </Badge>
+                <Badge className="bg-coral-100 text-coral-700 hover:bg-coral-200 transition-colors duration-300">
+                  Finalizado 17/03/2024
+                </Badge>
+              </div>
             </CardContent>
           </Card>
         </div>
 
         {/* Additional Courses */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <Card className="group border-0 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 bg-gradient-to-br from-white to-purple-50/20">
-            <CardHeader className="text-center pb-4">
-              <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
-                <Volume2 className="w-8 h-8 text-white" />
+          <Card className="group relative border border-coral-100/50 shadow-lg hover:shadow-2xl hover:shadow-coral-500/10 transition-all duration-500 hover:-translate-y-3 bg-white/70 backdrop-blur-sm overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-coral-500/5 to-coral-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            
+            <CardHeader className="text-center pb-4 relative z-10">
+              <div className="w-20 h-20 flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 relative">
+                <div className="absolute inset-0 bg-coral-500/10 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <Volume2 className="w-10 h-10 text-coral-500 relative z-10 group-hover:text-coral-600 transition-colors duration-300" />
               </div>
-              <CardTitle className="text-lg font-bold text-foreground">Workshop CAA em Prática</CardTitle>
-              <Badge className="bg-purple-100 text-purple-700 mx-auto">FÁBULA - FONOAUDIOLOGIA</Badge>
+              <CardTitle className="text-xl font-bold text-foreground mb-3 group-hover:text-coral-600 transition-colors duration-300">
+                Workshop CAA em Prática
+              </CardTitle>
             </CardHeader>
-            <CardContent className="text-center">
-              <p className="text-muted-foreground mb-4 leading-relaxed">
+            <CardContent className="text-center relative z-10">
+              <p className="text-muted-foreground mb-6 leading-relaxed">
                 Workshop prático sobre Comunicação Alternativa e Aumentativa 
                 para desenvolvimento de habilidades comunicativas.
               </p>
-              <div className="flex flex-wrap justify-center gap-2 mb-3">
-                <Badge variant="outline" className="text-xs">8h</Badge>
+              <div className="flex flex-wrap justify-center gap-2 mb-4">
+                <Badge variant="outline" className="text-xs border-coral-200 text-coral-600 hover:bg-coral-50 transition-colors duration-300">8h</Badge>
               </div>
-              <Badge variant="secondary" className="bg-green-100 text-green-700">Finalizado em 25/02/2024</Badge>
+              
+              <div className="flex flex-wrap justify-center gap-3">
+                <Badge className="bg-coral-100 text-coral-700 hover:bg-coral-200 transition-colors duration-300">
+                  FÁBULA - FONOAUDIOLOGIA
+                </Badge>
+                <Badge className="bg-coral-100 text-coral-700 hover:bg-coral-200 transition-colors duration-300">
+                  Finalizado 25/02/2024
+                </Badge>
+              </div>
             </CardContent>
           </Card>
 
-          <Card className="group border-0 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 bg-gradient-to-br from-white to-orange-50/20">
-            <CardHeader className="text-center pb-4">
-              <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
-                <Stethoscope className="w-8 h-8 text-white" />
+          <Card className="group relative border border-coral-100/50 shadow-lg hover:shadow-2xl hover:shadow-coral-500/10 transition-all duration-500 hover:-translate-y-3 bg-white/70 backdrop-blur-sm overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-coral-500/5 to-coral-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            
+            <CardHeader className="text-center pb-4 relative z-10">
+              <div className="w-20 h-20 flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 relative">
+                <div className="absolute inset-0 bg-coral-500/10 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <Stethoscope className="w-10 h-10 text-coral-500 relative z-10 group-hover:text-coral-600 transition-colors duration-300" />
               </div>
-              <CardTitle className="text-lg font-bold text-foreground">Treinamento IDADI</CardTitle>
-              <Badge className="bg-orange-100 text-orange-700 mx-auto">PSICÓLOGA ANDRESSA UCHOA</Badge>
+              <CardTitle className="text-xl font-bold text-foreground mb-3 group-hover:text-coral-600 transition-colors duration-300">
+                Treinamento IDADI
+              </CardTitle>
             </CardHeader>
-            <CardContent className="text-center">
-              <p className="text-muted-foreground mb-4 leading-relaxed">
+            <CardContent className="text-center relative z-10">
+              <p className="text-muted-foreground mb-6 leading-relaxed">
                 Inventário Dimensional de Avaliação do Desenvolvimento Infantil 
                 para análise especializada do desenvolvimento.
               </p>
-              <div className="flex flex-wrap justify-center gap-2 mb-3">
-                <Badge variant="outline" className="text-xs">2h</Badge>
+              <div className="flex flex-wrap justify-center gap-2 mb-4">
+                <Badge variant="outline" className="text-xs border-coral-200 text-coral-600 hover:bg-coral-50 transition-colors duration-300">2h</Badge>
               </div>
-              <Badge variant="secondary" className="bg-green-100 text-green-700">Finalizado em 02/03/2024</Badge>
+              
+              <div className="flex flex-wrap justify-center gap-3">
+                <Badge className="bg-coral-100 text-coral-700 hover:bg-coral-200 transition-colors duration-300">
+                  PSICÓLOGA ANDRESSA UCHOA
+                </Badge>
+                <Badge className="bg-coral-100 text-coral-700 hover:bg-coral-200 transition-colors duration-300">
+                  Finalizado 02/03/2024
+                </Badge>
+              </div>
             </CardContent>
           </Card>
         </div>
