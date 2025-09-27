@@ -4,7 +4,6 @@ import { useState, useCallback, useEffect } from 'react'
 import { Button } from "@/shared/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/shared/components/ui/card"
 import { Badge } from "@/shared/components/ui/badge"
-import { Progress } from "@/shared/components/ui/progress"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/shared/components/ui/tabs"
 import { 
   Accordion, 
@@ -29,7 +28,6 @@ import {
   Calendar,
   MapPin,
   Award,
-  BookOpen,
   Target,
   TrendingUp,
   Star,
@@ -339,6 +337,269 @@ const PDFViewer = ({ file, isPreview = false }: { file: string, isPreview?: bool
   );
 };
 
+// Component for CV Preview Card with animation
+function CvPreviewCard({ activeTab }: { activeTab: string }) {
+  const [isVisible, setIsVisible] = useState(false)
+  
+  useEffect(() => {
+    if (activeTab === 'overview') {
+      const timer = setTimeout(() => setIsVisible(true), 100)
+      return () => clearTimeout(timer)
+    } else {
+      setIsVisible(false)
+    }
+  }, [activeTab])
+
+  return (
+    <Card className={`border-0 shadow-2xl overflow-hidden bg-gradient-to-br from-white to-coral-50/30 transition-all duration-700 ${
+      isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+    }`}>
+      <CardContent className="p-8">
+        <div className="relative">
+          <div className="relative bg-white rounded-xl shadow-lg overflow-hidden transform rotate-1 hover:rotate-0 transition-transform duration-500">
+            <div 
+              className="h-80 flex items-center justify-center bg-cover bg-top" 
+              style={{ backgroundImage: "url('/docs/Currículo_imagem_tumblr.png')" }}
+            >
+            </div>
+          </div>
+          <div className="absolute -top-2 -right-2 w-6 h-6 bg-coral-500 rounded-full flex items-center justify-center">
+            <CheckCircle className="w-4 h-4 text-white" />
+          </div>
+        </div>
+      </CardContent>
+    </Card>
+  )
+}
+
+
+// Component for Action Card with Modal
+function ActionCardWithModal({ activeTab, handleDownload, downloadLoading, isModalOpen, setIsModalOpen }: { 
+  activeTab: string, 
+  handleDownload: () => Promise<void>, 
+  downloadLoading: boolean, 
+  isModalOpen: boolean,
+  setIsModalOpen: (open: boolean) => void 
+}) {
+  const [isVisible, setIsVisible] = useState(false)
+  
+  useEffect(() => {
+    if (activeTab === 'overview') {
+      const timer = setTimeout(() => setIsVisible(true), 300)
+      return () => clearTimeout(timer)
+    } else {
+      setIsVisible(false)
+    }
+  }, [activeTab])
+
+  return (
+    <Card className={`border-0 shadow-xl bg-gradient-to-br from-white via-coral-50/10 to-white transition-all duration-700 ${
+      isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+    }`}>
+      <CardContent className="p-8">
+        <div className="space-y-6">
+          <div className="space-y-4">
+            <h3 className="text-2xl sm:text-3xl font-bold text-foreground leading-tight">
+              Explore Minha Jornada
+              <span className="block text-lg font-normal text-muted-foreground mt-2">
+                Descubra minha experiência profissional e formação acadêmica
+              </span>
+            </h3>
+            
+            <div className="flex flex-wrap gap-2 mb-6">
+              <Badge className="bg-coral-500 text-white">Terapia Ocupacional</Badge>
+              <Badge variant="secondary">Método ABA</Badge>
+              <Badge variant="secondary">Denver</Badge>
+              <Badge variant="secondary">Serviço Social</Badge>
+            </div>
+          </div>
+
+          <div className="flex flex-col sm:flex-row gap-4">
+            <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+              <DialogTrigger asChild>
+                <Button 
+                  variant="outline" 
+                  size="lg"
+                  className="border-coral-500 text-coral-500 hover:bg-coral-500 hover:text-white transition-all duration-300 flex items-center justify-center gap-2 group"
+                >
+                  <Eye className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                  Visualizar PDF
+                </Button>
+              </DialogTrigger>
+              
+              <DialogContent 
+                className="!w-[95vw] !max-w-[95vw] !h-[95vh] !max-h-[95vh] p-0 overflow-hidden rounded-xl border-0 flex flex-col"
+              >
+                <DialogHeader className="sr-only">
+                  <DialogTitle>Currículo de Rebecca Ariel</DialogTitle>
+                  <DialogDescription>
+                    Visualizador completo do currículo profissional
+                  </DialogDescription>
+                </DialogHeader>
+                
+                <button
+                  onClick={() => setIsModalOpen(false)}
+                  className="absolute top-4 right-4 z-50 p-2 bg-white/90 hover:bg-white rounded-full shadow-lg transition-all duration-200 hover:scale-110 group"
+                  aria-label="Fechar"
+                >
+                  <svg className="w-4 h-4 text-muted-foreground group-hover:text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+                
+                <div className="w-full h-full flex flex-col min-h-0">
+                  <PDFViewer file="/docs/CV-RebeccaAriel.pdf" />
+                </div>
+              </DialogContent>
+            </Dialog>
+            
+            <Button 
+              size="lg"
+              onClick={handleDownload}
+              disabled={downloadLoading}
+              className="bg-gradient-to-r from-coral-500 to-coral-600 hover:from-coral-600 hover:to-coral-700 text-white transition-all duration-300 flex items-center justify-center gap-2 group shadow-lg hover:shadow-xl"
+            >
+              {downloadLoading ? (
+                <Loader2 className="w-5 h-5 animate-spin" />
+              ) : (
+                <Download className="w-5 h-5 group-hover:scale-110 transition-transform" />
+              )}
+              {downloadLoading ? 'Baixando...' : 'Baixar Currículo'}
+            </Button>
+          </div>
+        </div>
+      </CardContent>
+    </Card>
+  )
+}
+
+// Component for Timeline Item with animation
+function TimelineItem({ item, index, activeTab }: { 
+  item: { 
+    id: string, 
+    title: string, 
+    company: string, 
+    location: string, 
+    period: string, 
+    description: string, 
+    highlights: string[] 
+  }, 
+  index: number, 
+  activeTab: string 
+}) {
+  const [isVisible, setIsVisible] = useState(false)
+  
+  useEffect(() => {
+    if (activeTab === 'timeline') {
+      const timer = setTimeout(() => setIsVisible(true), index * 200)
+      return () => clearTimeout(timer)
+    } else {
+      setIsVisible(false)
+    }
+  }, [index, activeTab])
+
+  return (
+    <div 
+      className={`relative transition-all duration-700 ${
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+      }`}
+    >
+      {/* Timeline dot */}
+      <div className="absolute left-[-18px] top-6 w-4 h-4 bg-coral-500 rounded-full border-4 border-white shadow-lg z-10">
+        <div className="absolute inset-0 bg-coral-500 rounded-full animate-ping opacity-20" />
+      </div>
+      
+      <AccordionItem 
+        value={item.id}
+        className="border border-coral-100/50 rounded-xl bg-white/70 backdrop-blur-sm shadow-md hover:shadow-lg transition-all duration-300 ml-4"
+      >
+        <AccordionTrigger className="px-6 py-4 hover:no-underline">
+          <div className="flex items-center gap-4 w-full">
+            <div className="w-12 h-12 bg-coral-100 rounded-full flex items-center justify-center flex-shrink-0">
+              <Target className="w-6 h-6 text-coral-600" />
+            </div>
+            <div className="flex-1 text-left">
+              <div className="flex items-center gap-3 mb-1">
+                <h4 className="text-lg font-semibold text-foreground">{item.title}</h4>
+                <Badge variant="secondary" className="bg-coral-100 text-coral-700 text-xs">
+                  {item.period}
+                </Badge>
+              </div>
+              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <span className="font-medium text-coral-600">{item.company}</span>
+                <span>•</span>
+                <div className="flex items-center">
+                  <MapPin className="w-3 h-3 mr-1" />
+                  {item.location}
+                </div>
+              </div>
+            </div>
+          </div>
+        </AccordionTrigger>
+        <AccordionContent className="px-6 pb-6">
+          <div className="ml-16 space-y-4">
+            <p className="text-muted-foreground leading-relaxed">
+              {item.description}
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {item.highlights.map((highlight) => (
+                <Badge 
+                  key={highlight} 
+                  variant="outline" 
+                  className="text-xs border-coral-200 text-coral-600 bg-coral-50/50"
+                >
+                  {highlight}
+                </Badge>
+              ))}
+            </div>
+          </div>
+        </AccordionContent>
+      </AccordionItem>
+    </div>
+  )
+}
+
+// Component for Skills Category with animation
+function SkillsCategory({ category, skills, categoryIndex, activeTab }: { 
+  category: string, 
+  skills: { name: string, level: number }[], 
+  categoryIndex: number, 
+  activeTab: string 
+}) {
+  const [isVisible, setIsVisible] = useState(false)
+  
+  useEffect(() => {
+    if (activeTab === 'skills') {
+      const timer = setTimeout(() => setIsVisible(true), categoryIndex * 200)
+      return () => clearTimeout(timer)
+    } else {
+      setIsVisible(false)
+    }
+  }, [categoryIndex, activeTab])
+
+  return (
+    <Card 
+      className={`border border-coral-100/50 shadow-lg hover:shadow-2xl hover:shadow-coral-500/10 transition-all duration-500 hover:-translate-y-2 bg-white/70 backdrop-blur-sm ${
+        isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+      }`}
+    >
+      <CardHeader>
+        <CardTitle className="text-lg text-foreground flex items-center gap-2">
+          <div className="w-8 h-8 bg-coral-100 rounded-full flex items-center justify-center">
+            <TrendingUp className="w-4 h-4 text-coral-600" />
+          </div>
+          {category}
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="space-y-4">
+        {skills.map((skill, index) => (
+          <SkillBar key={skill.name} skill={{...skill, category}} index={index} isCardVisible={isVisible} />
+        ))}
+      </CardContent>
+    </Card>
+  )
+}
+
 export function CvSection() {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [downloadLoading, setDownloadLoading] = useState(false)
@@ -408,135 +669,15 @@ export function CvSection() {
           <TabsContent value="overview" className="space-y-6">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
               {/* CV Preview Card */}
-              {(() => {
-                const [isVisible, setIsVisible] = useState(false)
-                
-                useEffect(() => {
-                  if (activeTab === 'overview') {
-                    const timer = setTimeout(() => setIsVisible(true), 100)
-                    return () => clearTimeout(timer)
-                  } else {
-                    setIsVisible(false)
-                  }
-                }, [activeTab])
+              <CvPreviewCard activeTab={activeTab} />
 
-                return (
-                  <Card className={`border-0 shadow-2xl overflow-hidden bg-gradient-to-br from-white to-coral-50/30 transition-all duration-700 ${
-                    isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-                  }`}>
-                    <CardContent className="p-8">
-                      <div className="relative">
-                        <div className="relative bg-white rounded-xl shadow-lg overflow-hidden transform rotate-1 hover:rotate-0 transition-transform duration-500">
-                          <div 
-                            className="h-80 flex items-center justify-center bg-cover bg-top" 
-                            style={{ backgroundImage: "url('/docs/Currículo_imagem_tumblr.png')" }}
-                          >
-                          </div>
-                        </div>
-                        <div className="absolute -top-2 -right-2 w-6 h-6 bg-coral-500 rounded-full flex items-center justify-center">
-                          <CheckCircle className="w-4 h-4 text-white" />
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                )
-              })()}
-
-              {/* Action Card */}
-              {(() => {
-                const [isVisible, setIsVisible] = useState(false)
-                
-                useEffect(() => {
-                  if (activeTab === 'overview') {
-                    const timer = setTimeout(() => setIsVisible(true), 300)
-                    return () => clearTimeout(timer)
-                  } else {
-                    setIsVisible(false)
-                  }
-                }, [activeTab])
-
-                return (
-                  <Card className={`border-0 shadow-xl bg-gradient-to-br from-white via-coral-50/10 to-white transition-all duration-700 ${
-                    isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-                  }`}>
-                <CardContent className="p-8">
-                  <div className="space-y-6">
-                    <div className="space-y-4">
-                      <h3 className="text-2xl sm:text-3xl font-bold text-foreground leading-tight">
-                        Explore Minha Jornada
-                        <span className="block text-lg font-normal text-muted-foreground mt-2">
-                          Descubra minha experiência profissional e formação acadêmica
-                        </span>
-                      </h3>
-                      
-                      <div className="flex flex-wrap gap-2 mb-6">
-                        <Badge className="bg-coral-500 text-white">Terapia Ocupacional</Badge>
-                        <Badge variant="secondary">Método ABA</Badge>
-                        <Badge variant="secondary">Denver</Badge>
-                        <Badge variant="secondary">Serviço Social</Badge>
-                      </div>
-                    </div>
-
-                    <div className="flex flex-col sm:flex-row gap-4">
-                      <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-                        <DialogTrigger asChild>
-                          <Button 
-                            variant="outline" 
-                            size="lg"
-                            className="border-coral-500 text-coral-500 hover:bg-coral-500 hover:text-white transition-all duration-300 flex items-center justify-center gap-2 group"
-                          >
-                            <Eye className="w-5 h-5 group-hover:scale-110 transition-transform" />
-                            Visualizar PDF
-                          </Button>
-                        </DialogTrigger>
-                        
-                        <Button 
-                          size="lg"
-                          onClick={handleDownload}
-                          disabled={downloadLoading}
-                          className="bg-gradient-to-r from-coral-500 to-coral-600 hover:from-coral-600 hover:to-coral-700 text-white transition-all duration-300 flex items-center justify-center gap-2 group shadow-lg hover:shadow-xl"
-                        >
-                          {downloadLoading ? (
-                            <Loader2 className="w-5 h-5 animate-spin" />
-                          ) : (
-                            <Download className="w-5 h-5 group-hover:scale-110 transition-transform" />
-                          )}
-                          {downloadLoading ? 'Baixando...' : 'Baixar Currículo'}
-                        </Button>
-
-                        {/* Enhanced Modal */}
-                        <DialogContent 
-                          className="!w-[95vw] !max-w-[95vw] !h-[95vh] !max-h-[95vh] p-0 overflow-hidden rounded-xl border-0 flex flex-col"
-                          showCloseButton={false}
-                        >
-                          <DialogHeader className="sr-only">
-                            <DialogTitle>Currículo de Rebecca Ariel</DialogTitle>
-                            <DialogDescription>
-                              Visualizador completo do currículo profissional
-                            </DialogDescription>
-                          </DialogHeader>
-                          
-                          <button
-                            onClick={() => setIsModalOpen(false)}
-                            className="absolute top-4 right-4 z-50 p-2 bg-white/90 hover:bg-white rounded-full shadow-lg transition-all duration-200 hover:scale-110 group"
-                            aria-label="Fechar"
-                          >
-                            <svg className="w-4 h-4 text-muted-foreground group-hover:text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                            </svg>
-                          </button>
-                          
-                          <div className="w-full h-full flex flex-col min-h-0">
-                            <PDFViewer file="/docs/CV-RebeccaAriel.pdf" />
-                          </div>
-                        </DialogContent>
-                      </Dialog>
-                    </div>
-                  </div>
-                </CardContent>
-                  </Card>
-                )
-              })()}
+              <ActionCardWithModal 
+                activeTab={activeTab} 
+                handleDownload={handleDownload} 
+                downloadLoading={downloadLoading} 
+                isModalOpen={isModalOpen}
+                setIsModalOpen={setIsModalOpen} 
+              />
             </div>
           </TabsContent>
 
@@ -553,79 +694,9 @@ export function CvSection() {
                 <div className="absolute left-4 top-0 bottom-0 w-px bg-gradient-to-b from-coral-200 to-coral-400" />
                 
                 <Accordion type="multiple" className="w-full space-y-6">
-                  {timelineData.map((item, index) => {
-                    const [isVisible, setIsVisible] = useState(false)
-                    
-                    useEffect(() => {
-                      if (activeTab === 'timeline') {
-                        const timer = setTimeout(() => setIsVisible(true), index * 200)
-                        return () => clearTimeout(timer)
-                      } else {
-                        setIsVisible(false)
-                      }
-                    }, [index, activeTab])
-
-                    return (
-                      <div 
-                        key={item.id} 
-                        className={`relative transition-all duration-700 ${
-                          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-                        }`}
-                      >
-                        {/* Timeline dot */}
-                        <div className="absolute left-[-18px] top-6 w-4 h-4 bg-coral-500 rounded-full border-4 border-white shadow-lg z-10">
-                          <div className="absolute inset-0 bg-coral-500 rounded-full animate-ping opacity-20" />
-                        </div>
-                        
-                        <AccordionItem 
-                          value={item.id}
-                          className="border border-coral-100/50 rounded-xl bg-white/70 backdrop-blur-sm shadow-md hover:shadow-lg transition-all duration-300 ml-4"
-                        >
-                        <AccordionTrigger className="px-6 py-4 hover:no-underline">
-                          <div className="flex items-center gap-4 w-full">
-                            <div className="w-12 h-12 bg-coral-100 rounded-full flex items-center justify-center flex-shrink-0">
-                              <Target className="w-6 h-6 text-coral-600" />
-                            </div>
-                            <div className="flex-1 text-left">
-                              <div className="flex items-center gap-3 mb-1">
-                                <h4 className="text-lg font-semibold text-foreground">{item.title}</h4>
-                                <Badge variant="secondary" className="bg-coral-100 text-coral-700 text-xs">
-                                  {item.period}
-                                </Badge>
-                              </div>
-                              <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                                <span className="font-medium text-coral-600">{item.company}</span>
-                                <span>•</span>
-                                <div className="flex items-center">
-                                  <MapPin className="w-3 h-3 mr-1" />
-                                  {item.location}
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </AccordionTrigger>
-                        <AccordionContent className="px-6 pb-6">
-                          <div className="ml-16 space-y-4">
-                            <p className="text-muted-foreground leading-relaxed">
-                              {item.description}
-                            </p>
-                            <div className="flex flex-wrap gap-2">
-                              {item.highlights.map((highlight) => (
-                                <Badge 
-                                  key={highlight} 
-                                  variant="outline" 
-                                  className="text-xs border-coral-200 text-coral-600 bg-coral-50/50"
-                                >
-                                  {highlight}
-                                </Badge>
-                              ))}
-                            </div>
-                          </div>
-                        </AccordionContent>
-                        </AccordionItem>
-                      </div>
-                    )
-                  })}
+                  {timelineData.map((item, index) => (
+                    <TimelineItem key={item.id} item={item} index={index} activeTab={activeTab} />
+                  ))}
                 </Accordion>
               </div>
             </div>
@@ -639,41 +710,15 @@ export function CvSection() {
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {Object.entries(skillsData).map(([category, skills], categoryIndex) => {
-                const [isVisible, setIsVisible] = useState(false)
-                
-                useEffect(() => {
-                  if (activeTab === 'skills') {
-                    const timer = setTimeout(() => setIsVisible(true), categoryIndex * 200)
-                    return () => clearTimeout(timer)
-                  } else {
-                    setIsVisible(false)
-                  }
-                }, [categoryIndex, activeTab])
-
-                return (
-                  <Card 
-                    key={category} 
-                    className={`border border-coral-100/50 shadow-lg hover:shadow-2xl hover:shadow-coral-500/10 transition-all duration-500 hover:-translate-y-2 bg-white/70 backdrop-blur-sm ${
-                      isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
-                    }`}
-                  >
-                    <CardHeader>
-                      <CardTitle className="text-lg text-foreground flex items-center gap-2">
-                        <div className="w-8 h-8 bg-coral-100 rounded-full flex items-center justify-center">
-                          <TrendingUp className="w-4 h-4 text-coral-600" />
-                        </div>
-                        {category}
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent className="space-y-4">
-                      {skills.map((skill, index) => (
-                        <SkillBar key={skill.name} skill={skill} index={index} isCardVisible={isVisible} />
-                      ))}
-                    </CardContent>
-                  </Card>
-                )
-              })}
+              {Object.entries(skillsData).map(([category, skills], categoryIndex) => (
+                <SkillsCategory 
+                  key={category} 
+                  category={category} 
+                  skills={skills} 
+                  categoryIndex={categoryIndex} 
+                  activeTab={activeTab} 
+                />
+              ))}
             </div>
           </TabsContent>
 

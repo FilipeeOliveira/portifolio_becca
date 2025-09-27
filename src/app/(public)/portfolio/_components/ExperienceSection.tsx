@@ -2,7 +2,7 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/shared/components/ui/card"
 import { Badge } from "@/shared/components/ui/badge"
-import { Heart, Target, GraduationCap, Star, Award, ChevronLeft, ChevronRight } from "lucide-react"
+import { Heart, Target, GraduationCap, Award, ChevronLeft, ChevronRight } from "lucide-react"
 import { useState, useEffect } from "react"
 
 const educationData = [
