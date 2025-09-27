@@ -7,6 +7,12 @@ import { Badge } from "@/shared/components/ui/badge"
 import { Progress } from "@/shared/components/ui/progress"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/shared/components/ui/tabs"
 import { 
+  Accordion, 
+  AccordionContent, 
+  AccordionItem, 
+  AccordionTrigger 
+} from "@/shared/components/ui/accordion"
+import { 
   Dialog, 
   DialogContent, 
   DialogTrigger, 
@@ -134,81 +140,33 @@ const achievementsData = [
   }
 ]
 
-// Timeline Item Component
-const TimelineItem = ({ item, index }: { item: typeof timelineData[0], index: number }) => {
-  const [isVisible, setIsVisible] = useState(false)
-  
-  useEffect(() => {
-    const timer = setTimeout(() => setIsVisible(true), index * 200)
-    return () => clearTimeout(timer)
-  }, [index])
-
-  const Icon = item.type === 'work' ? Target : BookOpen
-  
-  return (
-    <div className={`relative pl-8 pb-8 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-      {/* Timeline line */}
-      <div className="absolute left-4 top-0 bottom-0 w-px bg-gradient-to-b from-coral-200 to-coral-400" />
-      
-      {/* Timeline dot */}
-      <div className="absolute left-2 top-2 w-4 h-4 bg-coral-500 rounded-full border-4 border-white shadow-lg z-10">
-        <div className="absolute inset-0 bg-coral-500 rounded-full animate-ping opacity-20" />
-      </div>
-      
-      <Card className="ml-4 border-0 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-white/80 backdrop-blur-sm">
-        <CardContent className="p-6">
-          <div className="flex items-start gap-3">
-            <div className="w-10 h-10 bg-coral-100 rounded-full flex items-center justify-center flex-shrink-0">
-              <Icon className="w-5 h-5 text-coral-600" />
-            </div>
-            
-            <div className="flex-1">
-              <div className="flex items-center gap-2 mb-2">
-                <Badge variant="secondary" className="bg-coral-100 text-coral-700 text-xs">
-                  {item.period}
-                </Badge>
-                <div className="flex items-center text-muted-foreground text-xs">
-                  <MapPin className="w-3 h-3 mr-1" />
-                  {item.location}
-                </div>
-              </div>
-              
-              <h4 className="text-lg font-semibold text-foreground mb-1">{item.title}</h4>
-              <p className="text-coral-600 font-medium text-sm mb-2">{item.company}</p>
-              <p className="text-muted-foreground text-sm leading-relaxed mb-3">{item.description}</p>
-              
-              <div className="flex flex-wrap gap-1">
-                {item.highlights.map((highlight) => (
-                  <Badge key={highlight} variant="outline" className="text-xs border-coral-200 text-coral-600">
-                    {highlight}
-                  </Badge>
-                ))}
-              </div>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-    </div>
-  )
-}
 
 // Skill Bar Component
-const SkillBar = ({ skill, index }: { skill: { name: string, level: number, category: string }, index: number }) => {
+const SkillBar = ({ skill, index, isCardVisible }: { skill: { name: string, level: number, category: string }, index: number, isCardVisible: boolean }) => {
   const [animatedLevel, setAnimatedLevel] = useState(0)
   
   useEffect(() => {
-    const timer = setTimeout(() => setAnimatedLevel(skill.level), index * 100)
-    return () => clearTimeout(timer)
-  }, [skill.level, index])
+    if (isCardVisible) {
+      const timer = setTimeout(() => setAnimatedLevel(skill.level), index * 100)
+      return () => clearTimeout(timer)
+    } else {
+      setAnimatedLevel(0)
+    }
+  }, [skill.level, index, isCardVisible])
   
   
   return (
     <div className="space-y-2">
       <div className="flex justify-between items-center">
         <span className="text-sm font-medium text-foreground">{skill.name}</span>
-        <span className="text-xs text-muted-foreground">{skill.level}%</span>
+        <span className="text-xs text-coral-600 font-medium">{skill.level}%</span>
       </div>
-      <Progress value={animatedLevel} className="h-2 bg-gray-100" />
+      <div className="relative h-2 bg-coral-50 rounded-full overflow-hidden">
+        <div 
+          className="h-full bg-gradient-to-r from-coral-500 to-coral-600 rounded-full transition-all duration-1000 ease-out"
+          style={{ width: `${animatedLevel}%` }}
+        />
+      </div>
     </div>
   )
 }
@@ -384,6 +342,7 @@ const PDFViewer = ({ file, isPreview = false }: { file: string, isPreview?: bool
 export function CvSection() {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [downloadLoading, setDownloadLoading] = useState(false)
+  const [activeTab, setActiveTab] = useState('overview')
 
   const handleDownload = async () => {
     setDownloadLoading(true)
@@ -400,7 +359,7 @@ export function CvSection() {
   }
 
   return (
-    <section id="curriculo" className="py-16 sm:py-20 lg:py-24 bg-gradient-to-br from-coral-50 via-white to-coral-50/20 relative overflow-hidden">
+    <section id="curriculo" className="py-16 sm:py-20 lg:py-24 bg-gradient-to-br from-white via-coral-50/30 to-white relative overflow-hidden">
       {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 right-10 w-32 h-32 bg-coral-100 rounded-full opacity-30 blur-3xl" />
@@ -425,7 +384,7 @@ export function CvSection() {
         </div>
 
         {/* Main Content Tabs */}
-        <Tabs defaultValue="overview" className="w-full">
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           <TabsList className="grid w-full grid-cols-4 mb-8 bg-white/50 backdrop-blur-sm">
             <TabsTrigger value="overview" className="flex items-center gap-2">
               <Eye className="w-4 h-4" />
@@ -449,25 +408,57 @@ export function CvSection() {
           <TabsContent value="overview" className="space-y-6">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
               {/* CV Preview Card */}
-              <Card className="border-0 shadow-2xl overflow-hidden bg-gradient-to-br from-white to-coral-50/30">
-                <CardContent className="p-8">
-                  <div className="relative">
-                    <div className="relative bg-white rounded-xl shadow-lg overflow-hidden transform rotate-1 hover:rotate-0 transition-transform duration-500">
-                      <div 
-                        className="h-80 flex items-center justify-center bg-cover bg-top" 
-                        style={{ backgroundImage: "url('/docs/Currículo_imagem_tumblr.png')" }}
-                      >
+              {(() => {
+                const [isVisible, setIsVisible] = useState(false)
+                
+                useEffect(() => {
+                  if (activeTab === 'overview') {
+                    const timer = setTimeout(() => setIsVisible(true), 100)
+                    return () => clearTimeout(timer)
+                  } else {
+                    setIsVisible(false)
+                  }
+                }, [activeTab])
+
+                return (
+                  <Card className={`border-0 shadow-2xl overflow-hidden bg-gradient-to-br from-white to-coral-50/30 transition-all duration-700 ${
+                    isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+                  }`}>
+                    <CardContent className="p-8">
+                      <div className="relative">
+                        <div className="relative bg-white rounded-xl shadow-lg overflow-hidden transform rotate-1 hover:rotate-0 transition-transform duration-500">
+                          <div 
+                            className="h-80 flex items-center justify-center bg-cover bg-top" 
+                            style={{ backgroundImage: "url('/docs/Currículo_imagem_tumblr.png')" }}
+                          >
+                          </div>
+                        </div>
+                        <div className="absolute -top-2 -right-2 w-6 h-6 bg-coral-500 rounded-full flex items-center justify-center">
+                          <CheckCircle className="w-4 h-4 text-white" />
+                        </div>
                       </div>
-                    </div>
-                    <div className="absolute -top-2 -right-2 w-6 h-6 bg-coral-500 rounded-full flex items-center justify-center">
-                      <CheckCircle className="w-4 h-4 text-white" />
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+                    </CardContent>
+                  </Card>
+                )
+              })()}
 
               {/* Action Card */}
-              <Card className="border-0 shadow-xl bg-gradient-to-br from-white via-coral-50/10 to-white">
+              {(() => {
+                const [isVisible, setIsVisible] = useState(false)
+                
+                useEffect(() => {
+                  if (activeTab === 'overview') {
+                    const timer = setTimeout(() => setIsVisible(true), 300)
+                    return () => clearTimeout(timer)
+                  } else {
+                    setIsVisible(false)
+                  }
+                }, [activeTab])
+
+                return (
+                  <Card className={`border-0 shadow-xl bg-gradient-to-br from-white via-coral-50/10 to-white transition-all duration-700 ${
+                    isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+                  }`}>
                 <CardContent className="p-8">
                   <div className="space-y-6">
                     <div className="space-y-4">
@@ -543,22 +534,99 @@ export function CvSection() {
                     </div>
                   </div>
                 </CardContent>
-              </Card>
+                  </Card>
+                )
+              })()}
             </div>
           </TabsContent>
 
           {/* Timeline Tab */}
           <TabsContent value="timeline" className="space-y-6">
-            <div className="max-w-4xl mx-auto ">
+            <div className="max-w-4xl mx-auto">
               <div className="text-center mb-8">
                 <h3 className="text-2xl font-bold text-foreground mb-2">Linha do Tempo Profissional</h3>
                 <p className="text-muted-foreground">Minha jornada de crescimento e desenvolvimento</p>
               </div>
               
-              <div className="relative">
-                {timelineData.map((item, index) => (
-                  <TimelineItem key={item.id} item={item} index={index} />
-                ))}
+              <div className="relative pl-8">
+                {/* Timeline line */}
+                <div className="absolute left-4 top-0 bottom-0 w-px bg-gradient-to-b from-coral-200 to-coral-400" />
+                
+                <Accordion type="multiple" className="w-full space-y-6">
+                  {timelineData.map((item, index) => {
+                    const [isVisible, setIsVisible] = useState(false)
+                    
+                    useEffect(() => {
+                      if (activeTab === 'timeline') {
+                        const timer = setTimeout(() => setIsVisible(true), index * 200)
+                        return () => clearTimeout(timer)
+                      } else {
+                        setIsVisible(false)
+                      }
+                    }, [index, activeTab])
+
+                    return (
+                      <div 
+                        key={item.id} 
+                        className={`relative transition-all duration-700 ${
+                          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+                        }`}
+                      >
+                        {/* Timeline dot */}
+                        <div className="absolute left-[-18px] top-6 w-4 h-4 bg-coral-500 rounded-full border-4 border-white shadow-lg z-10">
+                          <div className="absolute inset-0 bg-coral-500 rounded-full animate-ping opacity-20" />
+                        </div>
+                        
+                        <AccordionItem 
+                          value={item.id}
+                          className="border border-coral-100/50 rounded-xl bg-white/70 backdrop-blur-sm shadow-md hover:shadow-lg transition-all duration-300 ml-4"
+                        >
+                        <AccordionTrigger className="px-6 py-4 hover:no-underline">
+                          <div className="flex items-center gap-4 w-full">
+                            <div className="w-12 h-12 bg-coral-100 rounded-full flex items-center justify-center flex-shrink-0">
+                              <Target className="w-6 h-6 text-coral-600" />
+                            </div>
+                            <div className="flex-1 text-left">
+                              <div className="flex items-center gap-3 mb-1">
+                                <h4 className="text-lg font-semibold text-foreground">{item.title}</h4>
+                                <Badge variant="secondary" className="bg-coral-100 text-coral-700 text-xs">
+                                  {item.period}
+                                </Badge>
+                              </div>
+                              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                                <span className="font-medium text-coral-600">{item.company}</span>
+                                <span>•</span>
+                                <div className="flex items-center">
+                                  <MapPin className="w-3 h-3 mr-1" />
+                                  {item.location}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </AccordionTrigger>
+                        <AccordionContent className="px-6 pb-6">
+                          <div className="ml-16 space-y-4">
+                            <p className="text-muted-foreground leading-relaxed">
+                              {item.description}
+                            </p>
+                            <div className="flex flex-wrap gap-2">
+                              {item.highlights.map((highlight) => (
+                                <Badge 
+                                  key={highlight} 
+                                  variant="outline" 
+                                  className="text-xs border-coral-200 text-coral-600 bg-coral-50/50"
+                                >
+                                  {highlight}
+                                </Badge>
+                              ))}
+                            </div>
+                          </div>
+                        </AccordionContent>
+                        </AccordionItem>
+                      </div>
+                    )
+                  })}
+                </Accordion>
               </div>
             </div>
           </TabsContent>
@@ -571,23 +639,41 @@ export function CvSection() {
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {Object.entries(skillsData).map(([category, skills]) => (
-                <Card key={category} className="border-0 shadow-lg hover:shadow-xl transition-all duration-300">
-                  <CardHeader>
-                    <CardTitle className="text-lg text-foreground flex items-center gap-2">
-                      <div className="w-8 h-8 bg-coral-100 rounded-full flex items-center justify-center">
-                        <TrendingUp className="w-4 h-4 text-coral-600" />
-                      </div>
-                      {category}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    {skills.map((skill, index) => (
-                      <SkillBar key={skill.name} skill={skill} index={index} />
-                    ))}
-                  </CardContent>
-                </Card>
-              ))}
+              {Object.entries(skillsData).map(([category, skills], categoryIndex) => {
+                const [isVisible, setIsVisible] = useState(false)
+                
+                useEffect(() => {
+                  if (activeTab === 'skills') {
+                    const timer = setTimeout(() => setIsVisible(true), categoryIndex * 200)
+                    return () => clearTimeout(timer)
+                  } else {
+                    setIsVisible(false)
+                  }
+                }, [categoryIndex, activeTab])
+
+                return (
+                  <Card 
+                    key={category} 
+                    className={`border border-coral-100/50 shadow-lg hover:shadow-2xl hover:shadow-coral-500/10 transition-all duration-500 hover:-translate-y-2 bg-white/70 backdrop-blur-sm ${
+                      isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+                    }`}
+                  >
+                    <CardHeader>
+                      <CardTitle className="text-lg text-foreground flex items-center gap-2">
+                        <div className="w-8 h-8 bg-coral-100 rounded-full flex items-center justify-center">
+                          <TrendingUp className="w-4 h-4 text-coral-600" />
+                        </div>
+                        {category}
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      {skills.map((skill, index) => (
+                        <SkillBar key={skill.name} skill={skill} index={index} isCardVisible={isVisible} />
+                      ))}
+                    </CardContent>
+                  </Card>
+                )
+              })}
             </div>
           </TabsContent>
 
