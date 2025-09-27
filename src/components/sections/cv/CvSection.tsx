@@ -50,7 +50,7 @@ export function CvSection() {
         description: 'O arquivo foi salvo na sua pasta de downloads.',
         duration: 3000,
       })
-    } catch (error) {
+    } catch {
       toast.error('Erro ao baixar currículo', {
         description: 'Tente novamente em alguns instantes.',
       })

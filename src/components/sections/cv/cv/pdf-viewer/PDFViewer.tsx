@@ -2,7 +2,7 @@
 
 import { useState, useCallback, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
-import { ChevronLeft, ChevronRight, Loader2 } from 'lucide-react'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 import dynamic from 'next/dynamic'
 import { Loading } from '@/components/Loading'
 
