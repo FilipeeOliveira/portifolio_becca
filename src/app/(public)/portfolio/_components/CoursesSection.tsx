@@ -204,26 +204,58 @@ export function CoursesSection() {
         </div>
 
         {/* Call to Action */}
-        <div className="text-center mt-16">
-          <div className="bg-gradient-to-r from-coral-500 to-coral-600 rounded-2xl p-8 text-white">
-            <h3 className="text-2xl font-bold mb-4">Aprendizado Contínuo, Cuidado Especializado</h3>
-            <p className="text-coral-100 mb-6 max-w-2xl mx-auto">
-              Minha formação continuada me permite oferecer os métodos mais atuais e eficazes 
-              em terapia ocupacional e desenvolvimento humano.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button 
-                className="bg-white text-coral-600 px-6 py-3 rounded-full font-medium hover:bg-coral-50 transition-colors duration-300"
-                onClick={() => document.getElementById('contato')?.scrollIntoView({ behavior: 'smooth' })}
-              >
-                Agendar Consulta
-              </button>
-              <button 
-                className="border border-white/30 text-white px-6 py-3 rounded-full font-medium hover:bg-white/10 transition-colors duration-300"
-                onClick={() => document.getElementById('sobre-mim')?.scrollIntoView({ behavior: 'smooth' })}
-              >
-                Conhecer Minha História
-              </button>
+        <div className="text-center mt-40">
+          <div className="relative bg-gradient-to-br from-coral-50/80 via-white to-coral-100/60 backdrop-blur-sm rounded-3xl p-10 border border-coral-100/50 shadow-xl overflow-hidden">
+            {/* Decorative elements */}
+            <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-coral-200/20 to-coral-300/10 rounded-full -translate-y-16 translate-x-16 blur-2xl" />
+            <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-coral-100/30 to-coral-200/20 rounded-full translate-y-12 -translate-x-12 blur-xl" />
+            
+            <div className="relative z-10">
+              
+              <h3 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
+                Aprendizado Contínuo, 
+                <span className="block text-transparent bg-gradient-to-r from-coral-500 to-coral-600 bg-clip-text">
+                  Cuidado Especializado
+                </span>
+              </h3>
+              
+              <p className="text-muted-foreground mb-8 max-w-2xl mx-auto text-lg leading-relaxed">
+                Minha formação continuada me permite oferecer os métodos mais atuais e eficazes 
+                em terapia ocupacional e desenvolvimento humano.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <button 
+                  className="group bg-gradient-to-r from-coral-500 to-coral-600 text-white px-8 py-4 rounded-full font-semibold hover:from-coral-600 hover:to-coral-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1 flex items-center justify-center gap-2"
+                  onClick={() => document.getElementById('contato')?.scrollIntoView({ behavior: 'smooth' })}
+                >
+                  Vamos conversar
+                  <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </button>
+                
+                <button 
+                  className="group border-2 border-coral-200 text-coral-600 hover:border-coral-300 px-8 py-4 rounded-full font-semibold hover:bg-coral-50 transition-all duration-300 hover:-translate-y-1 flex items-center justify-center gap-2"
+                  onClick={() => {
+                    // Navigate to skills section in CV
+                    const cvSection = document.getElementById('curriculo');
+                    if (cvSection) {
+                      cvSection.scrollIntoView({ behavior: 'smooth' });
+                      // Wait for scroll then trigger skills tab
+                      setTimeout(() => {
+                        const skillsTab = document.querySelector('[data-state="inactive"][value="skills"]') as HTMLElement;
+                        if (skillsTab) {
+                          skillsTab.click();
+                        }
+                      }, 800);
+                    }
+                  }}
+                >
+                  <Brain className="w-4 h-4" />
+                  Minhas Habilidades
+                </button>
+              </div>
             </div>
           </div>
         </div>
