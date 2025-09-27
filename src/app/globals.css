@@ -163,3 +163,13 @@
     background: linear-gradient(135deg, #fef7f7 0%, #fdeaea 50%, #fbd5d5 100%);
   }
 }
+
+/* Custom Sonner Toast Styles - Only coral icon */
+[data-sonner-toast][data-type="success"] [data-icon] {
+  color: #ec5a5a !important; /* coral-500 */
+}
+
+[data-sonner-toast][data-type="success"] [data-icon] svg {
+  color: #ec5a5a !important; /* coral-500 */
+  fill: #ec5a5a !important; /* coral-500 */
+}

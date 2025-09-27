@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Accordion } from "@/components/ui/accordion"
 import { Eye, Clock, TrendingUp, Award } from 'lucide-react'
+import { toast } from "sonner"
 
 // Import data
 import { timelineData } from '@/data/timeline'
@@ -43,6 +44,16 @@ export function CvSection() {
       document.body.appendChild(link)
       link.click()
       document.body.removeChild(link)
+      
+      // Show success toast
+      toast.success('Currículo baixado com sucesso!', {
+        description: 'O arquivo foi salvo na sua pasta de downloads.',
+        duration: 3000,
+      })
+    } catch (error) {
+      toast.error('Erro ao baixar currículo', {
+        description: 'Tente novamente em alguns instantes.',
+      })
     } finally {
       setTimeout(() => setDownloadLoading(false), 1000)
     }

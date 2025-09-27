@@ -4,6 +4,7 @@ import { Navigation } from "@/components/layout/Navigation"
 import { Footer } from "@/components/layout/Footer"
 import { useActiveSection } from "@/hooks/useActiveSection"
 import { navigationItems } from "@/data/navigation"
+import { Toaster } from "sonner"
 
 export default function PortfolioLayout({
   children,
@@ -24,6 +25,7 @@ export default function PortfolioLayout({
       </main>
       
       <Footer />
+      <Toaster position="top-right" />
     </div>
   )
 }
