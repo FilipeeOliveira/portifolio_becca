@@ -1,8 +1,8 @@
 import { HeroSection } from "@/components/sections/hero/HeroSection"
 import { CoursesSection } from "@/components/sections/courses/CoursesSection"
-import { AboutSection } from "@/components/sections/experience/ExperienceSection"
 import { CvSection } from "@/components/sections/cv/CvSection"
 import { ContactSection } from "@/components/sections/contact/ContactSection"
+import { MissionSection } from "@/components/sections/mission/MissionSection"
 
 export default function PortfolioPage() {
   return (
@@ -29,7 +29,7 @@ export default function PortfolioPage() {
 
       <HeroSection />
       <CoursesSection />
-      <AboutSection />
+      <MissionSection />
       <CvSection />
       <ContactSection />
     </>
