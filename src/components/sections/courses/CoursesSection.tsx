@@ -73,7 +73,7 @@ export function CoursesSection() {
               {coursesData.map((course) => {
                 const IconComponent = course.icon
                 return (
-                  <CarouselItem key={course.id} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3 pt-4 pb-4">
+                  <CarouselItem key={course.id} className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/3 pt-4 pb-4">
                     <Card className="group relative border border-coral-100/50 shadow-lg hover:shadow-2xl hover:shadow-coral-500/10 transition-all duration-500 hover:-translate-y-2 bg-white/70 backdrop-blur-sm overflow-hidden h-full">
                       {/* Background glow effect on hover */}
                       <div className="absolute inset-0 bg-gradient-to-br from-coral-500/5 to-coral-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />

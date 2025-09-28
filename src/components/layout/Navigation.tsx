@@ -22,7 +22,7 @@ export function Navigation({ items, activeSection }: NavigationProps) {
 
   return (
     <nav className="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-md shadow-sm border-b border-coral-100/50 z-50">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 py-3 sm:py-4">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 py-4 sm:py-4">
         <div className="flex justify-between items-center">
           <div className="font-bold text-lg sm:text-xl text-coral-500 flex items-center gap-1">
             Rebecca Ariel
