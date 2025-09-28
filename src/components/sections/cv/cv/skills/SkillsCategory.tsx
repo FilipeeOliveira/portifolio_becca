@@ -27,7 +27,7 @@ export function SkillsCategory({ category, skills, categoryIndex, activeTab }: S
 
   return (
     <Card 
-      className={`border border-coral-100/50 shadow-lg hover:shadow-2xl hover:shadow-coral-500/10 transition-all duration-500 hover:-translate-y-2 bg-white/70 backdrop-blur-sm ${
+      className={`border border-coral-100/50 shadow-lg hover:shadow-2xl hover:shadow-coral-500/10 transition-all duration-500 hover:-translate-y-2 hover:scale-105 bg-white/70 backdrop-blur-sm cursor-default ${
         isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
       }`}
     >

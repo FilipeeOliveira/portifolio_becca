@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/shared/components/ui/tabs"
 import { Accordion } from "@/shared/components/ui/accordion"
-import { Eye, Clock, TrendingUp, Award, FileText } from 'lucide-react'
+import { Eye, Clock, TrendingUp, Trophy, FileText } from 'lucide-react'
 import { toast } from "sonner"
 
 // Import data
@@ -84,22 +84,34 @@ export function CvSection() {
 
         {/* Main Content Tabs */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full grid-cols-4 mb-6 sm:mb-8 bg-white/50 backdrop-blur-sm">
-            <TabsTrigger value="overview" className="flex flex-col sm:flex-row items-center gap-1 sm:gap-2 px-2 py-3">
-              <Eye className="w-4 h-4" />
-              <span className="text-xs sm:text-sm">Visão Geral</span>
+          <TabsList className="grid w-full grid-cols-4 mb-6 sm:mb-8 bg-transparent  p-0 relative z-10">
+            <TabsTrigger 
+              value="overview" 
+              className="flex flex-col sm:flex-row items-center gap-1 sm:gap-2 px-3 py-4  transition-all duration-300 hover:text-coral-500 data-[state=active]:text-coral-500 cursor-pointer relative z-20 "
+            >
+              <Eye className="w-4 h-4 transition-transform duration-200" />
+              <span className="text-xs sm:text-sm font-medium">Visão Geral</span>
             </TabsTrigger>
-            <TabsTrigger value="timeline" className="flex flex-col sm:flex-row items-center gap-1 sm:gap-2 px-2 py-3">
-              <Clock className="w-4 h-4" />
-              <span className="text-xs sm:text-sm">Timeline</span>
+            <TabsTrigger 
+              value="timeline" 
+              className="flex flex-col sm:flex-row items-center gap-1 sm:gap-2 px-3 py-4  transition-all duration-300 hover:text-coral-500 data-[state=active]:text-coral-500 cursor-pointer relative z-20 "
+            >
+              <Clock className="w-4 h-4 transition-transform duration-200" />
+              <span className="text-xs sm:text-sm font-medium">Timeline</span>
             </TabsTrigger>
-            <TabsTrigger value="skills" className="flex flex-col sm:flex-row items-center gap-1 sm:gap-2 px-2 py-3">
-              <TrendingUp className="w-4 h-4" />
-              <span className="text-xs sm:text-sm">Habilidades</span>
+            <TabsTrigger 
+              value="skills" 
+              className="flex flex-col sm:flex-row items-center gap-1 sm:gap-2 px-3 py-4  transition-all duration-300 hover:text-coral-500 data-[state=active]:text-coral-500 cursor-pointer relative z-20 "
+            >
+              <TrendingUp className="w-4 h-4 transition-transform duration-200" />
+              <span className="text-xs sm:text-sm font-medium">Habilidades</span>
             </TabsTrigger>
-            <TabsTrigger value="achievements" className="flex flex-col sm:flex-row items-center gap-1 sm:gap-2 px-2 py-3">
-              <Award className="w-4 h-4" />
-              <span className="text-xs sm:text-sm">Conquistas</span>
+            <TabsTrigger 
+              value="achievements" 
+              className="flex flex-col sm:flex-row items-center gap-1 sm:gap-2 px-3 py-4  transition-all duration-300 hover:text-coral-500 data-[state=active]:text-coral-500 cursor-pointer relative z-20 "
+            >
+              <Trophy className="w-4 h-4 transition-transform duration-200" />
+              <span className="text-xs sm:text-sm font-medium">Conquistas</span>
             </TabsTrigger>
           </TabsList>
 

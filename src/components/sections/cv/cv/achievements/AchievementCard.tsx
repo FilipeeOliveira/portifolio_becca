@@ -21,7 +21,7 @@ export function AchievementCard({ achievement, index }: AchievementCardProps) {
   const Icon = achievement.icon
   
   return (
-    <Card className={`border-0 shadow-md hover:shadow-xl transition-all duration-500 hover:-translate-y-2 bg-gradient-to-br from-white to-coral-50/30 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
+    <Card className={`border-0 shadow-md hover:shadow-xl transition-all duration-500 hover:-translate-y-2 hover:scale-105 bg-gradient-to-br from-white to-coral-50/30 cursor-default ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
       <CardContent className="p-6">
         <div className="flex items-center gap-4">
           <div className="w-12 h-12 bg-gradient-to-br from-coral-500 to-coral-600 rounded-full flex items-center justify-center">
@@ -30,7 +30,7 @@ export function AchievementCard({ achievement, index }: AchievementCardProps) {
           <div className="flex-1">
             <h4 className="font-semibold text-foreground mb-1">{achievement.title}</h4>
             <p className="text-muted-foreground text-sm mb-1">{achievement.description}</p>
-            <Badge className="bg-coral-100 text-coral-700 text-xs">
+            <Badge className="bg-coral-100 text-coral-700 text-xs hover:bg-coral-200 hover:scale-105 transition-all duration-200 cursor-default">
               {achievement.year}
             </Badge>
           </div>
