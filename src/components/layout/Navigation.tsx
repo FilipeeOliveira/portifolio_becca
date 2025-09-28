@@ -55,7 +55,7 @@ export function Navigation({ items, activeSection }: NavigationProps) {
               variant="ghost"
               size="sm"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="text-coral-500"
+              className="text-coral-500 cursor-pointer"
             >
               {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </Button>

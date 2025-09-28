@@ -69,7 +69,7 @@ export function ActionCardWithModal({
                 <Button 
                   variant="outline" 
                   size="lg"
-                  className="border-coral-500 text-coral-500 hover:bg-coral-500 hover:text-white transition-all duration-300 flex items-center justify-center gap-2 group"
+                  className="border-coral-500 text-coral-500 hover:bg-coral-500 hover:text-white transition-all duration-300 flex items-center justify-center gap-2 group cursor-pointer"
                 >
                   <Eye className="w-5 h-5 group-hover:scale-110 transition-transform" />
                   Visualizar PDF
@@ -88,7 +88,7 @@ export function ActionCardWithModal({
                 
                 <button
                   onClick={() => setIsModalOpen(false)}
-                  className="absolute top-4 right-4 z-50 p-2 bg-white/90 hover:bg-white rounded-full shadow-lg transition-all duration-200 hover:scale-110 group"
+                  className="absolute top-4 right-4 z-50 p-2 bg-white/90 hover:bg-white rounded-full shadow-lg transition-all duration-200 hover:scale-110 group cursor-pointer"
                   aria-label="Fechar"
                 >
                   <svg className="w-4 h-4 text-muted-foreground group-hover:text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -106,7 +106,7 @@ export function ActionCardWithModal({
               size="lg"
               onClick={handleDownload}
               disabled={downloadLoading}
-              className="bg-gradient-to-r from-coral-500 to-coral-600 hover:from-coral-600 hover:to-coral-700 text-white transition-all duration-300 flex items-center justify-center gap-2 group shadow-lg hover:shadow-xl"
+              className="bg-gradient-to-r from-coral-500 to-coral-600 hover:from-coral-600 hover:to-coral-700 text-white transition-all duration-300 flex items-center justify-center gap-2 group shadow-lg hover:shadow-xl cursor-pointer"
             >
               {downloadLoading ? (
                 <Loader2 className="w-5 h-5 animate-spin" />

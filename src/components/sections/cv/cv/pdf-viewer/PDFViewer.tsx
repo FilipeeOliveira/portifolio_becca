@@ -109,7 +109,7 @@ export function PDFViewer({ file, isPreview = false }: PDFViewerProps) {
             disabled={pageNumber <= 1} 
             variant="outline" 
             size="sm"
-            className="flex items-center gap-2 min-w-[80px] sm:min-w-[100px]"
+            className="flex items-center gap-2 min-w-[80px] sm:min-w-[100px] cursor-pointer"
           >
             <ChevronLeft className="h-4 w-4" />
             <span className="hidden sm:inline">Anterior</span>
@@ -146,7 +146,7 @@ export function PDFViewer({ file, isPreview = false }: PDFViewerProps) {
             disabled={pageNumber >= numPages} 
             variant="outline" 
             size="sm"
-            className="flex items-center gap-2 min-w-[80px] sm:min-w-[100px]"
+            className="flex items-center gap-2 min-w-[80px] sm:min-w-[100px] cursor-pointer"
           >
             <span className="hidden sm:inline">Próximo</span>
             <ChevronRight className="h-4 w-4" />

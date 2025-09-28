@@ -77,7 +77,7 @@ export function HeroSection() {
             <div className="flex flex-col sm:flex-row gap-4 ">
               <Button 
                 size="lg" 
-                className="bg-gradient-to-r from-coral-500 to-coral-600 hover:from-coral-600 hover:to-coral-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 group"
+                className="bg-gradient-to-r from-coral-500 to-coral-600 hover:from-coral-600 hover:to-coral-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 group cursor-pointer"
                 onClick={() => document.getElementById('curriculo')?.scrollIntoView({ behavior: 'smooth' })}
               >
                 Conheça Minha Jornada
@@ -87,7 +87,7 @@ export function HeroSection() {
               <Button 
                 variant="outline" 
                 size="lg"
-                className="border-coral-500 text-coral-500 hover:bg-coral-500 hover:text-white transition-all duration-300"
+                className="border-coral-500 text-coral-500 hover:bg-coral-500 hover:text-white transition-all duration-300 cursor-pointer"
                 onClick={() => document.getElementById('contato')?.scrollIntoView({ behavior: 'smooth' })}
               >
                 Vamos Conversar
