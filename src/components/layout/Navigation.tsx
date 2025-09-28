@@ -1,14 +1,14 @@
 "use client"
 
 import { useState } from "react"
-import { Button } from "@/components/ui/button"
+import { Button } from "@/shared/components/ui/button"
 import { X, Menu } from "lucide-react"
 import {
   NavigationMenu,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-} from "@/components/ui/navigation-menu"
+} from "@/shared/components/ui/navigation-menu"
 import type { NavigationProps } from "@/types/navigation.types"
 import { scrollToSection } from "@/lib/scroll.utils"
 

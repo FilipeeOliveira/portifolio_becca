@@ -1,8 +1,8 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Accordion } from "@/components/ui/accordion"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/shared/components/ui/tabs"
+import { Accordion } from "@/shared/components/ui/accordion"
 import { Eye, Clock, TrendingUp, Award } from 'lucide-react'
 import { toast } from "sonner"
 

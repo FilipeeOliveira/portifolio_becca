@@ -1,7 +1,6 @@
 import { 
   Brain, 
   Baby, 
-  Target,
   Stethoscope,
   Scale,
   Volume2

@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Card, CardContent } from '@/components/ui/card'
+import { Card, CardContent } from '@/shared/components/ui/card'
 import { CheckCircle } from 'lucide-react'
 
 interface CvPreviewCardProps {

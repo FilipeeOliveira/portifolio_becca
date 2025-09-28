@@ -1,8 +1,8 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Badge } from '@/components/ui/badge'
-import { AccordionItem, AccordionTrigger, AccordionContent } from '@/components/ui/accordion'
+import { Badge } from '@/shared/components/ui/badge'
+import { AccordionItem, AccordionTrigger, AccordionContent } from '@/shared/components/ui/accordion'
 import { Target, MapPin } from 'lucide-react'
 import { TimelineItem as TimelineItemType } from '@/data/timeline'
 

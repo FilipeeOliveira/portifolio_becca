@@ -1,8 +1,8 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Card, CardContent } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
+import { Card, CardContent } from '@/shared/components/ui/card'
+import { Badge } from '@/shared/components/ui/badge'
 import { Achievement } from '@/data/achievements'
 
 interface AchievementCardProps {

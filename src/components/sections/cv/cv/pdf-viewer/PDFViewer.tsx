@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useCallback, useEffect } from 'react'
-import { Button } from '@/components/ui/button'
+import { Button } from '@/shared/components/ui/button'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import dynamic from 'next/dynamic'
 import { Loading } from '@/components/Loading'

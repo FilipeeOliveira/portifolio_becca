@@ -1,9 +1,9 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
+import { Button } from '@/shared/components/ui/button'
+import { Card, CardContent } from '@/shared/components/ui/card'
+import { Badge } from '@/shared/components/ui/badge'
 import { 
   Dialog, 
   DialogContent, 
@@ -11,7 +11,7 @@ import {
   DialogHeader, 
   DialogTitle, 
   DialogDescription 
-} from '@/components/ui/dialog'
+} from '@/shared/components/ui/dialog'
 import { Eye, Download, Loader2 } from 'lucide-react'
 import { PDFViewer } from '../pdf-viewer'
 
