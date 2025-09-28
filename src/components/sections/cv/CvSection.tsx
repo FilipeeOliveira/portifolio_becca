@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/shared/components/ui/tabs"
 import { Accordion } from "@/shared/components/ui/accordion"
-import { Eye, Clock, TrendingUp, Award } from 'lucide-react'
+import { Eye, Clock, TrendingUp, Award, FileText } from 'lucide-react'
 import { toast } from "sonner"
 
 // Import data
@@ -62,13 +62,17 @@ export function CvSection() {
   return (
     <section 
       id="curriculo" 
-      className="py-20 bg-gradient-to-br from-coral-50/30 via-white to-coral-50/20"
+      className="py-16 sm:py-20 lg:py-24 bg-gradient-to-br from-coral-50/30 via-white to-coral-50/20"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-12 sm:mb-16">
+          <div className="inline-flex items-center gap-2 bg-coral-100/70 text-coral-600 px-4 py-2 rounded-full text-sm font-medium mb-6">
+            <FileText className="w-4 h-4" />
+            Experiência Profissional
+          </div>
           <h2 className="text-4xl sm:text-5xl font-bold text-foreground mb-4">
-            Meu Currículo
+            Minha <span className="text-transparent bg-gradient-to-r from-coral-500 to-coral-600 bg-clip-text">Experiência</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Uma jornada dedicada ao cuidado e desenvolvimento humano, combinando conhecimento técnico 
@@ -78,7 +82,7 @@ export function CvSection() {
 
         {/* Main Content Tabs */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full grid-cols-4 mb-8 bg-white/50 backdrop-blur-sm">
+          <TabsList className="grid w-full grid-cols-4 mb-6 sm:mb-8 bg-white/50 backdrop-blur-sm">
             <TabsTrigger value="overview" className="flex items-center gap-2">
               <Eye className="w-4 h-4" />
               <span className="hidden sm:inline">Visão Geral</span>
@@ -114,7 +118,7 @@ export function CvSection() {
           {/* Timeline Tab */}
           <TabsContent value="timeline" className="space-y-6">
             <div className="max-w-4xl mx-auto">
-              <div className="text-center mb-8">
+              <div className="text-center mb-6 sm:mb-8">
                 <h3 className="text-2xl font-bold text-foreground mb-2">Linha do Tempo Profissional</h3>
                 <p className="text-muted-foreground">Minha jornada de crescimento e desenvolvimento</p>
               </div>

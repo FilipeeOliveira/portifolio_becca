@@ -15,7 +15,7 @@ export function HeroSection() {
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[400px] sm:w-[600px] lg:w-[800px] h-[400px] sm:h-[600px] lg:h-[800px] bg-gradient-radial from-coral-50 to-transparent opacity-50" />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
         <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
           {/* Content */}
           <div className="space-y-6 sm:space-y-8 order-2 lg:order-1">
@@ -95,19 +95,16 @@ export function HeroSection() {
             </div>
 
             {/* Specialties Badges */}
-            <div className="flex flex-wrap gap-2 sm:gap-3 pt-3 sm:pt-4 ">
-              <Badge variant="secondary" className="bg-coral-100 text-coral-700 px-2 sm:px-3 py-1 text-xs sm:text-sm hover:scale-105 transition-transform duration-200">
-                Método ABA
-              </Badge>
-              <Badge variant="secondary" className="bg-coral-100 text-coral-700 px-2 sm:px-3 py-1 text-xs sm:text-sm hover:scale-105 transition-transform duration-200">
-                Denver
-              </Badge>
-              <Badge variant="secondary" className="bg-coral-100 text-coral-700 px-2 sm:px-3 py-1 text-xs sm:text-sm hover:scale-105 transition-transform duration-200">
-                Mediação Familiar
-              </Badge>
-              <Badge variant="secondary" className="bg-coral-100 text-coral-700 px-2 sm:px-3 py-1 text-xs sm:text-sm hover:scale-105 transition-transform duration-200">
-                Desenvolvimento Infantil
-              </Badge>
+            <div className="flex flex-wrap gap-2 sm:gap-3 pt-3 sm:pt-4">
+              {['Método ABA', 'Denver', 'Mediação Familiar', 'Desenvolvimento Infantil'].map((specialty) => (
+                <Badge 
+                  key={specialty}
+                  variant="secondary" 
+                  className="bg-coral-100 text-coral-700 px-2 sm:px-3 py-1 text-xs sm:text-sm hover:scale-105 transition-transform duration-200 cursor-default"
+                >
+                  {specialty}
+                </Badge>
+              ))}
             </div>
           </div>
 
