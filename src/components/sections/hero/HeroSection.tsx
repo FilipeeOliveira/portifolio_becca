@@ -74,7 +74,7 @@ export function HeroSection() {
             </div>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 ">
+            <div className="flex flex-col sm:flex-row gap-4 ">
               <Button 
                 size="lg" 
                 className="bg-gradient-to-r from-coral-500 to-coral-600 hover:from-coral-600 hover:to-coral-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 group"
@@ -95,7 +95,7 @@ export function HeroSection() {
             </div>
 
             {/* Specialties Badges */}
-            <div className="flex flex-wrap gap-2 sm:gap-3 pt-3 sm:pt-4">
+            <div className="flex flex-wrap gap-2 pt-4">
               {['Método ABA', 'Denver', 'Mediação Familiar', 'Desenvolvimento Infantil'].map((specialty) => (
                 <Badge 
                   key={specialty}

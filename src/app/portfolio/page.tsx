@@ -3,6 +3,7 @@ import { CoursesSection } from "@/components/sections/courses/CoursesSection"
 import { CvSection } from "@/components/sections/cv/CvSection"
 import { ContactSection } from "@/components/sections/contact/ContactSection"
 import { MissionSection } from "@/components/sections/mission/MissionSection"
+import { Separator } from "@/shared/components/ui/separator"
 
 export default function PortfolioPage() {
   return (
@@ -28,9 +29,13 @@ export default function PortfolioPage() {
       </div>
 
       <HeroSection />
+      <Separator className="opacity-30" />
       <CoursesSection />
+      <Separator className="opacity-30" />
       <MissionSection />
+      <Separator className="opacity-30" />
       <CvSection />
+      <Separator className="opacity-30" />
       <ContactSection />
     </>
   )

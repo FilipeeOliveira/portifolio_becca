@@ -29,7 +29,7 @@ export function ContactSection() {
         </div>
 
         {/* Social Media & Contact */}
-        <div className="flex items-center justify-center gap-6 sm:gap-8 lg:gap-12 mb-8 sm:mb-12">
+        <div className="flex items-center justify-center gap-4 sm:gap-6 lg:gap-8 xl:gap-12 mb-8 sm:mb-12">
           {/* Instagram */}
           <div className="flex flex-col items-center gap-2 sm:gap-3">
             <Button

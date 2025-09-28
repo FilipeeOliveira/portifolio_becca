@@ -85,21 +85,21 @@ export function CvSection() {
         {/* Main Content Tabs */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           <TabsList className="grid w-full grid-cols-4 mb-6 sm:mb-8 bg-white/50 backdrop-blur-sm">
-            <TabsTrigger value="overview" className="flex items-center gap-2">
+            <TabsTrigger value="overview" className="flex flex-col sm:flex-row items-center gap-1 sm:gap-2 px-2 py-3">
               <Eye className="w-4 h-4" />
-              <span className="hidden sm:inline">Visão Geral</span>
+              <span className="text-xs sm:text-sm">Visão Geral</span>
             </TabsTrigger>
-            <TabsTrigger value="timeline" className="flex items-center gap-2">
+            <TabsTrigger value="timeline" className="flex flex-col sm:flex-row items-center gap-1 sm:gap-2 px-2 py-3">
               <Clock className="w-4 h-4" />
-              <span className="hidden sm:inline">Timeline</span>
+              <span className="text-xs sm:text-sm">Timeline</span>
             </TabsTrigger>
-            <TabsTrigger value="skills" className="flex items-center gap-2">
+            <TabsTrigger value="skills" className="flex flex-col sm:flex-row items-center gap-1 sm:gap-2 px-2 py-3">
               <TrendingUp className="w-4 h-4" />
-              <span className="hidden sm:inline">Habilidades</span>
+              <span className="text-xs sm:text-sm">Habilidades</span>
             </TabsTrigger>
-            <TabsTrigger value="achievements" className="flex items-center gap-2">
+            <TabsTrigger value="achievements" className="flex flex-col sm:flex-row items-center gap-1 sm:gap-2 px-2 py-3">
               <Award className="w-4 h-4" />
-              <span className="hidden sm:inline">Conquistas</span>
+              <span className="text-xs sm:text-sm">Conquistas</span>
             </TabsTrigger>
           </TabsList>
 
