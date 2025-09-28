@@ -35,7 +35,7 @@ export function ContactSection() {
             <Button
               variant="outline"
               size="icon"
-              className="rounded-full border-coral-200 hover:bg-coral-50 hover:border-coral-300 w-12 h-12 sm:w-16 sm:h-16 hover:scale-110 transition-all duration-300"
+              className="rounded-full border-coral-200 hover:bg-coral-50 hover:border-coral-300 w-12 h-12 sm:w-16 sm:h-16 hover:scale-110 transition-all duration-300 cursor-pointer"
               onClick={() => window.open('https://instagram.com/rebeccaariel', '_blank')}
             >
               <svg className="h-6 w-6 sm:h-8 sm:w-8 text-coral-500" fill="currentColor" viewBox="0 0 24 24">
@@ -50,7 +50,7 @@ export function ContactSection() {
             <Button
               variant="outline"
               size="icon"
-              className="rounded-full border-coral-200 hover:bg-coral-50 hover:border-coral-300 w-12 h-12 sm:w-16 sm:h-16 hover:scale-110 transition-all duration-300"
+              className="rounded-full border-coral-200 hover:bg-coral-50 hover:border-coral-300 w-12 h-12 sm:w-16 sm:h-16 hover:scale-110 transition-all duration-300 cursor-pointer"
               onClick={() => window.open('https://www.linkedin.com/in/rebecca-ariel-b58153225', '_blank')}
             >
               <svg className="h-6 w-6 sm:h-8 sm:w-8 text-coral-500" fill="currentColor" viewBox="0 0 24 24">
@@ -65,7 +65,7 @@ export function ContactSection() {
             <Button
               variant="outline"
               size="icon"
-              className="rounded-full border-coral-200 hover:bg-coral-50 hover:border-coral-300 w-12 h-12 sm:w-16 sm:h-16 hover:scale-110 transition-all duration-300"
+              className="rounded-full border-coral-200 hover:bg-coral-50 hover:border-coral-300 w-12 h-12 sm:w-16 sm:h-16 hover:scale-110 transition-all duration-300 cursor-pointer"
               onClick={() => window.open('mailto:rebeccaariel.gg@gmail.com', '_blank')}
             >
               <Mail className="h-6 w-6 sm:h-8 sm:w-8 text-coral-500" />
@@ -78,7 +78,7 @@ export function ContactSection() {
             <Button
               variant="outline"
               size="icon"
-              className="rounded-full border-coral-200 hover:bg-coral-50 hover:border-coral-300 w-12 h-12 sm:w-16 sm:h-16 hover:scale-110 transition-all duration-300"
+              className="rounded-full border-coral-200 hover:bg-coral-50 hover:border-coral-300 w-12 h-12 sm:w-16 sm:h-16 hover:scale-110 transition-all duration-300 cursor-pointer"
               onClick={() => window.open('https://wa.me/5592985862173', '_blank')}
             >
               <Phone className="h-6 w-6 sm:h-8 sm:w-8 text-coral-500" />
