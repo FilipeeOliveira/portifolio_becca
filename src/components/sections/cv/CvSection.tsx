@@ -64,7 +64,7 @@ export function CvSection() {
   return (
     <section 
       id="curriculo" 
-      className="py-16 sm:py-20 lg:py-24 bg-gradient-to-br from-coral-50/30 via-white to-coral-50/20"
+      className="py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-white via-coral-50/20 to-white"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}

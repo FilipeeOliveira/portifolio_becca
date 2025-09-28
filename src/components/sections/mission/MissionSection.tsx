@@ -5,7 +5,7 @@ import { Heart, Target } from "lucide-react"
 
 export function MissionSection() {
   return (
-    <section id="sobre-mim" className="py-16 sm:py-20 lg:py-24 bg-gradient-to-br from-coral-50/30 via-white to-coral-50/30">
+    <section id="sobre-mim" className="py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-white via-coral-50/30 to-white">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12 sm:mb-16">

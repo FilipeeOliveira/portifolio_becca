@@ -14,7 +14,7 @@ export default function PortfolioLayout({
   const { activeSection } = useActiveSection(navigationItems)
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-coral-50 to-white">
+    <div className="min-h-screen bg-white">
       <Navigation 
         items={navigationItems}
         activeSection={activeSection}

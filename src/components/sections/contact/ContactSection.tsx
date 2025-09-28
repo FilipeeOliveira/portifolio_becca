@@ -6,7 +6,7 @@ import { Mail, Phone, MapPin } from "lucide-react"
 export function ContactSection() {
 
   return (
-    <section id="contato" className="py-16 sm:py-20 lg:py-24 bg-gradient-to-br from-coral-50/30 via-white to-coral-50/30 relative overflow-hidden">
+    <section id="contato" className="py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-white to-coral-50/40 relative overflow-hidden">
       {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 right-10 w-32 h-32 bg-coral-100 rounded-full opacity-30 blur-3xl" />

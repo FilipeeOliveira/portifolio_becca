@@ -7,9 +7,9 @@ import Image from "next/image"
 
 export function HeroSection() {
   return (
-    <section id="sobre" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white">
+    <section id="sobre" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-coral-50/40 via-white to-white">
       {/* Background with gradient and decorative elements */}
-      <div className="absolute inset-0 bg-gradient-to-br from-coral-50 via-white to-coral-100/30">
+      <div className="absolute inset-0">
         <div className="absolute top-10 sm:top-20 right-4 sm:right-20 w-32 sm:w-72 h-32 sm:h-72 bg-coral-100 rounded-full opacity-20 blur-3xl animate-pulse" />
         <div className="absolute bottom-10 sm:bottom-20 left-4 sm:left-20 w-48 sm:w-96 h-48 sm:h-96 bg-coral-200 rounded-full opacity-10 blur-3xl animate-pulse delay-1000" />
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[400px] sm:w-[600px] lg:w-[800px] h-[400px] sm:h-[600px] lg:h-[800px] bg-gradient-radial from-coral-50 to-transparent opacity-50" />
