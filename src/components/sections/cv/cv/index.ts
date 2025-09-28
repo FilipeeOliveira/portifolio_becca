@@ -4,6 +4,9 @@ export { CvPreviewCard, ActionCardWithModal } from './overview'
 // Timeline components
 export { TimelineItem } from './timeline'
 
+// Education components
+export { EducationItem } from './education'
+
 // Skills components
 export { SkillBar, SkillsCategory } from './skills'
 

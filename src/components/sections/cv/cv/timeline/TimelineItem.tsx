@@ -30,14 +30,9 @@ export function TimelineItem({ item, index, activeTab }: TimelineItemProps) {
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
       }`}
     >
-      {/* Timeline dot */}
-      <div className="absolute left-[-18px] top-6 w-4 h-4 bg-coral-500 rounded-full border-4 border-white shadow-lg z-10">
-        <div className="absolute inset-0 bg-coral-500 rounded-full animate-ping opacity-20" />
-      </div>
-      
       <AccordionItem 
         value={item.id}
-        className="border border-coral-100/50 rounded-xl bg-white/70 backdrop-blur-sm shadow-md hover:shadow-lg transition-all duration-300 ml-4"
+        className="border border-coral-100/50 rounded-xl bg-white/70 backdrop-blur-sm shadow-md hover:shadow-lg transition-all duration-300"
       >
         <AccordionTrigger className="px-6 py-4 hover:no-underline">
           <div className="flex items-center gap-4 w-full">

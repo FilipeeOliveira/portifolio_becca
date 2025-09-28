@@ -10,12 +10,14 @@ import { toast } from "sonner"
 import { timelineData } from '@/data/timeline'
 import { skillsData } from '@/data/skills'
 import { achievementsData } from '@/data/achievements'
+import { educationData } from '@/data/education'
 
 // Import components
 import { 
   CvPreviewCard, 
   ActionCardWithModal, 
   TimelineItem, 
+  EducationItem,
   SkillsCategory, 
   AchievementCard 
 } from './cv'
@@ -116,22 +118,50 @@ export function CvSection() {
           </TabsContent>
 
           {/* Timeline Tab */}
-          <TabsContent value="timeline" className="space-y-6">
-            <div className="max-w-4xl mx-auto">
+          <TabsContent value="timeline" className="space-y-8">
+            <div className="max-w-7xl mx-auto">
               <div className="text-center mb-6 sm:mb-8">
-                <h3 className="text-2xl font-bold text-foreground mb-2">Linha do Tempo Profissional</h3>
-                <p className="text-muted-foreground">Minha jornada de crescimento e desenvolvimento</p>
+                <h3 className="text-2xl font-bold text-foreground mb-2">Minha Trajetória</h3>
+                <p className="text-muted-foreground">Experiência profissional e formação acadêmica</p>
               </div>
               
-              <div className="relative pl-8">
-                {/* Timeline line */}
-                <div className="absolute left-4 top-0 bottom-0 w-px bg-gradient-to-b from-coral-200 to-coral-400" />
-                
-                <Accordion type="multiple" className="w-full space-y-6">
-                  {timelineData.map((item, index) => (
-                    <TimelineItem key={item.id} item={item} index={index} activeTab={activeTab} />
-                  ))}
-                </Accordion>
+              {/* Layout de duas colunas */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+                {/* Experiência Profissional - Coluna Esquerda */}
+                <div>
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="w-8 h-8 bg-coral-500 rounded-full flex items-center justify-center">
+                      <Clock className="w-4 h-4 text-white" />
+                    </div>
+                    <h4 className="text-xl font-semibold text-foreground">Experiência Profissional</h4>
+                  </div>
+                  
+                  <div className="relative">
+                    <Accordion type="multiple" className="w-full space-y-6">
+                      {timelineData.map((item, index) => (
+                        <TimelineItem key={item.id} item={item} index={index} activeTab={activeTab} />
+                      ))}
+                    </Accordion>
+                  </div>
+                </div>
+
+                {/* Formação Acadêmica - Coluna Direita */}
+                <div>
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="w-8 h-8 bg-coral-500 rounded-full flex items-center justify-center">
+                      <FileText className="w-4 h-4 text-white" />
+                    </div>
+                    <h4 className="text-xl font-semibold text-foreground">Formação Acadêmica</h4>
+                  </div>
+                  
+                  <div className="relative">
+                    <Accordion type="multiple" className="w-full space-y-6">
+                      {educationData.map((item, index) => (
+                        <EducationItem key={item.id} item={item} index={index} activeTab={activeTab} />
+                      ))}
+                    </Accordion>
+                  </div>
+                </div>
               </div>
             </div>
           </TabsContent>
