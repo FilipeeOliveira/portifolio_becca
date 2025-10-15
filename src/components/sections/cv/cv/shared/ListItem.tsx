@@ -3,16 +3,26 @@
 import { useState, useEffect } from 'react'
 import { Badge } from '@/shared/components/ui/badge'
 import { AccordionItem, AccordionTrigger, AccordionContent } from '@/shared/components/ui/accordion'
-import { Target, MapPin } from 'lucide-react'
-import { TimelineItem as TimelineItemType } from '@/data/timeline'
+import { Target, MapPin, GraduationCap, LucideIcon } from 'lucide-react'
 
-interface TimelineItemProps {
-  item: TimelineItemType
-  index: number
-  activeTab: string
+interface BaseItem {
+  id: string
+  period: string
+  title: string
+  company: string
+  location: string
+  description: string
+  highlights: string[]
 }
 
-export function TimelineItem({ item, index, activeTab }: TimelineItemProps) {
+interface ListItemProps {
+  item: BaseItem
+  index: number
+  activeTab: string
+  type: 'timeline' | 'education'
+}
+
+export function ListItem({ item, index, activeTab, type }: ListItemProps) {
   const [isVisible, setIsVisible] = useState(false)
   
   useEffect(() => {
@@ -23,6 +33,8 @@ export function TimelineItem({ item, index, activeTab }: TimelineItemProps) {
       setIsVisible(false)
     }
   }, [index, activeTab])
+
+  const Icon: LucideIcon = type === 'education' ? GraduationCap : Target
 
   return (
     <div 
@@ -37,7 +49,7 @@ export function TimelineItem({ item, index, activeTab }: TimelineItemProps) {
         <AccordionTrigger className="px-6 py-4 hover:no-underline">
           <div className="flex items-center gap-4 w-full">
             <div className="w-12 h-12 bg-coral-100 rounded-full flex items-center justify-center flex-shrink-0">
-              <Target className="w-6 h-6 text-coral-600" />
+              <Icon className="w-6 h-6 text-coral-600" />
             </div>
             <div className="flex-1 text-left">
               <div className="flex items-center gap-3 mb-1">

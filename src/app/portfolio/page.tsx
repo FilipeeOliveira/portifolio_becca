@@ -3,7 +3,6 @@ import { CoursesSection } from "@/components/sections/courses/CoursesSection"
 import { CvSection } from "@/components/sections/cv/CvSection"
 import { ContactSection } from "@/components/sections/contact/ContactSection"
 import { MissionSection } from "@/components/sections/mission/MissionSection"
-import { Separator } from "@/shared/components/ui/separator"
 
 export default function PortfolioPage() {
   return (

@@ -15,12 +15,11 @@ import { educationData } from '@/data/education'
 // Import components
 import { 
   CvPreviewCard, 
-  ActionCardWithModal, 
-  TimelineItem, 
-  EducationItem,
+  ActionCardWithModal,
   SkillsCategory, 
   AchievementCard 
 } from './cv'
+import { ListItem } from './cv/shared'
 
 export function CvSection() {
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -151,7 +150,7 @@ export function CvSection() {
                   <div className="relative">
                     <Accordion type="multiple" className="w-full space-y-6">
                       {timelineData.map((item, index) => (
-                        <TimelineItem key={item.id} item={item} index={index} activeTab={activeTab} />
+                        <ListItem key={item.id} item={item} index={index} activeTab={activeTab} type="timeline" />
                       ))}
                     </Accordion>
                   </div>
@@ -169,7 +168,7 @@ export function CvSection() {
                   <div className="relative">
                     <Accordion type="multiple" className="w-full space-y-6">
                       {educationData.map((item, index) => (
-                        <EducationItem key={item.id} item={item} index={index} activeTab={activeTab} />
+                        <ListItem key={item.id} item={item} index={index} activeTab={activeTab} type="education" />
                       ))}
                     </Accordion>
                   </div>
