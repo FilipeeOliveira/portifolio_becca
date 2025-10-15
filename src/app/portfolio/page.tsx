@@ -29,13 +29,9 @@ export default function PortfolioPage() {
       </div>
 
       <HeroSection />
-      <Separator className="opacity-30" />
       <CoursesSection />
-      <Separator className="opacity-30" />
       <MissionSection />
-      <Separator className="opacity-30" />
       <CvSection />
-      <Separator className="opacity-30" />
       <ContactSection />
     </>
   )

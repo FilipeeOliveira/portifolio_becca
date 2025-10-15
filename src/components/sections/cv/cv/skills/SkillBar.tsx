@@ -23,9 +23,9 @@ export function SkillBar({ skill, index, isCardVisible }: SkillBarProps) {
   }, [skill.level, index, isCardVisible])
   
   return (
-    <div className="space-y-2 group cursor-default">
+    <div className="space-y-1.5 sm:space-y-2 group cursor-default">
       <div className="flex justify-between items-center">
-        <span className="text-sm font-medium text-foreground group-hover:text-coral-600 transition-colors duration-200">
+        <span className="text-xs sm:text-sm font-medium text-foreground group-hover:text-coral-600 transition-colors duration-200">
           {skill.name}
         </span>
         <span className="text-xs text-coral-600 font-medium bg-coral-50 px-2 py-1 rounded-full group-hover:bg-coral-100 transition-colors duration-200">
@@ -36,7 +36,7 @@ export function SkillBar({ skill, index, isCardVisible }: SkillBarProps) {
       <div className="transform group-hover:scale-[1.02] transition-transform duration-200">
         <Progress 
           value={animatedLevel} 
-          className="h-2 bg-coral-50 group-hover:bg-coral-100 transition-colors duration-200 [&>div]:bg-gradient-to-r [&>div]:from-coral-500 [&>div]:to-coral-600 [&>div]:transition-all [&>div]:duration-1000 [&>div]:ease-out"
+          className="h-1.5 sm:h-2 bg-coral-50 group-hover:bg-coral-100 transition-colors duration-200 [&>div]:bg-gradient-to-r [&>div]:from-coral-500 [&>div]:to-coral-600 [&>div]:transition-all [&>div]:duration-1000 [&>div]:ease-out"
         />
       </div>
     </div>

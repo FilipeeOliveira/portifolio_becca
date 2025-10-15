@@ -25,7 +25,7 @@ export function HeroSection() {
                 Transformando vidas através do cuidado
               </div>
               
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight ">
+              <h1 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight ">
                 <span className="text-foreground">Olá, me chamo</span>
                 <br />
                 <span className="text-transparent bg-gradient-to-r from-coral-500 via-coral-600 to-coral-500 bg-clip-text">
@@ -34,41 +34,40 @@ export function HeroSection() {
               </h1>
               
               <div className="space-y-3 sm:space-y-4 ">
-                <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground font-medium">
-                  Estudante de Terapia Ocupacional dedicada ao desenvolvimento humano.
+                <p className="text-base xs:text-lg sm:text-xl md:text-2xl text-muted-foreground font-medium">
+                  Dedicada ao aprendizado dos princípios de autonomia, independência, funcionalidade e participação social.
                 </p>
                 
                 <p className="text-base sm:text-lg text-muted-foreground leading-relaxed max-w-2xl">
-                  Acredito que o cuidado terapêutico é um direito fundamental. 
-                  Com mais de 2 anos de experiência, minha missão é proporcionar 
-                  terapia acessível e transformadora para cada pessoa.
+                  O cuidado terapêutico é um direito. Com 2 anos de experiência prática como Assistente Terapêutica (AT) nos modelos ABA e DENVER, 
+                  meu objetivo é garantir que, como futura Terapeuta Ocupacional, minha atuação proporcione uma terapia acessível e transformadora a todos.
                 </p>
               </div>
               
               {/* Stats Cards */}
-              <div className="grid grid-cols-3 gap-2 sm:gap-4 py-4 sm:py-6 ">
-                <div className="text-center group cursor-default">
-                  <div className="w-8 sm:w-10 lg:w-12 h-8 sm:h-10 lg:h-12 bg-coral-500 rounded-full flex items-center justify-center mx-auto mb-1 sm:mb-2 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
-                    <Heart className="w-3 sm:w-4 lg:w-6 h-3 sm:h-4 lg:h-6 text-white" />
+              <div className="grid grid-cols-3 gap-3 sm:gap-4 py-4 sm:py-6 max-w-lg">
+                <div className="p-2 xs:p-3 sm:p-4 text-center group cursor-default transition-all duration-300">
+                  <div className="w-8 sm:w-10 h-8 sm:h-10 bg-gradient-to-br from-coral-500 to-coral-600 rounded-full flex items-center justify-center mx-auto mb-2 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-md">
+                    <Heart className="w-4 sm:w-5 h-4 sm:h-5 text-white" />
                   </div>
-                  <div className="text-lg sm:text-xl lg:text-2xl font-bold text-foreground">2+</div>
-                  <div className="text-xs sm:text-sm text-muted-foreground">Anos de experiência</div>
+                  <div className="text-lg xs:text-xl sm:text-2xl font-bold text-coral-600 mb-1">2+</div>
+                  <div className="text-xs text-muted-foreground font-medium leading-tight">Anos de experiência</div>
                 </div>
-                
-                <div className="text-center group cursor-default">
-                  <div className="w-8 sm:w-10 lg:w-12 h-8 sm:h-10 lg:h-12 bg-coral-500 rounded-full flex items-center justify-center mx-auto mb-1 sm:mb-2 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
-                    <Users className="w-3 sm:w-4 lg:w-6 h-3 sm:h-4 lg:h-6 text-white" />
+
+                <div className="p-2 xs:p-3 sm:p-4 text-center group cursor-default transition-all duration-300">
+                  <div className="w-8 sm:w-10 h-8 sm:h-10 bg-gradient-to-br from-coral-500 to-coral-600 rounded-full flex items-center justify-center mx-auto mb-2 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-md">
+                    <Users className="w-4 sm:w-5 h-4 sm:h-5 text-white" />
                   </div>
-                  <div className="text-lg sm:text-xl lg:text-2xl font-bold text-foreground">100+</div>
-                  <div className="text-xs sm:text-sm text-muted-foreground">Pacientes atendidos</div>
+                  <div className="text-lg xs:text-xl sm:text-2xl font-bold text-coral-600 mb-1">30+</div>
+                  <div className="text-xs text-muted-foreground font-medium leading-tight">Pacientes atendidos</div>
                 </div>
-                
-                <div className="text-center group cursor-default">
-                  <div className="w-8 sm:w-10 lg:w-12 h-8 sm:h-10 lg:h-12 bg-coral-500 rounded-full flex items-center justify-center mx-auto mb-1 sm:mb-2 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
-                    <Target className="w-3 sm:w-4 lg:w-6 h-3 sm:h-4 lg:h-6 text-white" />
+
+                <div className="p-2 xs:p-3 sm:p-4 text-center group cursor-default transition-all duration-300">
+                  <div className="w-8 sm:w-10 h-8 sm:h-10 bg-gradient-to-br from-coral-500 to-coral-600 rounded-full flex items-center justify-center mx-auto mb-2 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-md">
+                    <Target className="w-4 sm:w-5 h-4 sm:h-5 text-white" />
                   </div>
-                  <div className="text-lg sm:text-xl lg:text-2xl font-bold text-foreground">95%</div>
-                  <div className="text-xs sm:text-sm text-muted-foreground">Taxa de sucesso</div>
+                  <div className="text-lg xs:text-xl sm:text-2xl font-bold text-coral-600 mb-1">9+</div>
+                  <div className="text-xs text-muted-foreground font-medium leading-tight">Certificações</div>
                 </div>
               </div>
             </div>
@@ -95,17 +94,7 @@ export function HeroSection() {
             </div>
 
             {/* Specialties Badges */}
-            <div className="flex flex-wrap gap-2 pt-4">
-              {['Método ABA', 'Denver', 'Mediação Familiar', 'Desenvolvimento Infantil'].map((specialty) => (
-                <Badge 
-                  key={specialty}
-                  variant="secondary" 
-                  className="bg-coral-100 text-coral-700 px-2 sm:px-3 py-1 text-xs sm:text-sm hover:scale-105 transition-transform duration-200 cursor-default"
-                >
-                  {specialty}
-                </Badge>
-              ))}
-            </div>
+           
           </div>
 
           {/* Image */}

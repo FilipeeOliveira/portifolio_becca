@@ -22,13 +22,13 @@ export function Navigation({ items, activeSection }: NavigationProps) {
 
   return (
     <nav className="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-md shadow-sm border-b border-coral-100/50 z-50">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 py-4 sm:py-4">
+      <div className="mx-auto max-w-7xl px-3 xs:px-4 sm:px-6 py-3 xs:py-4 sm:py-4">
         <div className="flex justify-between items-center">
-          <div className="font-bold text-lg sm:text-xl text-coral-500 flex items-center gap-1">
+          <div className="font-bold text-base xs:text-lg sm:text-xl text-coral-500 flex items-center gap-1">
             Rebecca Ariel
           </div>
           
-          <NavigationMenu className="hidden md:flex">
+          <NavigationMenu className="hidden sm:flex">
             <NavigationMenuList className="gap-2 lg:gap-4">
               {items.map((item) => (
                 <NavigationMenuItem key={item.id}>
@@ -50,7 +50,7 @@ export function Navigation({ items, activeSection }: NavigationProps) {
             </NavigationMenuList>
           </NavigationMenu>
           
-          <div className="md:hidden">
+          <div className="sm:hidden">
             <Button
               variant="ghost"
               size="sm"
@@ -63,7 +63,7 @@ export function Navigation({ items, activeSection }: NavigationProps) {
         </div>
 
         {mobileMenuOpen && (
-          <div className="md:hidden mt-4 pb-4 border-t border-coral-100">
+          <div className="sm:hidden mt-4 pb-4 border-t border-coral-100">
             <NavigationMenu className="pt-4">
               <NavigationMenuList className="flex-col items-start gap-3">
                 {items.map((item) => (

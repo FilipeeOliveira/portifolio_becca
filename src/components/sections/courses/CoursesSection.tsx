@@ -54,8 +54,8 @@ export function CoursesSection() {
             Minha <span className="text-transparent bg-gradient-to-r from-coral-500 to-coral-600 bg-clip-text">Formação</span> Especializada
           </h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            Minha jornada de aprendizado contínuo inclui cursos especializados que me capacitam 
-            a oferecer o melhor cuidado terapêutico baseado em evidências científicas.
+            Minha formação e aprimoramento incluem a busca ativa por certificações e conhecimentos complementares. 
+            Este investimento me prepara para, futuramente, atuar com um cuidado terapêutico eficaz e alinhado às necessidades do desenvolvimento humano. 
           </p>
         </div>
 
@@ -73,7 +73,7 @@ export function CoursesSection() {
               {coursesData.map((course) => {
                 const IconComponent = course.icon
                 return (
-                  <CarouselItem key={course.id} className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/3 pt-4 pb-4">
+                  <CarouselItem key={course.id} className="pl-2 md:pl-4 basis-full xs:basis-11/12 sm:basis-1/2 lg:basis-1/3 pt-4 pb-4">
                     <Card className="group relative border border-coral-100/50 shadow-lg hover:shadow-2xl hover:shadow-coral-500/10 transition-all duration-500 hover:-translate-y-2 bg-white/70 backdrop-blur-sm overflow-hidden h-full">
                       {/* Background glow effect on hover */}
                       <div className="absolute inset-0 bg-gradient-to-br from-coral-500/5 to-coral-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -115,8 +115,8 @@ export function CoursesSection() {
             </CarouselContent>
             
             {/* Custom Navigation Buttons */}
-            <CarouselPrevious className="absolute -left-6 top-1/2 -translate-y-1/2 border-coral-200 bg-white/80 hover:bg-coral-50 hover:border-coral-300 text-coral-600 hover:text-coral-700 shadow-lg z-10" />
-            <CarouselNext className="absolute -right-6 top-1/2 -translate-y-1/2 border-coral-200 bg-white/80 hover:bg-coral-50 hover:border-coral-300 text-coral-600 hover:text-coral-700 shadow-lg z-10" />
+            <CarouselPrevious className="absolute -left-3 xs:-left-6 top-1/2 -translate-y-1/2 border-coral-200 bg-white/80 hover:bg-coral-50 hover:border-coral-300 text-coral-600 hover:text-coral-700 shadow-lg z-10" />
+            <CarouselNext className="absolute -right-3 xs:-right-6 top-1/2 -translate-y-1/2 border-coral-200 bg-white/80 hover:bg-coral-50 hover:border-coral-300 text-coral-600 hover:text-coral-700 shadow-lg z-10" />
           </Carousel>
           
           {/* Carousel Indicators */}
@@ -143,8 +143,9 @@ export function CoursesSection() {
               Comprometida com a <span className="text-coral-500">Excelência</span>
             </h3>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Cada certificação representa meu compromisso em oferecer o melhor atendimento, 
-              sempre baseado nas mais recentes evidências científicas e práticas inovadoras.
+              Cada certificação reflete meu compromisso com o aprendizado contínuo e a ética profissional. 
+              Esse aprimoramento constante é essencial para que meu futuro atendimento seja de qualidade, 
+              sempre pautado nas mais recentes evidências científicas e práticas inovadoras. 
             </p>
           </div>
         </div>

@@ -45,12 +45,12 @@ export function ActionCardWithModal({
     <Card className={`border-0 shadow-xl bg-gradient-to-br from-white via-coral-50/10 to-white transition-all duration-700 ${
       isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
     }`}>
-      <CardContent className="p-8">
+      <CardContent className="p-4 xs:p-6 sm:p-8">
         <div className="space-y-6">
           <div className="space-y-4">
-            <h3 className="text-2xl sm:text-3xl font-bold text-foreground leading-tight">
+            <h3 className="text-xl xs:text-2xl sm:text-3xl font-bold text-foreground leading-tight">
               Explore Minha Jornada
-              <span className="block text-lg font-normal text-muted-foreground mt-2">
+              <span className="block text-sm xs:text-base sm:text-lg font-normal text-muted-foreground mt-2">
                 Descubra minha experiência profissional e formação acadêmica
               </span>
             </h3>
@@ -59,11 +59,11 @@ export function ActionCardWithModal({
               <Badge className="bg-coral-500 text-white">Terapia Ocupacional</Badge>
               <Badge variant="secondary">Método ABA</Badge>
               <Badge variant="secondary">Denver</Badge>
-              <Badge variant="secondary">Serviço Social</Badge>
+              <Badge variant="secondary">Intervenção Precoce</Badge>
             </div>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-4">
+          <div className="flex flex-col xs:flex-col sm:flex-row gap-3 xs:gap-4">
             <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
               <DialogTrigger asChild>
                 <Button 

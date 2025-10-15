@@ -77,41 +77,41 @@ export function CvSection() {
             Minha <span className="text-transparent bg-gradient-to-r from-coral-500 to-coral-600 bg-clip-text">Experiência</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Uma jornada dedicada ao cuidado e desenvolvimento humano, combinando conhecimento técnico 
-            com paixão pela transformação de vidas.
+            Uma trajetória profissional focada na transformação de vidas, onde o conhecimento técnico é aplicado para promover a autonomia
+            e a participação em cada etapa do desenvolvimento.
           </p>
         </div>
 
         {/* Main Content Tabs */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full grid-cols-4 mb-6 sm:mb-8 bg-transparent  p-0 relative z-10">
+          <TabsList className="grid w-full grid-cols-4 mb-6 sm:mb-8 bg-transparent p-0 relative z-10">
             <TabsTrigger 
               value="overview" 
-              className="flex flex-col sm:flex-row items-center gap-1 sm:gap-2 px-3 py-4  transition-all duration-300 hover:text-coral-500 data-[state=active]:text-coral-500 cursor-pointer relative z-20 "
+              className="flex flex-col sm:flex-row items-center gap-1 sm:gap-2 px-1 sm:px-3 py-3 sm:py-4 transition-all duration-300 hover:text-coral-500 data-[state=active]:text-coral-500 cursor-pointer relative z-20"
             >
               <Eye className="w-4 h-4 transition-transform duration-200" />
-              <span className="text-xs sm:text-sm font-medium">Visão Geral</span>
+              <span className="text-xs sm:text-sm font-medium truncate">Visão Geral</span>
             </TabsTrigger>
             <TabsTrigger 
               value="timeline" 
-              className="flex flex-col sm:flex-row items-center gap-1 sm:gap-2 px-3 py-4  transition-all duration-300 hover:text-coral-500 data-[state=active]:text-coral-500 cursor-pointer relative z-20 "
+              className="flex flex-col sm:flex-row items-center gap-1 sm:gap-2 px-1 sm:px-3 py-3 sm:py-4 transition-all duration-300 hover:text-coral-500 data-[state=active]:text-coral-500 cursor-pointer relative z-20"
             >
               <Clock className="w-4 h-4 transition-transform duration-200" />
-              <span className="text-xs sm:text-sm font-medium">Timeline</span>
+              <span className="text-xs sm:text-sm font-medium truncate">Timeline</span>
             </TabsTrigger>
             <TabsTrigger 
               value="skills" 
-              className="flex flex-col sm:flex-row items-center gap-1 sm:gap-2 px-3 py-4  transition-all duration-300 hover:text-coral-500 data-[state=active]:text-coral-500 cursor-pointer relative z-20 "
+              className="flex flex-col sm:flex-row items-center gap-1 sm:gap-2 px-1 sm:px-3 py-3 sm:py-4 transition-all duration-300 hover:text-coral-500 data-[state=active]:text-coral-500 cursor-pointer relative z-20"
             >
               <TrendingUp className="w-4 h-4 transition-transform duration-200" />
-              <span className="text-xs sm:text-sm font-medium">Habilidades</span>
+              <span className="text-xs sm:text-sm font-medium truncate">Habilidades</span>
             </TabsTrigger>
             <TabsTrigger 
               value="achievements" 
-              className="flex flex-col sm:flex-row items-center gap-1 sm:gap-2 px-3 py-4  transition-all duration-300 hover:text-coral-500 data-[state=active]:text-coral-500 cursor-pointer relative z-20 "
+              className="flex flex-col sm:flex-row items-center gap-1 sm:gap-2 px-1 sm:px-3 py-3 sm:py-4 transition-all duration-300 hover:text-coral-500 data-[state=active]:text-coral-500 cursor-pointer relative z-20"
             >
               <Trophy className="w-4 h-4 transition-transform duration-200" />
-              <span className="text-xs sm:text-sm font-medium">Conquistas</span>
+              <span className="text-xs sm:text-sm font-medium truncate">Conquistas</span>
             </TabsTrigger>
           </TabsList>
 
@@ -138,7 +138,7 @@ export function CvSection() {
               </div>
               
               {/* Layout de duas colunas */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-12">
                 {/* Experiência Profissional - Coluna Esquerda */}
                 <div>
                   <div className="flex items-center gap-3 mb-6">
@@ -185,7 +185,7 @@ export function CvSection() {
               <p className="text-muted-foreground">Habilidades desenvolvidas ao longo da minha carreira</p>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
               {Object.entries(skillsData).map(([category, skills], categoryIndex) => (
                 <SkillsCategory 
                   key={category} 
@@ -205,7 +205,7 @@ export function CvSection() {
               <p className="text-muted-foreground">Marcos importantes da minha trajetória profissional</p>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               {achievementsData.map((achievement, index) => (
                 <AchievementCard key={achievement.title} achievement={achievement} index={index} />
               ))}
