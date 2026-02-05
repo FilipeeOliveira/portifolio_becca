@@ -113,27 +113,32 @@ export function CoursesSection() {
                 )
               })}
             </CarouselContent>
-            
-            {/* Custom Navigation Buttons */}
-            <CarouselPrevious className="absolute -left-3 xs:-left-6 top-1/2 -translate-y-1/2 border-coral-200 bg-white/80 hover:bg-coral-50 hover:border-coral-300 text-coral-600 hover:text-coral-700 shadow-lg z-10" />
-            <CarouselNext className="absolute -right-3 xs:-right-6 top-1/2 -translate-y-1/2 border-coral-200 bg-white/80 hover:bg-coral-50 hover:border-coral-300 text-coral-600 hover:text-coral-700 shadow-lg z-10" />
+
+            {/* Navigation Controls - Buttons + Indicators */}
+            <div className="flex items-center justify-center mt-8 gap-4">
+              {/* Previous Button */}
+              <CarouselPrevious className="static translate-x-0 translate-y-0 border-coral-200 bg-white/80 hover:bg-coral-50 hover:border-coral-300 text-coral-600 hover:text-coral-700 shadow-lg" />
+
+              {/* Carousel Indicators */}
+              <div className="flex items-center gap-2 px-4">
+                {Array.from({ length: count }, (_, index) => (
+                  <button
+                    key={index}
+                    className={`w-2.5 h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
+                      index + 1 === current
+                        ? "bg-coral-500 scale-125"
+                        : "bg-coral-200 hover:bg-coral-400"
+                    }`}
+                    onClick={() => api?.scrollTo(index)}
+                    aria-label={`Ir para slide ${index + 1}`}
+                  />
+                ))}
+              </div>
+
+              {/* Next Button */}
+              <CarouselNext className="static translate-x-0 translate-y-0 border-coral-200 bg-white/80 hover:bg-coral-50 hover:border-coral-300 text-coral-600 hover:text-coral-700 shadow-lg" />
+            </div>
           </Carousel>
-          
-          {/* Carousel Indicators */}
-          <div className="flex justify-center mt-6 gap-2">
-            {Array.from({ length: count }, (_, index) => (
-              <button
-                key={index}
-                className={`w-2 h-2 rounded-full transition-all duration-300 cursor-pointer ${
-                  index + 1 === current
-                    ? "bg-coral-500" 
-                    : "bg-coral-200 hover:bg-coral-400"
-                }`}
-                onClick={() => api?.scrollTo(index)}
-                aria-label={`Ir para slide ${index + 1}`}
-              />
-            ))}
-          </div>
         </div>
 
         {/* Call to Action */}
