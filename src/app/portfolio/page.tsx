@@ -1,5 +1,5 @@
 import { HeroSection } from "@/components/sections/hero/HeroSection"
-import { CoursesSection } from "@/components/sections/courses/CoursesSection"
+import { CoursesRoadmap } from "@/components/sections/courses/CoursesRoadmap"
 import { CvSection } from "@/components/sections/cv/CvSection"
 import { ContactSection } from "@/components/sections/contact/ContactSection"
 import { MissionSection } from "@/components/sections/mission/MissionSection"
@@ -28,7 +28,7 @@ export default function PortfolioPage() {
       </div>
 
       <HeroSection />
-      <CoursesSection />
+      <CoursesRoadmap />
       <MissionSection />
       <CvSection />
       <ContactSection />
