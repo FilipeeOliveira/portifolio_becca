@@ -1,157 +1,247 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/shared/components/ui/card"
-import { Badge } from "@/shared/components/ui/badge"
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-  type CarouselApi,
-} from "@/shared/components/ui/carousel"
+import { useEffect, useRef, useState } from "react"
+import { motion, useScroll, useTransform, useMotionValueEvent } from "motion/react"
 import { Target } from "lucide-react"
-
-// Import data
-import { coursesData } from '@/data/courses'
+import { coursesData } from "@/data/courses"
 
 export function CoursesSection() {
-  const [api, setApi] = useState<CarouselApi>()
-  const [current, setCurrent] = useState(0)
-  const [count, setCount] = useState(0)
+  const sectionRef = useRef<HTMLElement>(null)
+  const trackRef = useRef<HTMLDivElement>(null)
+  const [distance, setDistance] = useState(0)
+  const [activeIndex, setActiveIndex] = useState(0)
 
   useEffect(() => {
-    if (!api) {
-      return
+    const measure = () => {
+      if (!trackRef.current) return
+      setDistance(Math.max(0, trackRef.current.scrollWidth - window.innerWidth))
+    }
+    measure()
+
+    let tid: ReturnType<typeof setTimeout> | null = null
+    const debounced = () => {
+      if (tid) clearTimeout(tid)
+      tid = setTimeout(measure, 120)
     }
 
-    setCount(api.scrollSnapList().length)
-    setCurrent(api.selectedScrollSnap() + 1)
+    const ro =
+      typeof ResizeObserver !== "undefined" && trackRef.current
+        ? new ResizeObserver(debounced)
+        : null
+    if (ro && trackRef.current) ro.observe(trackRef.current)
+    window.addEventListener("resize", debounced)
 
-    api.on("select", () => {
-      setCurrent(api.selectedScrollSnap() + 1)
-    })
-  }, [api])
+    return () => {
+      if (tid) clearTimeout(tid)
+      ro?.disconnect()
+      window.removeEventListener("resize", debounced)
+    }
+  }, [])
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end end"],
+  })
+
+  const x = useTransform(scrollYProgress, [0, 1], [0, -distance])
+
+  useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    const total = coursesData.length
+    if (!total) return
+    const index = Math.min(
+      total - 1,
+      Math.round(Math.max(0, Math.min(1, latest)) * (total - 1))
+    )
+    setActiveIndex(index)
+  })
 
   return (
-    <section id="especialidades" className="py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-white via-coral-50/20 to-white relative overflow-hidden">
-      {/* Background decorative elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 right-10 w-32 h-32 bg-coral-100 rounded-full opacity-30 blur-3xl" />
-        <div className="absolute bottom-20 left-10 w-24 h-24 bg-coral-200 rounded-full opacity-20 blur-2xl" />
-        <div className="absolute top-1/2 left-1/4 w-16 h-16 bg-coral-300 rounded-full opacity-10 blur-xl" />
-      </div>
+    <section
+      id="especialidades"
+      ref={sectionRef}
+      className="relative h-[350vh] bg-white"
+    >
+      <div className="sticky top-0 flex h-screen flex-col justify-center overflow-hidden bg-white">
+        {/* Subtle coral grid background */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_85%)]"
+          style={{
+            backgroundImage:
+              "linear-gradient(to right, #fdeaea 1px, transparent 1px), linear-gradient(to bottom, #fdeaea 1px, transparent 1px)",
+            backgroundSize: "64px 64px",
+          }}
+        />
 
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative">
         {/* Header */}
-        <div className="text-center mb-12 sm:mb-16">
+        <div className="relative mb-12 text-center px-4">
           <div className="inline-flex items-center gap-2 bg-coral-100/70 text-coral-600 px-4 py-2 rounded-full text-sm font-medium mb-6">
             <Target className="w-4 h-4" />
             Cursos & Certificações
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-6">
-            Minha <span className="text-transparent bg-gradient-to-r from-coral-500 to-coral-600 bg-clip-text">Formação</span> Especializada
+          <h2 className="mt-2 text-balance text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
+            Minha{" "}
+            <span className="text-transparent bg-gradient-to-r from-coral-500 to-coral-600 bg-clip-text">
+              Formação
+            </span>{" "}
+            Especializada
           </h2>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            Minha formação e aprimoramento incluem a busca ativa por certificações e conhecimentos complementares. 
-            Este investimento me prepara para, futuramente, atuar com um cuidado terapêutico eficaz e alinhado às necessidades do desenvolvimento humano. 
+          <p className="text-sm text-muted-foreground max-w-xl mx-auto">
+            Role para explorar minha trajetória de aprendizado especializado.
           </p>
         </div>
 
-        {/* Carousel Container */}
-        <div className="relative px-2 py-6">
-          <Carousel
-            setApi={setApi}
-            opts={{
-              align: "start",
-              loop: true,
-            }}
-            className="w-full"
+        {/* Roadmap track */}
+        <div className="relative">
+          {/* Rail line */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute left-0 right-0 top-1/2 h-px -translate-y-1/2 bg-coral-100"
+          />
+
+          <motion.div
+            ref={trackRef}
+            style={{ x }}
+            className="relative flex items-center gap-12 pl-[10vw] pr-[10vw] will-change-transform md:gap-20"
           >
-            <CarouselContent className="-ml-2 md:-ml-4 py-4">
-              {coursesData.map((course) => {
-                const IconComponent = course.icon
-                return (
-                  <CarouselItem key={course.id} className="pl-2 md:pl-4 basis-full xs:basis-11/12 sm:basis-1/2 lg:basis-1/3 pt-4 pb-4">
-                    <Card className="group relative border border-coral-100/50 shadow-lg hover:shadow-2xl hover:shadow-coral-500/10 transition-all duration-500 hover:-translate-y-2 bg-white/70 backdrop-blur-sm overflow-hidden h-full">
-                      {/* Background glow effect on hover */}
-                      <div className="absolute inset-0 bg-gradient-to-br from-coral-500/5 to-coral-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                      
-                      <CardHeader className="text-center pb-4 relative z-10">
-                        <div className="w-20 h-20 flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 relative">
-                          <div className="absolute inset-0 bg-coral-500/10 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                          <IconComponent className="w-10 h-10 text-coral-500 relative z-10 group-hover:text-coral-600 transition-colors duration-300" />
-                        </div>
-                        <CardTitle className="text-lg font-bold text-foreground mb-3 group-hover:text-coral-600 transition-colors duration-300 leading-tight">
-                          {course.title}
-                        </CardTitle>
-                      </CardHeader>
-                      <CardContent className="text-center relative z-10 flex flex-col justify-between h-full">
-                        <div>
-                          <p className="text-muted-foreground mb-6 leading-relaxed text-sm">
-                            {course.description}
-                          </p>
-                          <div className="flex flex-wrap justify-center gap-2 mb-4">
-                            <Badge variant="outline" className="text-xs border-coral-200 text-coral-600 hover:bg-coral-50 transition-colors duration-300">
-                              {course.duration}
-                            </Badge>
-                          </div>
-                        </div>
-                        
-                        <div className="flex flex-wrap justify-center gap-2 mt-auto">
-                          <Badge className="bg-coral-100 text-coral-700 hover:bg-coral-200 transition-colors duration-300 text-xs">
-                            {course.institution}
-                          </Badge>
-                          <Badge className="bg-coral-100 text-coral-700 hover:bg-coral-200 transition-colors duration-300 text-xs">
-                            {course.completedDate}
-                          </Badge>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </CarouselItem>
-                )
-              })}
-            </CarouselContent>
+            {coursesData.map((course, i) => {
+              const isTop = i % 2 === 0
+              const isActive = i === activeIndex
+              const IconComponent = course.icon
 
-            {/* Navigation Controls - Buttons + Indicators */}
-            <div className="flex items-center justify-center mt-8 gap-4">
-              {/* Previous Button */}
-              <CarouselPrevious className="static translate-x-0 translate-y-0 border-coral-200 bg-white/80 hover:bg-coral-50 hover:border-coral-300 text-coral-600 hover:text-coral-700 shadow-lg" />
+              const cardBody = (
+                <div
+                  className={[
+                    "w-full flex flex-col gap-2 lg:gap-3 rounded-2xl border p-3 sm:p-4 md:p-5 lg:p-6 bg-white transition-all duration-300 ease-out",
+                    isActive
+                      ? "border-coral-300 shadow-xl shadow-coral-500/10 scale-[1.04]"
+                      : "border-coral-100 shadow-sm scale-100 opacity-60",
+                  ].join(" ")}
+                >
+                  <div
+                    className={[
+                      "w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300",
+                      isActive ? "bg-coral-100" : "bg-coral-50",
+                    ].join(" ")}
+                  >
+                    <IconComponent
+                      className={[
+                        "w-5 h-5 transition-colors duration-300",
+                        isActive ? "text-coral-500" : "text-coral-300",
+                      ].join(" ")}
+                    />
+                  </div>
 
-              {/* Carousel Indicators */}
-              <div className="flex items-center gap-2 px-4">
-                {Array.from({ length: count }, (_, index) => (
-                  <button
-                    key={index}
-                    className={`w-2.5 h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
-                      index + 1 === current
-                        ? "bg-coral-500 scale-125"
-                        : "bg-coral-200 hover:bg-coral-400"
-                    }`}
-                    onClick={() => api?.scrollTo(index)}
-                    aria-label={`Ir para slide ${index + 1}`}
-                  />
-                ))}
-              </div>
+                  <span
+                    className={[
+                      "text-xs font-semibold uppercase tracking-[0.3em] transition-opacity duration-300",
+                      isActive
+                        ? "text-coral-500 opacity-100"
+                        : "text-coral-400 opacity-60",
+                    ].join(" ")}
+                  >
+                    {course.completedDate}
+                  </span>
 
-              {/* Next Button */}
-              <CarouselNext className="static translate-x-0 translate-y-0 border-coral-200 bg-white/80 hover:bg-coral-50 hover:border-coral-300 text-coral-600 hover:text-coral-700 shadow-lg" />
-            </div>
-          </Carousel>
+                  <h3 className="text-balance text-lg font-bold tracking-tight text-foreground md:text-xl">
+                    {course.title}
+                  </h3>
+
+                  <p className="hidden md:block text-pretty text-sm leading-relaxed text-muted-foreground">
+                    {course.description}
+                  </p>
+
+                  <div className="flex flex-wrap gap-2 mt-1">
+                    <span className="text-xs bg-coral-50 text-coral-600 px-2.5 py-1 rounded-full border border-coral-100">
+                      {course.institution}
+                    </span>
+                    <span className="text-xs bg-coral-50 text-coral-600 px-2.5 py-1 rounded-full border border-coral-100">
+                      {course.duration}
+                    </span>
+                  </div>
+                </div>
+              )
+
+              const connector = (
+                <div
+                  aria-hidden
+                  className={[
+                    "w-px flex-none h-5 sm:h-8 md:h-10 lg:h-16 transition-colors duration-300",
+                    isActive ? "bg-coral-400" : "bg-coral-100",
+                  ].join(" ")}
+                />
+              )
+
+              return (
+                <div
+                  key={course.id}
+                  className="flex h-[60vh] w-[80vw] shrink-0 flex-col items-center sm:w-[55vw] md:w-[34vw] lg:w-[26vw]"
+                >
+                  {/* Top half — card anchors to the bottom (toward center) */}
+                  <div className="flex w-full flex-1 flex-col items-center justify-end">
+                    {isTop && (
+                      <>
+                        {cardBody}
+                        {connector}
+                      </>
+                    )}
+                  </div>
+
+                  {/* Dot — always at the exact center of the item */}
+                  <div className="flex h-4 w-4 flex-none items-center justify-center">
+                    <div
+                      aria-hidden
+                      className={[
+                        "rounded-full ring-4 ring-white transition-all duration-300",
+                        isActive
+                          ? "h-4 w-4 bg-coral-500 shadow-lg shadow-coral-500/40"
+                          : "h-3 w-3 bg-coral-200",
+                      ].join(" ")}
+                    />
+                  </div>
+
+                  {/* Bottom half — card anchors to the top (toward center) */}
+                  <div className="flex w-full flex-1 flex-col items-center justify-start">
+                    {!isTop && (
+                      <>
+                        {connector}
+                        {cardBody}
+                      </>
+                    )}
+                  </div>
+                </div>
+              )
+            })}
+          </motion.div>
         </div>
 
-        {/* Call to Action */}
-        <div className="text-center mt-16">
-          <div className="bg-gradient-to-r from-coral-500/10 to-coral-600/10 rounded-2xl p-8 backdrop-blur-sm border border-coral-100/50">
-            <h3 className="text-2xl font-bold text-foreground mb-4">
-              Comprometida com a <span className="text-coral-500">Excelência</span>
-            </h3>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Cada certificação reflete meu compromisso com o aprendizado contínuo e a ética profissional. 
-              Esse aprimoramento constante é essencial para que meu futuro atendimento seja de qualidade, 
-              sempre pautado nas mais recentes evidências científicas e práticas inovadoras. 
-            </p>
+        {/* Progress indicator + scroll hint */}
+        <div className="absolute bottom-8 left-0 right-0 flex items-center justify-between px-6 md:px-24">
+          <div className="flex items-center gap-2">
+            {coursesData.map((_, i) => (
+              <div
+                key={i}
+                className={[
+                  "rounded-full transition-all duration-300",
+                  i === activeIndex
+                    ? "w-6 h-2 bg-coral-500"
+                    : "w-2 h-2 bg-coral-200",
+                ].join(" ")}
+              />
+            ))}
+          </div>
+
+          <div className="flex items-center gap-2 text-xs text-coral-400">
+            <span>Role para explorar</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden>
+              <path
+                d="M3 8h10M9 4l4 4-4 4"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
           </div>
         </div>
       </div>
