@@ -1,36 +1,29 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useEffect, useState } from "react"
 import type { NavigationItem } from "@/types/navigation.types"
 
-export function useActiveSection(navigationItems: NavigationItem[]) {
-  const [activeSection, setActiveSection] = useState("sobre")
+// Seção visível no momento (para destacar no menu). IntersectionObserver em vez de ouvir cada evento de scroll.
+export function useActiveSection(items: NavigationItem[]) {
+  const [activeSection, setActiveSection] = useState(items[0]?.id ?? "")
 
   useEffect(() => {
-    const handleScroll = () => {
-      const sections = navigationItems.map((item) => document.getElementById(item.id))
-      const scrollPosition = window.scrollY + 100
-      const windowHeight = window.innerHeight
-      const documentHeight = document.documentElement.scrollHeight
-
-      if (scrollPosition + windowHeight >= documentHeight - 50) {
-        setActiveSection(navigationItems[navigationItems.length - 1].id)
-        return
-      }
-
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const section = sections[i]
-        if (section && section.offsetTop <= scrollPosition) {
-          setActiveSection(navigationItems[i].id)
-          break
-        }
-      }
+    const visiveis = new Map<string, number>()
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) visiveis.set(e.target.id, e.isIntersecting ? e.intersectionRatio : 0)
+        // a primeira seção (na ordem do menu) com presença relevante na faixa central da tela
+        const atual = items.find((i) => (visiveis.get(i.id) ?? 0) > 0)
+        if (atual) setActiveSection(atual.id)
+      },
+      { rootMargin: "-35% 0px -55% 0px", threshold: [0, 0.01] },
+    )
+    for (const i of items) {
+      const el = document.getElementById(i.id)
+      if (el) io.observe(el)
     }
-    
-    handleScroll()    
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [navigationItems])
+    return () => io.disconnect()
+  }, [items])
 
-  return { activeSection, setActiveSection }
+  return { activeSection }
 }

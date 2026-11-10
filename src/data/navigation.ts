@@ -3,10 +3,11 @@ export interface NavigationItem {
   label: string
 }
 
+// Os ids das seções foram mantidos para não quebrar links antigos (#sobre, #curriculo...)
 export const navigationItems: NavigationItem[] = [
-  { id: "sobre", label: "Sobre" },
-  { id: "especialidades", label: "Especialidades" },
-  { id: "sobre-mim", label: "Missão e Valores" },
-  { id: "curriculo", label: "Currículo" },
+  { id: "sobre", label: "Início" },
+  { id: "sobre-mim", label: "Missão" },
+  { id: "especialidades", label: "Formação" },
+  { id: "curriculo", label: "Trajetória" },
   { id: "contato", label: "Contato" },
 ]

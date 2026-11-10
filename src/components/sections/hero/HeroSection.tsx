@@ -1,121 +1,101 @@
-"use client"
-
-import { Button } from "@/shared/components/ui/button"
-import { Heart, Users, Target, ArrowRight, Sparkles } from "lucide-react"
+// Hero "Anel": a foto em que o túnel da sala sensorial emoldura o rosto vira um recorte circular, com anéis
+// concêntricos em volta (um deles girando devagar) e os números em "discos" ao redor.
 import Image from "next/image"
+import { ArrowDown } from "lucide-react"
+import { site } from "@/data/site"
+
+const delay = (s: number) => ({ animationDelay: `${s}s` })
 
 export function HeroSection() {
+  const [anos, pacientes, certificacoes] = site.stats
   return (
-    <section id="sobre" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-coral-50/40 via-white to-white">
-      {/* Background with gradient and decorative elements */}
-      <div className="absolute inset-0">
-        <div className="absolute top-10 sm:top-20 right-4 sm:right-20 w-32 sm:w-72 h-32 sm:h-72 bg-coral-100 rounded-full opacity-20 blur-3xl animate-pulse" />
-        <div className="absolute bottom-10 sm:bottom-20 left-4 sm:left-20 w-48 sm:w-96 h-48 sm:h-96 bg-coral-200 rounded-full opacity-10 blur-3xl animate-pulse delay-1000" />
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[400px] sm:w-[600px] lg:w-[800px] h-[400px] sm:h-[600px] lg:h-[800px] bg-gradient-radial from-coral-50 to-transparent opacity-50" />
-      </div>
+    <section id="sobre" className="relative overflow-hidden pt-28 pb-20 sm:pt-32 lg:pb-28">
+      <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-16 px-4 sm:px-6 lg:grid-cols-[1.05fr_.95fr] lg:gap-8">
+        <div className="flex min-w-0 flex-col items-start gap-7">
+          <p className="rise flex items-center gap-3 text-sm font-medium text-muted-foreground" style={delay(0.05)}>
+            <span className="size-4 rounded-full border-[3px] border-coral-500" aria-hidden="true" />
+            {site.papel} · {site.cidade}
+          </p>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
-        <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
-          {/* Content */}
-          <div className="space-y-6 sm:space-y-8 order-2 lg:order-1">
-            <div className="space-y-6">
-              <div className="inline-flex items-center gap-2 bg-coral-100/70 text-coral-600 px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-medium backdrop-blur-sm ">
-                <Sparkles className="w-4 h-4" />
-                Transformando vidas através do cuidado
-              </div>
-              
-              <h1 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight ">
-                <span className="text-foreground">Olá, me chamo</span>
-                <br />
-                <span className="text-transparent bg-gradient-to-r from-coral-500 via-coral-600 to-coral-500 bg-clip-text">
-                  Rebecca Ariel
-                </span>
-              </h1>
-              
-              <div className="space-y-3 sm:space-y-4 ">
-                <p className="text-base xs:text-lg sm:text-xl md:text-2xl text-muted-foreground font-medium">
-                  Dedicada ao aprendizado dos princípios de autonomia, independência, funcionalidade e participação social.
-                </p>
-                
-                <p className="text-base sm:text-lg text-muted-foreground leading-relaxed max-w-2xl">
-                  O cuidado terapêutico é um direito. Com 2 anos de experiência prática como Assistente Terapêutica (AT) nos modelos ABA e DENVER, 
-                  meu objetivo é garantir que, como futura Terapeuta Ocupacional, minha atuação proporcione uma terapia acessível e transformadora a todos.
-                </p>
-              </div>
-              
-              {/* Stats Cards */}
-              <div className="grid grid-cols-3 gap-3 sm:gap-4 py-4 sm:py-6 max-w-lg">
-                <div className="p-2 xs:p-3 sm:p-4 text-center group cursor-default transition-all duration-300">
-                  <div className="w-8 sm:w-10 h-8 sm:h-10 bg-gradient-to-br from-coral-500 to-coral-600 rounded-full flex items-center justify-center mx-auto mb-2 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-md">
-                    <Heart className="w-4 sm:w-5 h-4 sm:h-5 text-white" />
-                  </div>
-                  <div className="text-lg xs:text-xl sm:text-2xl font-bold text-coral-600 mb-1">2+</div>
-                  <div className="text-xs text-muted-foreground font-medium leading-tight">Anos de experiência</div>
-                </div>
+          <h1
+            className="rise text-[clamp(3.6rem,1.8rem+8vw,8rem)] leading-[0.88] font-extrabold tracking-[-0.03em] text-ink"
+            style={delay(0.12)}
+          >
+            Rebecca
+            <br />
+            <span className="text-coral-ink">Ariel</span>
+          </h1>
 
-                <div className="p-2 xs:p-3 sm:p-4 text-center group cursor-default transition-all duration-300">
-                  <div className="w-8 sm:w-10 h-8 sm:h-10 bg-gradient-to-br from-coral-500 to-coral-600 rounded-full flex items-center justify-center mx-auto mb-2 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-md">
-                    <Users className="w-4 sm:w-5 h-4 sm:h-5 text-white" />
-                  </div>
-                  <div className="text-lg xs:text-xl sm:text-2xl font-bold text-coral-600 mb-1">30+</div>
-                  <div className="text-xs text-muted-foreground font-medium leading-tight">Pacientes atendidos</div>
-                </div>
+          <p className="rise max-w-[34ch] font-display text-[clamp(1.3rem,1.05rem+1vw,1.75rem)] leading-snug font-medium text-ink" style={delay(0.2)}>
+            Dedicada aos princípios de <span className="marca">autonomia</span>, <span className="marca">independência</span>,{" "}
+            <span className="marca">funcionalidade</span> e <span className="marca">participação social</span>.
+          </p>
 
-                <div className="p-2 xs:p-3 sm:p-4 text-center group cursor-default transition-all duration-300">
-                  <div className="w-8 sm:w-10 h-8 sm:h-10 bg-gradient-to-br from-coral-500 to-coral-600 rounded-full flex items-center justify-center mx-auto mb-2 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-md">
-                    <Target className="w-4 sm:w-5 h-4 sm:h-5 text-white" />
-                  </div>
-                  <div className="text-lg xs:text-xl sm:text-2xl font-bold text-coral-600 mb-1">9+</div>
-                  <div className="text-xs text-muted-foreground font-medium leading-tight">Certificações</div>
-                </div>
-              </div>
-            </div>
+          <p className="rise max-w-[56ch] leading-relaxed text-muted-foreground sm:text-lg" style={delay(0.26)}>
+            O cuidado terapêutico é um direito. Com 2 anos de experiência prática como Assistente Terapêutica (AT) nos modelos ABA e
+            DENVER, meu objetivo é garantir que, como futura Terapeuta Ocupacional, minha atuação proporcione uma terapia acessível e
+            transformadora a todos.
+          </p>
 
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 ">
-              <Button 
-                size="lg" 
-                className="bg-gradient-to-r from-coral-500 to-coral-600 hover:from-coral-600 hover:to-coral-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 group cursor-pointer"
-                onClick={() => document.getElementById('curriculo')?.scrollIntoView({ behavior: 'smooth' })}
-              >
-                Conheça Minha Jornada
-                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-              </Button>
-              
-              <Button 
-                variant="outline" 
-                size="lg"
-                className="border-coral-500 text-coral-500 hover:bg-coral-500 hover:text-white transition-all duration-300 cursor-pointer"
-                onClick={() => document.getElementById('contato')?.scrollIntoView({ behavior: 'smooth' })}
-              >
-                Vamos Conversar
-              </Button>
-            </div>
+          <div className="rise flex w-full flex-col gap-3 sm:w-auto sm:flex-row" style={delay(0.32)}>
+            <a
+              href="#contato"
+              className="inline-flex h-13 items-center justify-center rounded-full bg-primary px-8 font-semibold text-primary-foreground shadow-lg shadow-coral-500/25 transition-colors hover:bg-coral-ink"
+            >
+              Vamos conversar
+            </a>
+            <a
+              href="#curriculo"
+              className="inline-flex h-13 items-center justify-center gap-2 rounded-full border-2 border-ink/10 px-8 font-semibold text-ink transition-colors hover:border-coral-300 hover:bg-coral-50"
+            >
+              Conheça minha trajetória
+              <ArrowDown className="size-4" aria-hidden="true" />
+            </a>
+          </div>
+        </div>
 
-            {/* Specialties Badges */}
-           
+        {/* composição em anéis */}
+        <div className="rise relative mx-auto aspect-square w-full max-w-[30rem]" style={delay(0.18)}>
+          <svg aria-hidden="true" viewBox="0 0 100 100" className="gira absolute -inset-[7%] size-[114%] text-coral-300">
+            <circle cx="50" cy="50" r="49" fill="none" stroke="currentColor" strokeWidth=".5" strokeDasharray="1.2 2.4" />
+          </svg>
+          <div aria-hidden="true" className="absolute inset-0 rounded-full border-[14px] border-coral-200" />
+          <div className="absolute inset-[22px] overflow-hidden rounded-full bg-coral-100">
+            <Image
+              src={site.fotos.anel}
+              alt="Rebecca Ariel sorrindo, emoldurada por um túnel em anel numa sala de integração sensorial"
+              fill
+              priority
+              sizes="(min-width: 1024px) 460px, 90vw"
+              className="object-cover"
+            />
           </div>
 
-          {/* Image */}
-          <div className="relative order-1 lg:order-2 ">
-            <div className="relative">
-              {/* Decorative rings */}
-              <div className="absolute -inset-2 sm:-inset-4 bg-gradient-to-r from-coral-200 to-coral-300 rounded-full opacity-20 blur-2xl animate-pulse" />
-              <div className="absolute -inset-4 sm:-inset-8 bg-gradient-to-r from-coral-100 to-coral-200 rounded-full opacity-10 blur-3xl animate-pulse delay-500" />
-              
-              {/* Main image container */}
-              <div className="relative bg-white rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl transform rotate-1 sm:rotate-2 hover:rotate-0 hover:scale-105 transition-all duration-700 group">
-                <Image
-                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Imagem%20do%20WhatsApp%20de%202025-08-12%20%C3%A0%28s%29%2013.50.54_2cf6968e.jpg-acdHLitbeTHNTnh9FSUziWmgOoGq5m.jpeg"
-                  alt="Rebecca Ariel - Terapeuta Ocupacional trabalhando com brinquedos terapêuticos"
-                  width={600}
-                  height={600}
-                  priority
-                  className="w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] object-cover object-[center_20%] group-hover:scale-110 transition-transform duration-700"
-                />
-                </div>
-            </div>
+          <div className="absolute -bottom-4 -left-2 size-[34%] overflow-hidden rounded-full border-[6px] border-background shadow-xl sm:-left-6">
+            <Image src={site.fotos.sorriso} alt="" fill sizes="170px" className="object-cover" />
           </div>
+
+          {/* números em discos ao redor da foto */}
+          <dl className="contents">
+            <div className="absolute top-[2%] -left-[4%] grid size-[30%] place-items-center rounded-full bg-ink text-center text-paper shadow-xl sm:-left-[8%]">
+              <div className="flex flex-col-reverse items-center px-2">
+                <dt className="text-[0.65rem] leading-tight text-paper/80 sm:text-xs">anos como AT</dt>
+                <dd className="font-display text-[clamp(1.6rem,1rem+2.4vw,2.6rem)] mb-1 leading-none font-extrabold">{anos.valor}</dd>
+              </div>
+            </div>
+            <div className="absolute -top-[2%] right-[2%] grid size-[26%] place-items-center rounded-full bg-primary text-center text-primary-foreground shadow-xl">
+              <div className="flex flex-col-reverse items-center px-2">
+                <dt className="text-[0.65rem] leading-tight text-white/90 sm:text-xs">{pacientes.rotulo}</dt>
+                <dd className="font-display text-[clamp(1.4rem,.9rem+2vw,2.2rem)] mb-1 leading-none font-extrabold">{pacientes.valor}</dd>
+              </div>
+            </div>
+            <div className="absolute -right-[3%] bottom-[8%] grid size-[27%] place-items-center rounded-full border-2 border-coral-200 bg-background text-center shadow-xl sm:-right-[7%]">
+              <div className="flex flex-col-reverse items-center px-2">
+                <dt className="text-[0.65rem] leading-tight text-muted-foreground sm:text-xs">{certificacoes.rotulo}</dt>
+                <dd className="font-display text-[clamp(1.4rem,.9rem+2vw,2.2rem)] mb-1 leading-none font-extrabold text-coral-ink">{certificacoes.valor}</dd>
+              </div>
+            </div>
+          </dl>
         </div>
       </div>
     </section>

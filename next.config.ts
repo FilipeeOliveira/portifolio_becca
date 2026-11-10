@@ -1,15 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'hebbkx1anhila5yf.public.blob.vercel-storage.com',
-        port: '',
-        pathname: '/**',
-      },
-    ],
+  // o portfólio agora é servido na raiz; links antigos para /portfolio continuam funcionando
+  async redirects() {
+    return [{ source: "/portfolio", destination: "/", permanent: true }];
   },
 };
 

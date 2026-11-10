@@ -25,6 +25,6 @@ export const educationData: EducationItem[] = [
     company: "UFAM - Universidade Federal do Amazonas",
     location: "Manaus, AM",
     description: "Formação em políticas sociais e intervenção comunitária, complementando a abordagem terapêutica com perspectiva social.",
-    highlights: ["Graduada", "Concluído", "Bacharelado"]
+    highlights: ["Graduada com distinção", "Bacharelado"]
   }
 ]

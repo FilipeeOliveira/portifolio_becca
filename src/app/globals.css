@@ -1,81 +1,38 @@
 @import "tailwindcss";
 @import "tw-animate-css";
-@import "react-pdf/dist/Page/AnnotationLayer.css";
-@import "react-pdf/dist/Page/TextLayer.css";
 
 @custom-variant dark (&:is(.dark *));
 
+/*
+  Conceito "Anel": o túnel, as almofadas e as argolas da sala de integração sensorial das fotos viram a
+  linguagem do site (recortes circulares, anéis de progresso, marcadores em anel).
+  Cores mantidas: papel quente, tinta escura e coral. Contraste (WCAG): --primary com branco 5.1:1,
+  --coral-ink no papel 5.7:1, --muted-foreground 6.6:1. Coral claro só em formas e títulos grandes.
+*/
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
-  --font-work-sans: ui-sans-serif, system-ui, sans-serif;
-  --font-open-sans: ui-serif, Georgia, serif;
-}
+  --paper: #fffaf7;
+  --ink: #2b1a1a;
+  --coral-ink: #b8352f;
 
-.dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.145 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.145 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.985 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.396 0.141 25.723);
-  --destructive-foreground: oklch(0.637 0.237 25.331);
-  --border: oklch(0.269 0 0);
-  --input: oklch(0.269 0 0);
-  --ring: oklch(0.439 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(0.269 0 0);
-  --sidebar-ring: oklch(0.439 0 0);
+  --background: var(--paper);
+  --foreground: var(--ink);
+  --card: #ffffff;
+  --card-foreground: var(--ink);
+  --popover: #ffffff;
+  --popover-foreground: var(--ink);
+  --primary: #c93a3a;
+  --primary-foreground: #ffffff;
+  --secondary: #fdeaea;
+  --secondary-foreground: var(--ink);
+  --muted: #f7ebe7;
+  --muted-foreground: #6b5552;
+  --accent: #fdeaea;
+  --accent-foreground: var(--ink);
+  --destructive: #c93a3a;
+  --border: #f0dcd6;
+  --input: #ecd3cc;
+  --ring: #c93a3a;
+  --radius: 1rem;
 }
 
 @theme inline {
@@ -94,40 +51,30 @@
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 6px);
+  --radius-md: calc(var(--radius) - 4px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
 
-  /* Fixed font variables to use the ones defined in layout.tsx */
-  --font-sans: var(--font-work-sans);
-  --font-serif: var(--font-open-sans);
+  /* Figtree no texto; Bricolage Grotesque nos títulos (font-display). font-serif aponta para a display
+     porque o menu (mantido como está) usa essa classe nos links do celular */
+  --font-sans: var(--font-figtree), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-bricolage), var(--font-figtree), ui-sans-serif, sans-serif;
+  --font-serif: var(--font-display);
 
-  /* Added coral color system to Tailwind theme */
+  --color-ink: var(--ink);
+  --color-paper: var(--paper);
+  --color-coral-ink: var(--coral-ink);
   --color-coral-50: #fef7f7;
   --color-coral-100: #fdeaea;
   --color-coral-200: #fbd5d5;
   --color-coral-300: #f8b4b4;
   --color-coral-400: #f48888;
   --color-coral-500: #ec5a5a;
-  --color-coral-600: #d73f3f;
+  --color-coral-600: #c93a3a;
 }
 
 @layer base {
@@ -135,41 +82,48 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground font-sans;
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
   }
 }
 
-/* Updated custom styles for better visual consistency */
-@layer components {
-  .gradient-text {
-    @apply bg-gradient-to-r from-coral-500 to-coral-600 bg-clip-text text-transparent;
-  }
+html { scroll-behavior: smooth; }
+/* âncoras não ficam escondidas atrás do cabeçalho fixo */
+section[id] { scroll-margin-top: 88px; }
+:focus-visible { outline: 2px solid var(--primary); outline-offset: 3px; }
 
-  .soft-shadow {
-    box-shadow: 0 10px 25px -5px rgba(236, 90, 90, 0.1), 0 4px 6px -2px rgba(236, 90, 90, 0.05);
-  }
+/* Destaque de marca (usado no nome "Ariel" do menu e em palavras-chave): coral, na fonte display */
+.accent { font-family: var(--font-display); font-weight: 700; color: var(--coral-ink); }
 
-  .hover-lift {
-    transition: all 0.3s ease-in-out;
-  }
+/* Palavra-chave com "marca-texto" em arco na base */
+.marca {
+  background: linear-gradient(transparent 62%, var(--color-coral-200) 62%, var(--color-coral-200) 92%, transparent 92%);
+  padding: 0 .08em;
+}
 
-  .hover-lift:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 20px 40px -10px rgba(236, 90, 90, 0.15), 0 8px 16px -4px rgba(236, 90, 90, 0.1);
-  }
+/* Anel tracejado girando devagar atrás da foto do hero */
+.gira { animation: gira 80s linear infinite; }
+@keyframes gira { to { transform: rotate(360deg); } }
 
-  /* Adding coral background utilities */
-  .bg-coral-gradient {
-    background: linear-gradient(135deg, #fef7f7 0%, #fdeaea 50%, #fbd5d5 100%);
+/* Faixa de abordagens rolando (cada metade cobre telas largas: conteúdo repetido 3x no componente) */
+.marquee { animation: marquee 60s linear infinite; }
+@keyframes marquee { to { transform: translateX(-50%); } }
+
+/* Entrada do hero em CSS: conteúdo visível mesmo sem JavaScript */
+.rise { animation: rise .8s cubic-bezier(.22, 1, .36, 1) both; }
+@keyframes rise { from { opacity: 0; transform: translateY(20px); } }
+
+/* Entrada suave ao rolar (navegadores sem suporte mostram tudo direto) */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .reveal { animation: reveal linear both; animation-timeline: view(); animation-range: entry 0% entry 45%; }
+    @keyframes reveal { from { opacity: 0; transform: translateY(28px); } }
   }
 }
 
-/* Custom Sonner Toast Styles - Only coral icon */
-[data-sonner-toast][data-type="success"] [data-icon] {
-  color: #ec5a5a !important; /* coral-500 */
-}
-
-[data-sonner-toast][data-type="success"] [data-icon] svg {
-  color: #ec5a5a !important; /* coral-500 */
-  fill: #ec5a5a !important; /* coral-500 */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
 }
