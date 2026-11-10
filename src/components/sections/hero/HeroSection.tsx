@@ -1,13 +1,11 @@
-// Hero "Anel": a foto em que o túnel da sala sensorial emoldura o rosto vira um recorte circular, com anéis
-// concêntricos em volta (um deles girando devagar) e os números em "discos" ao redor.
-import Image from "next/image"
+// Hero "Anel": texto à esquerda e, à direita, a composição em anéis (HeroRings, com profundidade na rolagem).
 import { ArrowDown } from "lucide-react"
 import { site } from "@/data/site"
+import { HeroRings } from "./HeroRings"
 
 const delay = (s: number) => ({ animationDelay: `${s}s` })
 
 export function HeroSection() {
-  const [anos, pacientes, certificacoes] = site.stats
   return (
     <section id="sobre" className="relative overflow-hidden pt-28 pb-20 sm:pt-32 lg:pb-28">
       <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-16 px-4 sm:px-6 lg:grid-cols-[1.05fr_.95fr] lg:gap-8">
@@ -54,48 +52,9 @@ export function HeroSection() {
           </div>
         </div>
 
-        {/* composição em anéis */}
+        {/* composição em anéis (com profundidade na rolagem) */}
         <div className="rise relative mx-auto aspect-square w-full max-w-[30rem]" style={delay(0.18)}>
-          <svg aria-hidden="true" viewBox="0 0 100 100" className="gira absolute -inset-[7%] size-[114%] text-coral-300">
-            <circle cx="50" cy="50" r="49" fill="none" stroke="currentColor" strokeWidth=".5" strokeDasharray="1.2 2.4" />
-          </svg>
-          <div aria-hidden="true" className="absolute inset-0 rounded-full border-[14px] border-coral-200" />
-          <div className="absolute inset-[22px] overflow-hidden rounded-full bg-coral-100">
-            <Image
-              src={site.fotos.anel}
-              alt="Rebecca Ariel sorrindo, emoldurada por um túnel em anel numa sala de integração sensorial"
-              fill
-              priority
-              sizes="(min-width: 1024px) 460px, 90vw"
-              className="object-cover"
-            />
-          </div>
-
-          <div className="absolute -bottom-4 -left-2 size-[34%] overflow-hidden rounded-full border-[6px] border-background shadow-xl sm:-left-6">
-            <Image src={site.fotos.sorriso} alt="" fill sizes="170px" className="object-cover" />
-          </div>
-
-          {/* números em discos ao redor da foto */}
-          <dl className="contents">
-            <div className="absolute top-[2%] -left-[4%] grid size-[30%] place-items-center rounded-full bg-ink text-center text-paper shadow-xl sm:-left-[8%]">
-              <div className="flex flex-col-reverse items-center px-2">
-                <dt className="text-[0.65rem] leading-tight text-paper/80 sm:text-xs">anos como AT</dt>
-                <dd className="font-display text-[clamp(1.6rem,1rem+2.4vw,2.6rem)] mb-1 leading-none font-extrabold">{anos.valor}</dd>
-              </div>
-            </div>
-            <div className="absolute -top-[2%] right-[2%] grid size-[26%] place-items-center rounded-full bg-primary text-center text-primary-foreground shadow-xl">
-              <div className="flex flex-col-reverse items-center px-2">
-                <dt className="text-[0.65rem] leading-tight text-white/90 sm:text-xs">{pacientes.rotulo}</dt>
-                <dd className="font-display text-[clamp(1.4rem,.9rem+2vw,2.2rem)] mb-1 leading-none font-extrabold">{pacientes.valor}</dd>
-              </div>
-            </div>
-            <div className="absolute -right-[3%] bottom-[8%] grid size-[27%] place-items-center rounded-full border-2 border-coral-200 bg-background text-center shadow-xl sm:-right-[7%]">
-              <div className="flex flex-col-reverse items-center px-2">
-                <dt className="text-[0.65rem] leading-tight text-muted-foreground sm:text-xs">{certificacoes.rotulo}</dt>
-                <dd className="font-display text-[clamp(1.4rem,.9rem+2vw,2.2rem)] mb-1 leading-none font-extrabold text-coral-ink">{certificacoes.valor}</dd>
-              </div>
-            </div>
-          </dl>
+          <HeroRings />
         </div>
       </div>
     </section>
